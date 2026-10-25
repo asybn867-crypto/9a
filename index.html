@@ -470,10 +470,9 @@ window.onerror = function (msg, src, line) {
       });
     } catch (error) {
       loading.textContent =
-        "A-aku gagal terhubung ke server! Coba lagi nanti. " +
-        "Periksa deployment dan binding AI, ya.";
-      console.error("Mio AI error:", error);
-      history.pop();
+loading.textContent = "Error: " + error.message; // <-- Biar error aslinya muncul
+console.error("Mio AI error:", error);
+history.pop();
     } finally {
       input.disabled = false;
       send.disabled = false;
