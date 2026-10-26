@@ -37,15 +37,19 @@ button, select { font: inherit; color: inherit; }
 button { cursor: pointer; }
 :focus-visible { outline: 3px solid var(--steel); outline-offset: 2px; }
 
-/* ---- LATAR VIDEO ---- */
-.art {
+/* ---- LATAR VIDEO (fullscreen, semua ukuran layar) ---- */
+.art-wrap {
   position: fixed; inset: 0; z-index: 0;
+  pointer-events: none;
+}
+.art {
+  display: block;
   width: 100%; height: 100%;
   object-fit: cover;
   object-position: center top;
-  pointer-events: none;
 }
-.art::after {
+/* gradasi putih di atas video (dipindah ke wrapper karena <video> tidak bisa punya ::after) */
+.art-wrap::after {
   content: ""; position: absolute; inset: 0;
   background: linear-gradient(to bottom,
     rgba(254,254,254,.78) 0, rgba(254,254,254,0) 24%,
@@ -173,11 +177,11 @@ section[hidden] { display: none; }
 .mile.on svg { color: var(--amber); }
 .rule { margin: 14px 0 0; font-size: 13px; color: var(--ink-2); }
 
-/* ---- KHUSUS LAYAR LEBAR (SPLIT SCREEN) ---- */
+/* ---- LAYAR LEBAR (SPLIT SCREEN): Mio kiri, jadwal kanan ---- */
 @media (min-width: 960px) {
   :root { --art-w: min(46vw, 780px); --panel: #f6f8fd; }
-  .art { right: auto; width: var(--art-w); background-position: 50% 0; }
-  .art::after { display: none; }
+  .art-wrap { right: auto; width: var(--art-w); }
+  .art-wrap::after { display: none; }
   .wrap { margin-left: var(--art-w); padding-block: 40px 72px; }
   .gap-hero { display: none; }
   .views, .days button, .panel { backdrop-filter: none; -webkit-backdrop-filter: none; }
@@ -211,10 +215,12 @@ section[hidden] { display: none; }
 </head>
 <body>
 
-<!-- LATAR VIDEO MIO -->
-<video autoplay loop muted playsinline class="art" id="art">
-  <source src="bg-video.mp4" type="video/mp4">
-</video>
+<!-- LATAR VIDEO MIO (dibungkus agar gradasi putih bisa dipasang) -->
+<div class="art-wrap" aria-hidden="true">
+  <video autoplay loop muted playsinline class="art" id="art">
+    <source src="bg-video.mp4" type="video/mp4">
+  </video>
+</div>
 
 <div class="wrap">
   <div class="col">
