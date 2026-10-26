@@ -42,12 +42,12 @@ button { cursor: pointer; }
 :focus-visible { outline: 3px solid var(--steel); outline-offset: 2px; }
 
 /* ---- latar gambar ---- */
-.art {
+..art {
   position: fixed; inset: 0; z-index: 0;
   width: 100%; height: 100%;
   object-fit: cover; 
+  object-position: center top; /* <--- TAMBAHKAN BARIS INI */
   pointer-events: none;
-}
 }
 .art::after {
   content: ""; position: absolute; inset: 0;
