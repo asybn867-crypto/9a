@@ -469,6 +469,7 @@ window.onerror = function (msg, src, line) {
       if (!response.ok || !data.response) {
         throw new Error(data.error || "Permintaan gagal.");
       }
+   
 
       loading.textContent = data.response;
       history.push({
@@ -486,4 +487,9 @@ window.onerror = function (msg, src, line) {
       messagesBox.scrollTop = messagesBox.scrollHeight;
     }
   });
+   ;
+</script>
+
+</body>
+</html>
 })()
