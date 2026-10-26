@@ -211,4 +211,139 @@
     var cur = back(doneToday ? t : t - 1);
     var endYesterday = back(t - 1);
     var todayPts = 10 + 2 * Math.min((doneToday ? cur : endYesterday + 1) - 1, 10);
-    return { cur: cur, best: best, pts: pts, doneToday: 
+        return { cur: cur, best: best, pts: pts, doneToday: doneToday, todayPts: todayPts, endYesterday: endYesterday };
+  }
+
+  function renderStudy() {
+    var n = new Date(), mins = n.getHours() * 60 + n.getMinutes(), ts = dateStr(n);
+    var c = calc(done, ts);
+    var phase = mins < STUDY_START ? "before" : (mins < STUDY_END ? "during" : "after");
+    var status;
+    if (phase === "before") status = "Mulai pukul 19.45, " + durText(STUDY_START - mins) + " lagi.";
+    else if (phase === "during") status = "Sedang berlangsung, sisa " + durText(STUDY_END - mins) + ".";
+    else status = "Sesi hari ini selesai pukul 20.30.";
+    var lead, sub;
+    if (c.doneToday) { lead = "Sudah dicentang hari ini"; sub = "+" + c.todayPts + " poin masuk. Sampai ketemu besok malam."; }
+    else if (phase === "before") { lead = "Belum bisa dicentang"; sub = "Tombol terbuka mulai pukul 19.45."; }
+    else { lead = "Centang kalau sudah belajar"; sub = "Bernilai " + c.todayPts + " poin" + (c.endYesterday > 0 ? ", streak " + c.endYesterday + " harimu lanjut." : "."); }
+    
+    var locked = !c.doneToday && phase === "before";
+    var h = '<div class="study"><div><div class="lab">Jadwal belajar · setiap hari</div><h2>19.45 – 20.30</h2><p class="sub">45 menit. ' + esc(status) + '</p></div>' +
+      '<div class="checkrow"><button type="button" class="check" id="checkBtn" aria-pressed="' + c.doneToday + '" aria-label="Centang belajar hari ini"' + (locked ? " disabled" : "") + '>' + ICON_CHECK + '</button>' +
+      '<div class="tx"><b>' + esc(lead) + '</b><span>' + esc(sub) + '</span></div></div></div>' +
+      '<div class="score"><div><div class="k">' + ICON_FLAME + 'Streak</div><div class="v">' + c.cur + '<small>hari</small></div><div class="h">' +
+      (c.cur === 0 ? "Mulai streak pertamamu malam ini." : (c.doneToday ? "Terpanjang " + c.best + " hari." : "Centang malam ini supaya tidak putus.")) + '</div></div>' +
+      '<div><div class="k">Poin</div><div class="v">' + c.pts + '<small>poin</small></div><div class="h">10 poin per sesi, +2 tiap hari beruntun (maks +20).</div></div></div>';
+    document.getElementById("studyPanel").innerHTML = h;
+    document.getElementById("navChip").innerHTML = ICON_FLAME + " " + c.cur;
+    return c;
+  }
+
+  function renderCal(c) {
+    var n = new Date(), todayN = dayNum(dateStr(n));
+    var weekStart = todayN - ((n.getDay() + 6) % 7);
+    var start = weekStart - 21;
+    var h = '<h3>4 minggu terakhir</h3><div class="grid7">';
+    ["Sen", "Sel", "Rab", "Kam", "Jum", "Sab", "Min"].forEach(function (d) { h += '<div class="dn">' + d + '</div>'; });
+    for (var i = 0; i < 28; i++) {
+      var dn = start + i, ds = numToStr(dn), cls = "cell", inner = ds.slice(8);
+      if (dn > todayN) cls += " fut";
+      else if (done[ds]) { cls += " done"; inner = ICON_CHECK; }
+      if (dn === todayN) cls += " today";
+      h += '<div class="' + cls + '" title="' + ds + '">' + inner + '</div>';
+    }
+    h += '</div><p class="legend">Kotak biru berarti sesi belajar dicentang. Lingkaran oranye adalah hari ini.</p>';
+    document.getElementById("calPanel").innerHTML = h;
+
+    var marks = [3, 7, 14, 30], mh = '<h3>Capaian streak</h3><div class="mrow">';
+    marks.forEach(function (m) { mh += '<span class="mile' + (c.best >= m ? " on" : "") + '">' + ICON_FLAME + m + ' hari</span>'; });
+    mh += '</div>';
+    var next = marks.filter(function (m) { return c.best < m; })[0];
+    mh += '<p class="rule">' + (next ? "Streak terpanjangmu " + c.best + " hari. Tinggal " + (next - c.best) + " hari lagi ke " + next + " hari." : "Semua capaian terbuka. Streak terpanjangmu " + c.best + " hari.") + '</p>';
+    document.getElementById("milesPanel").innerHTML = mh;
+  }
+
+  function renderAllStudy() { var c = renderStudy(); renderCal(c); }
+
+  document.getElementById("studyPanel").addEventListener("click", function (ev) {
+    var b = ev.target.closest("#checkBtn");
+    if (!b || b.disabled) return;
+    var n = new Date(), ts = dateStr(n), mins = n.getHours() * 60 + n.getMinutes();
+    if (done[ts]) delete done[ts];
+    else if (mins >= STUDY_START) done[ts] = 1;
+    else return;
+    saveLocal(); renderAllStudy();
+  });
+
+  var tabJ = document.getElementById("tabJadwal"), tabB = document.getElementById("tabBelajar");
+  
+  function setView(v) {
+    var j = v === "jadwal";
+    tabJ.setAttribute("aria-selected", String(j)); 
+    tabB.setAttribute("aria-selected", String(!j));
+    document.getElementById("viewJadwal").hidden = !j;
+    document.getElementById("viewBelajar").hidden = j;
+    if (!j) renderAllStudy();
+  }
+
+  tabJ.addEventListener("click", function() { setView("jadwal"); });
+  tabB.addEventListener("click", function() { setView("belajar"); });
+
+  // POMODORO
+  var pomoInterval;
+  var pomoTimeLeft = 25 * 60;
+  var isPomoRunning = false;
+  var pomoDisplay = document.getElementById("pomoTime");
+  var pomoBtn = document.getElementById("pomoBtn");
+  var pomoMsg = document.getElementById("pomoMsg");
+
+  function updatePomoDisplay() {
+    var minutes = Math.floor(pomoTimeLeft / 60);
+    var seconds = pomoTimeLeft % 60;
+    if (pomoDisplay) {
+      pomoDisplay.textContent = (minutes < 10 ? "0" : "") + minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+    }
+  }
+
+  if (pomoBtn) {
+    pomoBtn.addEventListener("click", function() {
+      if (isPomoRunning) {
+        clearInterval(pomoInterval);
+        isPomoRunning = false;
+        pomoTimeLeft = 25 * 60;
+        updatePomoDisplay();
+        pomoBtn.textContent = "Mulai Fokus";
+        pomoBtn.style.background = "var(--navy)";
+        pomoMsg.textContent = "Baru juga mulai udah nyerah? Dasar lemah! 😤";
+        pomoMsg.style.color = "red";
+      } else {
+        isPomoRunning = true;
+        pomoBtn.textContent = "Batal Fokus";
+        pomoBtn.style.background = "#b00020"; 
+        pomoMsg.textContent = "Fokus 25 menit! Jangan buka sosmed!";
+        pomoMsg.style.color = "var(--navy)";
+        
+        pomoInterval = setInterval(function() {
+          pomoTimeLeft--;
+          updatePomoDisplay();
+
+          if (pomoTimeLeft <= 0) {
+            clearInterval(pomoInterval);
+            isPomoRunning = false;
+            pomoTimeLeft = 25 * 60;
+            pomoBtn.textContent = "Mulai Fokus Lagi";
+            pomoBtn.style.background = "var(--navy)";
+            pomoMsg.textContent = "Yah, lumayan lah. Istirahat 5 menit! 😌";
+            pomoMsg.style.color = "var(--ok)";
+            alert("Waktu fokus 25 menit selesai! Waktunya istirahat 5 menit.");
+          }
+        }, 1000);
+      }
+    });
+  }
+
+  renderDays();
+  renderDay();
+  setView("jadwal");
+
+})();
