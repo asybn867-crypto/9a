@@ -23,7 +23,6 @@
   --f-disp: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "Nunito", system-ui, sans-serif;
   --f-body: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --f-mono: "DM Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
-  --art-w: 0px;
   color-scheme: light;
 }
 * { box-sizing: border-box; }
@@ -38,7 +37,7 @@ button, select { font: inherit; color: inherit; }
 button { cursor: pointer; }
 :focus-visible { outline: 3px solid var(--steel); outline-offset: 2px; }
 
-/* ---- LATAR VIDEO / GAMBAR ---- */
+/* ---- LATAR VIDEO FULL SCREEN ---- */
 .art {
   position: fixed; inset: 0; z-index: 0;
   width: 100%; height: 100%;
@@ -53,7 +52,7 @@ button { cursor: pointer; }
     rgba(254,254,254,0) 34%, rgba(254,254,254,.9) 58%, rgba(254,254,254,.96) 100%);
 }
 
-/* ---- HALAMAN UTAMA ---- */
+/* ---- HALAMAN UTAMA (CENTER) ---- */
 .wrap {
   position: relative; z-index: 1;
   padding-left: max(16px, env(safe-area-inset-left, 0px));
@@ -71,7 +70,7 @@ button { cursor: pointer; }
   align-items: center;
   justify-content: space-between;
   padding: 12px 20px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -94,7 +93,6 @@ button { cursor: pointer; }
 .eyebrow { font: 500 11px/1.4 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--navy); }
 h1 { margin: 4px 0 0; font: 900 clamp(30px, 8vw, 46px)/1.02 var(--f-disp); letter-spacing: -.01em; text-wrap: balance; color: var(--ink); }
 .now-line { margin: 6px 0 0; font: 500 13px/1.4 var(--f-mono); color: var(--ink-2); font-variant-numeric: tabular-nums; }
-.gap-hero { display: none; } /* Sembunyikan gap hero karena pakai Navbar */
 
 /* ---- NAVIGASI TAB & TOMBOL ---- */
 .views { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 5px; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); margin-bottom: 14px;}
@@ -208,11 +206,7 @@ section[hidden] { display: none; }
   .days button .abbr { display: none; }
 }
 @media (min-width: 960px) {
-  :root { --art-w: min(46vw, 780px); --panel: #f6f8fd; }
-  .art { right: auto; width: var(--art-w); background-position: 50% 0; }
-  .art::after { display: none; }
-  .wrap { margin-left: var(--art-w); padding-block: 40px 72px; }
-  .gap-hero { display: none; }
+  :root { --panel: #f6f8fd; }
   .views, .days button, .panel { backdrop-filter: none; -webkit-backdrop-filter: none; }
 }
 
@@ -239,7 +233,7 @@ section[hidden] { display: none; }
 </head>
 <body>
 
-<!-- LATAR VIDEO MIO -->
+<!-- LATAR VIDEO MIO FULL SCREEN -->
 <video autoplay loop muted playsinline class="art" id="art">
   <source src="bg-video.mp4" type="video/mp4">
 </video>
