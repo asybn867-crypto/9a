@@ -184,17 +184,18 @@ section[hidden] { display: none; }
 /* ---- SPLIT SCREEN PERSIS KAYAK AWAL ---- */
 @media (min-width: 960px) {
   :root { 
-    --art-w: min(46vw, 780px, calc(100vh * 0.797)); /* 0.797 = rasio video (1012x1270, sudah tanpa pinggiran hitam) */
+    --art-w: min(46vw, 780px, calc(100vh * 0.797)); /* 0.797 = rasio video (1012x1270) */
     --panel: #f6f8fd; 
   }
   .art {
     right: auto;
     width: var(--art-w);
-    object-fit: contain;          /* tampilkan seluruh video, tidak di-crop */
-    object-position: left top;    /* mepet kiri-atas */
+    height: 100%;
+    object-fit: cover;            /* UBAH KE COVER BIAR GAK ADA GARIS HITAM */
+    object-position: center top;  /* Tarik ke tengah atas */
     background: var(--paper);
   }
-  .art::after { display: none; } /* Hilangkan gradien di PC biar video kelihatan jelas */
+  .art::after { display: none; } 
   .wrap { margin-left: var(--art-w); padding-block: 40px 72px; }
   .gap-hero { display: none; }
   .views, .days button, .panel { backdrop-filter: none; -webkit-backdrop-filter: none; }
