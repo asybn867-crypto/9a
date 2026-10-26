@@ -181,20 +181,26 @@ section[hidden] { display: none; }
   .days button .abbr { display: none; }
 }
 
-/* ---- SPLIT SCREEN PERSIS KAYAK AWAL ---- */
+/* ---- SPLIT SCREEN (INI BAGIAN YANG GUA BENERIN) ---- */
 @media (min-width: 960px) {
   :root { 
-    --art-w: min(46vw, 780px, calc(100vh * 0.797)); /* 0.797 = rasio video (1012x1270) */
+    --art-w: min(46vw, 780px, calc(100vh * 0.797)); 
     --panel: #f6f8fd; 
   }
+  
+  /* Bikin container-nya jadi patokan crop */
   .art {
     right: auto;
     width: var(--art-w);
     height: 100%;
-    object-fit: cover;            /* UBAH KE COVER BIAR GAK ADA GARIS HITAM */
-    object-position: center top;  /* Tarik ke tengah atas */
-    background: var(--paper);
+    object-fit: cover;
+    
+    /* GUA PAKSA DI-ZOOM & GESER BIAR GARIS HITAM KELUAR LAYAR */
+    transform: scale(1.15) translate(-2%, -2%); 
+    transform-origin: top left; 
+    /* Kalau masih ada sisa hitam dikit, naikin scale jadi 1.2 */
   }
+  
   .art::after { display: none; } 
   .wrap { margin-left: var(--art-w); padding-block: 40px 72px; }
   .gap-hero { display: none; }
