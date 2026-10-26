@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tabungan - Kelas IX-A</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Zen+Maru+Gothic:wght@500;700;900&display=swap">
+<style>
+  :root {
+    --paper: #fefefe;
+    --ink: #14213d;
+    --ink-2: #4a5878;
+    --navy: #23408f;
+    --mist: #eef2fa;
+    --line: #d6deee;
+    --ok: #1f9d6b;
+    --danger: #b00020;
+    --f-disp: "Zen Maru Gothic", system-ui, sans-serif;
+    --f-body: "Plus Jakarta Sans", system-ui, sans-serif;
+    --f-mono: "DM Mono", monospace;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font: 400 15px/1.5 var(--f-body); -webkit-font-smoothing: antialiased;
+    padding: 16px; padding-bottom: 50px;
+  }
+  .wrap { max-width: 600px; margin: 0 auto; }
+  
+  /* Tombol Kembali */
+  .btn-back {
+    display: inline-flex; align-items: center; gap: 6px;
+    text-decoration: none; color: var(--navy); font-weight: 700;
+    padding: 10px 16px; background: var(--mist); border-radius: 10px;
+    margin-bottom: 20px; font-size: 14px; border: 1px solid var(--line);
+  }
+  
+  h1 { font: 900 32px/1.1 var(--f-disp); margin: 0 0 20px 0; color: var(--navy); }
+
+  /* Panel Utama */
+  .panel {
+    background: #fff; border: 1px solid var(--line); border-radius: 16px;
+    padding: 20px; box-shadow: 0 8px 24px rgba(20, 33, 61, 0.05);
+  }
+
+  /* Total Tabungan */
+  .total-box { text-align: center; margin-bottom: 24px; }
+  .total-box .label { font: 500 11px var(--f-mono); text-transform: uppercase; letter-spacing: .1em; color: var(--ink-2); }
+  .total-box .amount { font: 900 42px/1 var(--f-disp); color: var(--ok); margin-top: 8px; }
+
+  /* Form Input */
+  .form-group { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+  input[type="number"], input[type="text"] {
+    width: 100%; padding: 12px 14px; border: 1.5px solid var(--line);
+    border-radius: 10px; font: 400 15px var(--f-body); outline: none; transition: border .2s;
+  }
+  input:focus { border-color: var(--navy); }
+  
+  .btn-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .btn-group button {
+    padding: 14px; border: none; border-radius: 10px; font: 700 14px var(--f-body);
+    color: white; cursor: pointer; transition: opacity .2s;
+  }
+  .btn-group button:active { opacity: 0.8; }
+  .btn-in { background: var(--ok); }
+  .btn-out { background: var(--danger); }
+
+  /* Riwayat List */
+  h3 { font: 500 11px var(--f-mono); text-transform: uppercase; letter-spacing: .1em; color: var(--ink-2); margin: 0 0 12px 0; }
+  ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+  li {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 14px; background: var(--mist); border-radius: 10px; font-size: 14px;
+  }
+  .item-info { display: flex; flex-direction: column; gap: 2px; }
+  .item-note { font-weight: 700; color: var(--ink); }
+  .item-date { font-size: 11px; color: var(--ink-2); font-family: var(--f-mono); }
+  .item-right { display: flex; align-items: center; gap: 12px; }
+  .item-amount { font-weight: 700; font-family: var(--f-mono); }
+  .item-amount.in { color: var(--ok); }
+  .item-amount.out { color: var(--danger); }
+  .btn-del { background: none; border: none; color: var(--danger); font-size: 18px; cursor: pointer; padding: 0; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <a href="index.html" class="btn-back">← Kembali ke Jadwal</a>
+  
+  <h1>💰 Tabungan Kamu</h1>
+
+  <div class="panel">
+    <div class="total-box">
+      <div class="label">Total Saldo</div>
+      <div class="amount" id="totalAmount">Rp 0</div>
+    </div>
+
+    <div class="form-group">
+      <input type="number" id="inputNominal" placeholder="Nominal (cth: 10000)" min="1">
+      <input type="text" id="inputCatatan" placeholder="Catatan (cth: Uang Jajan)">
+      
+      <div class="btn-group">
+        <button class="btn-in" onclick="tambahUang('in')">+ Masuk</button>
+        <button class="btn-out" onclick="tambahUang('out')">- Keluar</button>
+      </div>
+    </div>
+
+    <h3>Riwayat Transaksi</h3>
+    <ul id="listRiwayat">
+      <!-- Data bakal muncul di sini lewat JS -->
+    </ul>
+  </div>
+</div>
+
+<script>
+  // Ambil data dari localStorage, kalau kosong bikin array baru
+  let dataUang = [];
+  try {
+    dataUang = JSON.parse(localStorage.getItem("jp26:money") || "[]") || [];
+  } catch (e) { dataUang = []; }
+
+  function simpanData() {
+    localStorage.setItem("jp26:money", JSON.stringify(dataUang));
+  }
+
+  function renderUang() {
+    const totalEl = document.getElementById("totalAmount");
+    const listEl = document.getElementById("listRiwayat");
+    listEl.innerHTML = "";
+
+    let total = 0;
+
+    if (dataUang.length === 0) {
+      listEl.innerHTML = '<li style="justify-content:center; color:var(--ink-2); font-style:italic;">Belum ada transaksi.</li>';
+    }
+
+    // Looping dari data terbaru (reverse)
+    dataUang.slice().reverse().forEach((trx, revIndex) => {
+      const originalIndex = dataUang.length - 1 - revIndex;
+      
+      // Hitung total (kalau 'in' ditambah, 'out' dikurang)
+      total += (trx.type === 'in' ? trx.amount : -trx.amount);
+
+      // Bikin elemen list
+      const li = document.createElement("li");
+      
+      const info = document.createElement("div");
+      info.className = "item-info";
+      info.innerHTML = `<span class="item-note">${trx.note}</span><span class="item-date">${trx.date}</span>`;
+      
+      const right = document.createElement("div");
+      right.className = "item-right";
+      
+      const amountSpan = document.createElement("span");
+      amountSpan.className = "item-amount " + trx.type;
+      const sign = trx.type === 'in' ? '+' : '-';
+      amountSpan.textContent = `${sign} Rp${trx.amount.toLocaleString('id-ID')}`;
+
+      const btnDel = document.createElement("button");
+      btnDel.className = "btn-del";
+      btnDel.innerHTML = "✖";
+      btnDel.onclick = () => hapusTransaksi(originalIndex);
+
+      right.appendChild(amountSpan);
+      right.appendChild(btnDel);
+      li.appendChild(info);
+      li.appendChild(right);
+      listEl.appendChild(li);
+    });
+
+    // Update Total Saldo
+    totalEl.textContent = (total < 0 ? "- " : "") + "Rp " + Math.abs(total).toLocaleString('id-ID');
+    totalEl.style.color = total < 0 ? "var(--danger)" : "var(--ok)";
+  }
+
+  function tambahUang(type) {
+    const nominal = parseInt(document.getElementById("inputNominal").value);
+    let catatan = document.getElementById("inputCatatan").value.trim();
+    
+    if (isNaN(nominal) || nominal <= 0) {
+      alert("Masukkan nominal yang valid!");
+      return;
+    }
+    
+    if (!catatan) catatan = (type === 'in' ? "Pemasukan" : "Pengeluaran");
+
+    const d = new Date();
+    const tgl = `${d.getDate()}/${d.getMonth()+1}/${d.getFullYear()}`;
+
+    dataUang.push({ type: type, amount: nominal, note: catatan, date: tgl });
+    simpanData();
+    
+    // Reset input
+    document.getElementById("inputNominal").value = "";
+    document.getElementById("inputCatatan").value = "";
+    
+    renderUang();
+  }
+
+  function hapusTransaksi(index) {
+    if (confirm("Hapus catatan ini?")) {
+      dataUang.splice(index, 1);
+      simpanData();
+      renderUang();
+    }
+  }
+
+  // Jalankan saat halaman dibuka
+  renderUang();
+</script>
+
+</body>
+</html>
