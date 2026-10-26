@@ -343,13 +343,13 @@ section[hidden] { display: none; }
       <button type="button" role="tab" id="tabBelajar" aria-selected="false" aria-controls="viewBelajar">Belajar Malam <span class="chip" id="navChip"></span></button>
     </nav>
 
-    <!-- TOMBOL TABUNGAN (Sudah dipindah ke tempat yang benar) -->
+    <!-- TOMBOL TABUNGAN -->
     <a href="tabungan.html" class="btn-tabungan">Buka Tabungan 💰</a>
 
     <section id="viewJadwal" role="tabpanel" aria-labelledby="tabJadwal">
       <div class="stack">
         <div class="days" id="days" role="tablist" aria-label="Hari"></div>
-        <div class="panel" id="dayPanel"></div>
+        <div class="panel" id="dayPanel"></div> <!-- TABEL JADWAL MUNCUL DI SINI -->
       </div>
     </section>
 
@@ -476,7 +476,6 @@ window.onerror = function (msg, src, line) {
         content: data.response
       });
     } catch (error) {
-      // Bagian yang tadi error udah dibersihin
       loading.textContent = "Error: " + error.message;
       console.error("Mio AI error:", error);
       history.pop();
@@ -484,4 +483,7 @@ window.onerror = function (msg, src, line) {
       input.disabled = false;
       send.disabled = false;
       input.focus();
-      messagesBox.scrol
+      messagesBox.scrollTop = messagesBox.scrollHeight;
+    }
+  });
+})()
