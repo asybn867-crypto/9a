@@ -38,15 +38,18 @@ button, select { font: inherit; color: inherit; }
 button { cursor: pointer; }
 :focus-visible { outline: 3px solid var(--steel); outline-offset: 2px; }
 
-/* ---- LATAR VIDEO ---- */
-.art {
+/* ---- LATAR VIDEO (DIBUNGKUS) ---- */
+.art-wrapper {
   position: fixed; inset: 0; z-index: 0;
+  pointer-events: none;
+  overflow: hidden; /* Penting biar video gak meluber */
+}
+.art {
   width: 100%; height: 100%;
   object-fit: cover;
   object-position: center top;
-  pointer-events: none;
 }
-.art::after {
+.art-wrapper::after {
   content: ""; position: absolute; inset: 0;
   background: linear-gradient(to bottom,
     rgba(254,254,254,.78) 0, rgba(254,254,254,0) 24%,
@@ -181,27 +184,26 @@ section[hidden] { display: none; }
   .days button .abbr { display: none; }
 }
 
-/* ---- SPLIT SCREEN (INI BAGIAN YANG GUA BENERIN) ---- */
+/* ---- SPLIT SCREEN (PAKSA CROP) ---- */
 @media (min-width: 960px) {
   :root { 
     --art-w: min(46vw, 780px, calc(100vh * 0.797)); 
     --panel: #f6f8fd; 
   }
   
-  /* Bikin container-nya jadi patokan crop */
-  .art {
+  /* Container dikunci sesuai lebar */
+  .art-wrapper {
     right: auto;
     width: var(--art-w);
-    height: 100%;
-    object-fit: cover;
-    
-    /* GUA PAKSA DI-ZOOM & GESER BIAR GARIS HITAM KELUAR LAYAR */
-    transform: scale(1.15) translate(-2%, -2%); 
+  }
+
+  /* Video dipaksa zoom & geser ke kiri atas biar garis hitamnya hilang */
+  .art {
+    transform: scale(1.35) translate(-10%, -10%); 
     transform-origin: top left; 
-    /* Kalau masih ada sisa hitam dikit, naikin scale jadi 1.2 */
   }
   
-  .art::after { display: none; } 
+  .art-wrapper::after { display: none; } 
   .wrap { margin-left: var(--art-w); padding-block: 40px 72px; }
   .gap-hero { display: none; }
   .views, .days button, .panel { backdrop-filter: none; -webkit-backdrop-filter: none; }
@@ -231,10 +233,12 @@ section[hidden] { display: none; }
 </head>
 <body>
 
-<!-- LATAR VIDEO -->
-<video autoplay loop muted playsinline class="art" id="art">
-  <source src="bg-video.mp4" type="video/mp4">
-</video>
+<!-- LATAR VIDEO DIBUNGKUS WRAPPER -->
+<div class="art-wrapper">
+  <video autoplay loop muted playsinline class="art" id="art">
+    <source src="bg-video.mp4" type="video/mp4">
+  </video>
+</div>
 
 <div class="wrap">
   <div class="col">
