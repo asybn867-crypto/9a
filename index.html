@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Jadwal Kelas IX-A</title>
-   <link rel="icon" type="image/png" href="file_0000000030b48211b4c46d9e0ee47457.png">
+<link rel="icon" type="image/png" href="file_0000000030b48211b4c46d9e0ee47457.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Zen+Maru+Gothic:wght@500;700;900&display=swap">
@@ -82,7 +82,7 @@ h1 {
 .gap-hero { height: clamp(96px, 22svh, 230px); }
 
 /* ---- navigasi tampilan ---- */
-.views { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 5px; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.views { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 5px; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); margin-bottom: 14px;}
 .views button {
   border: 0; background: transparent; border-radius: 10px; padding: 11px 10px;
   font: 700 14px var(--f-body); color: var(--ink-2);
@@ -92,6 +92,16 @@ h1 {
 .views .chip { font: 500 12px var(--f-mono); padding: 2px 8px; border-radius: 99px; background: var(--mist); color: var(--navy); display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
 .views button[aria-selected="true"] .chip { background: rgba(255,255,255,.18); color: #fff; }
 .chip svg { width: 12px; height: 12px; }
+
+/* ---- Tombol Tabungan ---- */
+.btn-tabungan {
+    display: block; text-align: center; padding: 14px; 
+    background: var(--mist); color: var(--navy); 
+    border: 1.5px solid var(--navy); border-radius: 12px; 
+    text-decoration: none; font-weight: 700; margin-bottom: 14px;
+    transition: background .2s;
+}
+.btn-tabungan:active { background: #dce6f9; }
 
 section[hidden] { display: none; }
 .stack { display: flex; flex-direction: column; gap: 14px; margin-top: 14px; }
@@ -198,66 +208,8 @@ section[hidden] { display: none; }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; }
 }
-</style>
 
-</head>
-<body>
-<div class="art" id="art" aria-hidden="true"></div>
-
-<div class="wrap">
-  <div class="col">
-    <header class="top">
-      <div>
-        <div class="eyebrow">Kelas IX-A · Semester Ganjil 2026/2027</div>
-        <h1>Jadwal Pelajaran</h1>
-        <p class="now-line" id="nowLine"></p>
-      </div>
-    </header>
-
-    <div class="gap-hero" aria-hidden="true"></div>
-
-    <nav class="views" role="tablist" aria-label="Tampilan">
-      <button type="button" role="tab" id="tabJadwal" aria-selected="true" aria-controls="viewJadwal">Jadwal Sekolah</button>
-      <button type="button" role="tab" id="tabBelajar" aria-selected="false" aria-controls="viewBelajar">Belajar Malam <span class="chip" id="navChip"></span></button>
-    </nav>
-
-    <section id="viewJadwal" role="tabpanel" aria-labelledby="tabJadwal">
-      <div class="stack">
-        <div class="days" id="days" role="tablist" aria-label="Hari"></div>
-        <div class="panel" id="dayPanel"></div>
-      </div>
-    </section>
-<section id="viewBelajar" role="tabpanel" aria-labelledby="tabBelajar" hidden>
-  <div class="stack">
-    <div class="panel" id="studyPanel"></div>
-    
-    <!-- POMODORO TIMER -->
-    <div class="panel" id="pomoPanel" style="padding: 20px 16px; text-align: center; border-top: 1px solid var(--line);">
-        <h3 style="margin: 0 0 10px; font: 500 11px var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2);">Pomodoro Timer</h3>
-        <div id="pomoTime" style="font: 900 48px var(--f-disp); margin: 10px 0; color: var(--navy); font-variant-numeric: tabular-nums;">25:00</div>
-        <div id="pomoMsg" style="font-size: 13px; color: var(--ink-2); margin-bottom: 15px; font-style: italic; min-height: 20px;">Siap buat fokus?</div>
-        <button id="pomoBtn" style="padding: 10px 24px; background: var(--navy); color: white; border: none; border-radius: 50px; font-weight: bold; cursor: pointer; width: 100%;">Mulai Fokus</button>
-    </div>
-
-    <div class="panel cal" id="calPanel"></div>
-    <div class="panel miles" id="milesPanel"></div>
-  </div>
-</section>
-  </div>
-</div>
-
-<script>
-window.onerror = function (msg, src, line) {
-  var b = document.createElement("pre");
-  b.style.cssText = "position:fixed;left:0;right:0;bottom:0;z-index:99;margin:0;padding:12px;background:#b00020;color:#fff;font:12px/1.4 monospace;white-space:pre-wrap";
-  b.textContent = "Error: " + msg + " (baris " + line + ")";
-  document.body.appendChild(b);
-};
-</script>
-<script src="script.js"></script>
-  
-<!-- WIDGET MIO AI -->
-<style>
+/* WIDGET MIO AI CSS */
 #mio-toggle {
   position: fixed;
   right: 20px;
@@ -337,15 +289,8 @@ window.onerror = function (msg, src, line) {
   overflow-wrap: anywhere;
 }
 
-.mio-user {
-  align-self: flex-end;
-  background: #7957e8;
-}
-
-.mio-bot {
-  align-self: flex-start;
-  background: #292938;
-}
+.mio-user { align-self: flex-end; background: #7957e8; }
+.mio-bot { align-self: flex-start; background: #292938; }
 
 #mio-form {
   display: flex;
@@ -375,12 +320,69 @@ window.onerror = function (msg, src, line) {
   cursor: pointer;
 }
 
-#mio-send:disabled {
-  opacity: .5;
-  cursor: wait;
-}
+#mio-send:disabled { opacity: .5; cursor: wait; }
 </style>
+</head>
+<body>
+<div class="art" id="art" aria-hidden="true"></div>
 
+<div class="wrap">
+  <div class="col">
+    <header class="top">
+      <div>
+        <div class="eyebrow">Kelas IX-A · Semester Ganjil 2026/2027</div>
+        <h1>Jadwal Pelajaran</h1>
+        <p class="now-line" id="nowLine"></p>
+      </div>
+    </header>
+
+    <div class="gap-hero" aria-hidden="true"></div>
+
+    <nav class="views" role="tablist" aria-label="Tampilan">
+      <button type="button" role="tab" id="tabJadwal" aria-selected="true" aria-controls="viewJadwal">Jadwal Sekolah</button>
+      <button type="button" role="tab" id="tabBelajar" aria-selected="false" aria-controls="viewBelajar">Belajar Malam <span class="chip" id="navChip"></span></button>
+    </nav>
+
+    <!-- TOMBOL TABUNGAN (Sudah dipindah ke tempat yang benar) -->
+    <a href="tabungan.html" class="btn-tabungan">Buka Tabungan 💰</a>
+
+    <section id="viewJadwal" role="tabpanel" aria-labelledby="tabJadwal">
+      <div class="stack">
+        <div class="days" id="days" role="tablist" aria-label="Hari"></div>
+        <div class="panel" id="dayPanel"></div>
+      </div>
+    </section>
+
+    <section id="viewBelajar" role="tabpanel" aria-labelledby="tabBelajar" hidden>
+      <div class="stack">
+        <div class="panel" id="studyPanel"></div>
+        
+        <!-- POMODORO TIMER -->
+        <div class="panel" id="pomoPanel" style="padding: 20px 16px; text-align: center; border-top: 1px solid var(--line);">
+            <h3 style="margin: 0 0 10px; font: 500 11px var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2);">Pomodoro Timer</h3>
+            <div id="pomoTime" style="font: 900 48px var(--f-disp); margin: 10px 0; color: var(--navy); font-variant-numeric: tabular-nums;">25:00</div>
+            <div id="pomoMsg" style="font-size: 13px; color: var(--ink-2); margin-bottom: 15px; font-style: italic; min-height: 20px;">Siap buat fokus?</div>
+            <button id="pomoBtn" style="padding: 10px 24px; background: var(--navy); color: white; border: none; border-radius: 50px; font-weight: bold; cursor: pointer; width: 100%;">Mulai Fokus</button>
+        </div>
+
+        <div class="panel cal" id="calPanel"></div>
+        <div class="panel miles" id="milesPanel"></div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script>
+window.onerror = function (msg, src, line) {
+  var b = document.createElement("pre");
+  b.style.cssText = "position:fixed;left:0;right:0;bottom:0;z-index:99;margin:0;padding:12px;background:#b00020;color:#fff;font:12px/1.4 monospace;white-space:pre-wrap";
+  b.textContent = "Error: " + msg + " (baris " + line + ")";
+  document.body.appendChild(b);
+};
+</script>
+<script src="script.js"></script>
+
+<!-- WIDGET MIO AI -->
 <button id="mio-toggle" type="button">
   ✦ Tanya Mio
 </button>
@@ -391,8 +393,7 @@ window.onerror = function (msg, src, line) {
       <strong>✦ Mio AI</strong>
       <small>Tutor pelajaran · Online jika tersedia</small>
     </div>
-    <button id="mio-close" type="button"
-      aria-label="Tutup chat">×</button>
+    <button id="mio-close" type="button" aria-label="Tutup chat">×</button>
   </header>
 
   <div id="mio-messages" aria-live="polite">
@@ -400,9 +401,7 @@ window.onerror = function (msg, src, line) {
   </div>
 
   <form id="mio-form">
-    <input id="mio-input" type="text"
-      placeholder="Tanya pelajaran..."
-      autocomplete="off" maxlength="1500" required>
+    <input id="mio-input" type="text" placeholder="Tanya pelajaran..." autocomplete="off" maxlength="1500" required>
     <button id="mio-send" type="submit">Kirim</button>
   </form>
 </section>
@@ -432,8 +431,7 @@ window.onerror = function (msg, src, line) {
 
   function addMessage(text, role) {
     const bubble = document.createElement("div");
-    bubble.className = "mio-msg " +
-      (role === "user" ? "mio-user" : "mio-bot");
+    bubble.className = "mio-msg " + (role === "user" ? "mio-user" : "mio-bot");
     bubble.textContent = text;
     messagesBox.appendChild(bubble);
     messagesBox.scrollTop = messagesBox.scrollHeight;
@@ -478,22 +476,12 @@ window.onerror = function (msg, src, line) {
         content: data.response
       });
     } catch (error) {
-      loading.textContent =
-loading.textContent = "Error: " + error.message; // <-- Biar error aslinya muncul
-console.error("Mio AI error:", error);
-history.pop();
+      // Bagian yang tadi error udah dibersihin
+      loading.textContent = "Error: " + error.message;
+      console.error("Mio AI error:", error);
+      history.pop();
     } finally {
       input.disabled = false;
       send.disabled = false;
       input.focus();
-      messagesBox.scrollTop = messagesBox.scrollHeight;
-    }
-  });
-})();
-</script>
-<!-- Tabungann
-
-   -->
-   <a href="tabungan.html" style="display:block; text-align:center; margin-top: 20px; padding: 12px; background: var(--navy); color: white; border-radius: 8px; text-decoration: none; font-weight: bold;">Buka Tabungan 💰</a>
-</body>
-</html>
+      messagesBox.scrol
