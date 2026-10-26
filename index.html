@@ -19,11 +19,10 @@
   --line: #d6deee;
   --amber: #e8912d;
   --ok: #1f9d6b;
-  --panel: rgba(255, 255, 255, .86);
+  --panel: rgba(255, 255, 255, .85); /* Efek kaca transparan */
   --f-disp: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "Nunito", system-ui, sans-serif;
   --f-body: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --f-mono: "DM Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
-  --art-w: 0px; 
   color-scheme: light;
 }
 * { box-sizing: border-box; }
@@ -38,39 +37,37 @@ button, select { font: inherit; color: inherit; }
 button { cursor: pointer; }
 :focus-visible { outline: 3px solid var(--steel); outline-offset: 2px; }
 
-/* ---- LATAR VIDEO ---- */
+/* ---- LATAR VIDEO FULL SCREEN ---- */
 .art {
-  position: fixed; inset: 0; z-index: 0;
-  width: 100%; height: 100%;
+  position: fixed; inset: 0; z-index: -1; /* Taruh paling belakang */
+  width: 100vw; height: 100vh;
   object-fit: cover;
-  object-position: center top;
+  object-position: center;
   pointer-events: none;
 }
+/* Gelapin sedikit videonya biar teks kebaca */
 .art::after {
   content: ""; position: absolute; inset: 0;
-  background: linear-gradient(to bottom,
-    rgba(254,254,254,.78) 0, rgba(254,254,254,0) 24%,
-    rgba(254,254,254,0) 34%, rgba(254,254,254,.9) 58%, rgba(254,254,254,.96) 100%);
+  background: rgba(20, 33, 61, 0.4); /* Overlay gelap transparan */
 }
 
-/* ---- HALAMAN UTAMA ---- */
+/* ---- HALAMAN UTAMA (CENTER) ---- */
 .wrap {
   position: relative; z-index: 1;
-  padding-left: max(16px, env(safe-area-inset-left, 0px));
-  padding-right: max(16px, env(safe-area-inset-right, 0px));
-  padding-block: 30px 56px;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 30px 16px 56px;
 }
-.col { max-width: 720px; margin-inline: auto; }
+.col { display: flex; flex-direction: column; gap: 20px; }
 
 /* ---- HEADER ---- */
-.top { display: flex; flex-direction: column; gap: 14px; margin-bottom: 20px; }
-.eyebrow { font: 500 11px/1.4 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--navy); }
-h1 { margin: 4px 0 0; font: 900 clamp(30px, 8vw, 46px)/1.02 var(--f-disp); letter-spacing: -.01em; text-wrap: balance; color: var(--ink); }
-.now-line { margin: 6px 0 0; font: 500 13px/1.4 var(--f-mono); color: var(--ink-2); font-variant-numeric: tabular-nums; }
-.gap-hero { height: 20px; }
+.top { display: flex; flex-direction: column; gap: 14px; }
+.eyebrow { font: 500 11px/1.4 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+h1 { margin: 4px 0 0; font: 900 clamp(30px, 8vw, 46px)/1.02 var(--f-disp); letter-spacing: -.01em; text-wrap: balance; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+.now-line { margin: 6px 0 0; font: 500 13px/1.4 var(--f-mono); color: #eef2fa; font-variant-numeric: tabular-nums; text-shadow: 0 1px 3px rgba(0,0,0,0.5); }
 
 /* ---- TAB & TOMBOL ---- */
-.views { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 5px; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); margin-bottom: 14px;}
+.views { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 5px; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
 .views button {
   border: 0; background: transparent; border-radius: 10px; padding: 11px 10px;
   font: 700 14px var(--f-body); color: var(--ink-2); display: flex; align-items: center; justify-content: center; gap: 8px; min-width: 0;
@@ -81,14 +78,15 @@ h1 { margin: 4px 0 0; font: 900 clamp(30px, 8vw, 46px)/1.02 var(--f-disp); lette
 
 .btn-tabungan {
     display: block; text-align: center; padding: 14px; 
-    background: var(--mist); color: var(--navy); 
+    background: var(--panel); color: var(--navy); 
     border: 1.5px solid var(--navy); border-radius: 12px; 
-    text-decoration: none; font-weight: 700; margin-bottom: 20px; transition: background .2s;
+    text-decoration: none; font-weight: 700; transition: background .2s;
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
 }
 .btn-tabungan:active { background: #dce6f9; }
 
 section[hidden] { display: none; }
-.stack { display: flex; flex-direction: column; gap: 14px; margin-top: 14px; }
+.stack { display: flex; flex-direction: column; gap: 14px; }
 
 /* ---- TAB HARI ---- */
 .days { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; }
@@ -101,7 +99,7 @@ section[hidden] { display: none; }
 .days button[aria-selected="true"] { background: var(--navy); border-color: var(--navy); color: #fff; }
 .days button.today::after { content: ""; position: absolute; left: 50%; bottom: 4px; width: 5px; height: 5px; margin-left: -2.5px; border-radius: 50%; background: var(--amber); }
 
-/* ---- PANEL JADWAL ---- */
+/* ---- PANEL JADWAL & BELAJAR ---- */
 .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
 .dayhead { padding: 16px 16px 14px; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px; }
 .dayhead h2 { margin: 0; font: 900 26px/1.1 var(--f-disp); }
@@ -181,36 +179,6 @@ section[hidden] { display: none; }
   .days button .abbr { display: none; }
 }
 
-/* ---- SPLIT SCREEN (PERSIS KAYAK AWAL) ---- */
-@media (min-width: 960px) {
-  :root { 
-    --art-w: min(46vw, 780px); 
-    --panel: #f6f8fd; 
-  }
-  .art { 
-    right: auto; 
-    width: var(--art-w); 
-    object-fit: cover;
-    object-position: center top; 
-  }
-  .art::after { display: none; } 
-  
-  .wrap { 
-    margin-left: var(--art-w); 
-    padding-block: 24px 72px; 
-    padding-left: 24px; 
-    padding-right: 24px;
-  }
-  
-  .col { 
-    margin-inline: 0; 
-  }
-  
-  .gap-hero { display: none; }
-  .views, .days button, .panel { backdrop-filter: none; -webkit-backdrop-filter: none; }
-  .top { gap: 18px; }
-}
-
 /* ---- WIDGET MIO AI ---- */
 #mio-toggle {
   position: fixed; right: 20px; bottom: 20px; z-index: 9999; border: 0; border-radius: 50px; padding: 14px 20px; color: white; background: #7957e8; font-size: 15px; font-weight: bold; box-shadow: 0 6px 25px #0003; cursor: pointer;
@@ -234,7 +202,7 @@ section[hidden] { display: none; }
 </head>
 <body>
 
-<!-- LATAR VIDEO -->
+<!-- LATAR VIDEO MIO FULL SCREEN -->
 <video autoplay loop muted playsinline class="art" id="art">
   <source src="bg-video.mp4" type="video/mp4">
 </video>
@@ -249,8 +217,6 @@ section[hidden] { display: none; }
         <p class="now-line" id="nowLine"></p>
       </div>
     </header>
-
-    <div class="gap-hero" aria-hidden="true"></div>
 
     <nav class="views" role="tablist" aria-label="Tampilan">
       <button type="button" role="tab" id="tabJadwal" aria-selected="true" aria-controls="viewJadwal">Jadwal Sekolah</button>
