@@ -23,7 +23,7 @@
   --f-disp: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "Nunito", system-ui, sans-serif;
   --f-body: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --f-mono: "DM Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
-  --art-w: 0px; /* Default untuk HP */
+  --art-w: 0px; 
   color-scheme: light;
 }
 * { box-sizing: border-box; }
@@ -181,7 +181,7 @@ section[hidden] { display: none; }
   .days button .abbr { display: none; }
 }
 
-/* ---- SPLIT SCREEN PERSIS KAYAK AWAL ---- */
+/* ---- SPLIT SCREEN (PERSIS KAYAK AWAL) ---- */
 @media (min-width: 960px) {
   :root { 
     --art-w: min(46vw, 780px); 
@@ -190,11 +190,22 @@ section[hidden] { display: none; }
   .art { 
     right: auto; 
     width: var(--art-w); 
-    background-position: 50% 0; 
-    object-position: center center; /* Biar video pas di tengah kiri */
+    object-fit: cover;
+    object-position: center top; 
   }
-  .art::after { display: none; } /* Hilangkan gradien di PC biar video kelihatan jelas */
-  .wrap { margin-left: var(--art-w); padding-block: 40px 72px; }
+  .art::after { display: none; } 
+  
+  .wrap { 
+    margin-left: var(--art-w); 
+    padding-block: 24px 72px; 
+    padding-left: 24px; 
+    padding-right: 24px;
+  }
+  
+  .col { 
+    margin-inline: 0; 
+  }
+  
   .gap-hero { display: none; }
   .views, .days button, .panel { backdrop-filter: none; -webkit-backdrop-filter: none; }
   .top { gap: 18px; }
