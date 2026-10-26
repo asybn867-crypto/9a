@@ -187,11 +187,12 @@ section[hidden] { display: none; }
     --art-w: min(46vw, 780px); 
     --panel: #f6f8fd; 
   }
-  .art { 
-    right: auto; 
-    width: var(--art-w); 
-    background-position: 50% 0; 
-    object-position: center center; /* Biar video pas di tengah kiri */
+  .art {
+    right: auto;
+    width: var(--art-w);
+    object-fit: contain;          /* tampilkan seluruh video, tidak di-crop */
+    object-position: center top;  /* menempel di atas, sisa ruang di bawah putih */
+    background: var(--paper);
   }
   .art::after { display: none; } /* Hilangkan gradien di PC biar video kelihatan jelas */
   .wrap { margin-left: var(--art-w); padding-block: 40px 72px; }
