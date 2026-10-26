@@ -184,7 +184,7 @@ section[hidden] { display: none; }
 /* ---- SPLIT SCREEN PERSIS KAYAK AWAL ---- */
 @media (min-width: 960px) {
   :root { 
-    --art-w: min(46vw, 780px, calc(100vh * 0.797)); /* 0.797 = rasio video setelah pinggiran hitam dibuang */
+    --art-w: min(46vw, 780px, calc(100vh * 0.797)); /* 0.797 = rasio video (1012x1270, sudah tanpa pinggiran hitam) */
     --panel: #f6f8fd; 
   }
   .art {
@@ -192,7 +192,6 @@ section[hidden] { display: none; }
     width: var(--art-w);
     object-fit: contain;          /* tampilkan seluruh video, tidak di-crop */
     object-position: left top;    /* mepet kiri-atas */
-    object-view-box: inset(4.65% 0 0 6.3%); /* buang pinggiran hitam yang ada di file video (atas 62px, kiri 68px) */
     background: var(--paper);
   }
   .art::after { display: none; } /* Hilangkan gradien di PC biar video kelihatan jelas */
