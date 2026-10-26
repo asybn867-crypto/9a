@@ -23,6 +23,7 @@
   --f-disp: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "Nunito", system-ui, sans-serif;
   --f-body: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --f-mono: "DM Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --art-w: 0px; /* Default untuk HP */
   color-scheme: light;
 }
 * { box-sizing: border-box; }
@@ -37,19 +38,15 @@ button, select { font: inherit; color: inherit; }
 button { cursor: pointer; }
 :focus-visible { outline: 3px solid var(--steel); outline-offset: 2px; }
 
-/* ---- LATAR VIDEO (fullscreen, semua ukuran layar) ---- */
-.art-wrap {
-  position: fixed; inset: 0; z-index: 0;
-  pointer-events: none;
-}
+/* ---- LATAR VIDEO ---- */
 .art {
-  display: block;
+  position: fixed; inset: 0; z-index: 0;
   width: 100%; height: 100%;
   object-fit: cover;
   object-position: center top;
+  pointer-events: none;
 }
-/* gradasi putih di atas video (dipindah ke wrapper karena <video> tidak bisa punya ::after) */
-.art-wrap::after {
+.art::after {
   content: ""; position: absolute; inset: 0;
   background: linear-gradient(to bottom,
     rgba(254,254,254,.78) 0, rgba(254,254,254,0) 24%,
@@ -65,13 +62,14 @@ button { cursor: pointer; }
 }
 .col { max-width: 720px; margin-inline: auto; }
 
-/* ---- HEADER & TAB ---- */
+/* ---- HEADER ---- */
 .top { display: flex; flex-direction: column; gap: 14px; margin-bottom: 20px; }
 .eyebrow { font: 500 11px/1.4 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--navy); }
 h1 { margin: 4px 0 0; font: 900 clamp(30px, 8vw, 46px)/1.02 var(--f-disp); letter-spacing: -.01em; text-wrap: balance; color: var(--ink); }
 .now-line { margin: 6px 0 0; font: 500 13px/1.4 var(--f-mono); color: var(--ink-2); font-variant-numeric: tabular-nums; }
-.gap-hero { height: 20px; } /* Pengganti jarak */
+.gap-hero { height: 20px; }
 
+/* ---- TAB & TOMBOL ---- */
 .views { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 5px; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); margin-bottom: 14px;}
 .views button {
   border: 0; background: transparent; border-radius: 10px; padding: 11px 10px;
@@ -92,7 +90,7 @@ h1 { margin: 4px 0 0; font: 900 clamp(30px, 8vw, 46px)/1.02 var(--f-disp); lette
 section[hidden] { display: none; }
 .stack { display: flex; flex-direction: column; gap: 14px; margin-top: 14px; }
 
-/* ---- PANEL JADWAL ---- */
+/* ---- TAB HARI ---- */
 .days { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; }
 .days button {
   position: relative; border: 1.5px solid var(--line); background: var(--panel); border-radius: 10px;
@@ -103,6 +101,7 @@ section[hidden] { display: none; }
 .days button[aria-selected="true"] { background: var(--navy); border-color: var(--navy); color: #fff; }
 .days button.today::after { content: ""; position: absolute; left: 50%; bottom: 4px; width: 5px; height: 5px; margin-left: -2.5px; border-radius: 50%; background: var(--amber); }
 
+/* ---- PANEL JADWAL ---- */
 .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
 .dayhead { padding: 16px 16px 14px; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px; }
 .dayhead h2 { margin: 0; font: 900 26px/1.1 var(--f-disp); }
@@ -177,20 +176,28 @@ section[hidden] { display: none; }
 .mile.on svg { color: var(--amber); }
 .rule { margin: 14px 0 0; font-size: 13px; color: var(--ink-2); }
 
-/* ---- LAYAR LEBAR (SPLIT SCREEN): Mio kiri, jadwal kanan ---- */
+@media (min-width: 480px) {
+  .days button .full { display: inline; }
+  .days button .abbr { display: none; }
+}
+
+/* ---- SPLIT SCREEN PERSIS KAYAK AWAL ---- */
 @media (min-width: 960px) {
-  :root { --art-w: clamp(320px, 36vw, 560px); --panel: #f6f8fd; }
-  .art-wrap { right: auto; width: var(--art-w); background: var(--paper); }
-  .art-wrap::after { display: none; }
-  .wrap { margin-left: var(--art-w); padding-block: 40px 72px; padding-inline: clamp(16px, 2.5vw, 40px); }
-  .col { max-width: 720px; margin-inline: 0; } /* rapat ke Mio, tidak melayang di tengah */
+  :root { 
+    --art-w: min(46vw, 780px); 
+    --panel: #f6f8fd; 
+  }
+  .art { 
+    right: auto; 
+    width: var(--art-w); 
+    background-position: 50% 0; 
+    object-position: center center; /* Biar video pas di tengah kiri */
+  }
+  .art::after { display: none; } /* Hilangkan gradien di PC biar video kelihatan jelas */
+  .wrap { margin-left: var(--art-w); padding-block: 40px 72px; }
   .gap-hero { display: none; }
   .views, .days button, .panel { backdrop-filter: none; -webkit-backdrop-filter: none; }
   .top { gap: 18px; }
-}
-@media (max-width: 959px) {
-  .days button .full { display: inline; }
-  .days button .abbr { display: none; }
 }
 
 /* ---- WIDGET MIO AI ---- */
@@ -216,12 +223,10 @@ section[hidden] { display: none; }
 </head>
 <body>
 
-<!-- LATAR VIDEO MIO (dibungkus agar gradasi putih bisa dipasang) -->
-<div class="art-wrap" aria-hidden="true">
-  <video autoplay loop muted playsinline class="art" id="art">
-    <source src="bg-video.mp4" type="video/mp4">
-  </video>
-</div>
+<!-- LATAR VIDEO -->
+<video autoplay loop muted playsinline class="art" id="art">
+  <source src="bg-video.mp4" type="video/mp4">
+</video>
 
 <div class="wrap">
   <div class="col">
