@@ -129,7 +129,6 @@ section[hidden] { display: none; }
 .brk.now { background: var(--amber); color: #2a1700; border-top-color: var(--amber); }
 .brk.past { opacity: .55; }
 .brk span:first-child { min-width: 0; }
-
 /* ---- BELAJAR MALAM ---- */
 .study { padding: 20px 16px 18px; display: flex; flex-direction: column; gap: 16px; }
 .study .lab { font: 500 11px var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--navy); }
@@ -197,8 +196,9 @@ section[hidden] { display: none; }
 @media (min-width: 480px) {
   .days button .full { display: inline; }
   .days button .abbr { display: none; }
-       }
-   /* ---- SPLIT SCREEN (VIDEO KIRI, KONTEN KANAN) ---- */
+}
+
+/* ---- SPLIT SCREEN (VIDEO KIRI, KONTEN KANAN) ---- */
 @media (min-width: 960px) {
   :root { --art-w: 50vw; --panel: #f6f8fd; }
   .art { 
@@ -250,7 +250,6 @@ section[hidden] { display: none; }
 </head>
 <body>
 
-<!-- LATAR VIDEO MIO -->
 <video autoplay loop muted playsinline class="art" id="art">
   <source src="bg-video.mp4" type="video/mp4">
 </video>
@@ -274,13 +273,12 @@ section[hidden] { display: none; }
     </nav>
 
     <a href="tabungan.html" class="btn-tabungan">Buka Tabungan 💰</a>
-
+    
     <section id="viewJadwal" role="tabpanel" aria-labelledby="tabJadwal">
       <div class="stack">
         <div class="days" id="days" role="tablist" aria-label="Hari"></div>
         <div class="panel" id="dayPanel"></div>
         
-        <!-- DAFTAR PR -->
         <div class="panel pr-panel" id="prPanel">
             <h3 style="margin: 0 0 12px; font: 500 11px var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2);">Daftar PR & Deadline</h3>
             <div class="pr-input-group">
@@ -290,7 +288,6 @@ section[hidden] { display: none; }
             </div>
             <ul class="pr-list" id="prList"></ul>
         </div>
-
       </div>
     </section>
 
@@ -322,7 +319,6 @@ window.onerror = function (msg, src, line) {
 </script>
 <script src="script.js"></script>
 
-<!-- WIDGET MIO AI -->
 <button id="mio-toggle" type="button">✦ Tanya Mio</button>
 <section id="mio-chat" aria-label="Chat dengan Mio">
   <header id="mio-header">
@@ -340,7 +336,6 @@ window.onerror = function (msg, src, line) {
     <button id="mio-send" type="submit">Kirim</button>
   </form>
 </section>
-
 <script>
 (() => {
   const API = "https://synn.asybn867.workers.dev/chat";
@@ -359,7 +354,7 @@ window.onerror = function (msg, src, line) {
   });
   close.addEventListener("click", () => chat.classList.remove("open"));
 
- function addMessage(text, role) {
+  function addMessage(text, role) {
     const bubble = document.createElement("div");
     bubble.className = "mio-msg " + (role === "user" ? "mio-user" : "mio-bot");
     bubble.textContent = text;
@@ -397,9 +392,6 @@ window.onerror = function (msg, src, line) {
   });
 })();
 
-// ==========================================
-// FITUR 1: DAFTAR PR
-// ==========================================
 let prData = JSON.parse(localStorage.getItem('mio_pr') || '[]');
 const prList = document.getElementById('prList');
 const prInput = document.getElementById('prInput');
@@ -470,9 +462,6 @@ if (prAddBtn) {
 }
 renderPR();
 
-// ==========================================
-// FITUR 3: MIO BERUBAH SESUAI WAKTU
-// ==========================================
 const jam = new Date().getHours();
 const mioGreeting = document.querySelector('.mio-msg.mio-bot');
 
