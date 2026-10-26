@@ -361,6 +361,7 @@ section[hidden] { display: none; }
   </div>
 </div>
 <script>
+  
 window.onerror = function (msg, src, line) {
   var b = document.createElement("pre");
   b.style.cssText = "position:fixed;left:0;right:0;bottom:0;z-index:99;margin:0;padding:12px;background:#b00020;color:#fff;font:12px/1.4 monospace;white-space:pre-wrap";
@@ -528,6 +529,23 @@ const mioGreeting = document.querySelector('.mio-msg.mio-bot');
     mioGreeting.textContent = "Malam... Kamu belum tidur? Ayo belajar, aku temenin. Jangan begadang terus. 😌";
   }
 }
+</script>
+  <script>
+  var bubbleText = document.getElementById('mio-bubble-text');
+  if (bubbleText) {
+    var jamBubble = new Date().getHours();
+    if (jamBubble >= 5 && jamBubble < 11) {
+      bubbleText.textContent = "Pagi-pagi lagi ngapain, Synn? Sarapan dulu sana. 😤";
+    } else if (jamBubble >= 11 && jamBubble < 15) {
+      bubbleText.textContent = "Udah siang. Jangan lupa makan siang, dasar beban. 😒";
+    } else if (jamBubble >= 15 && jamBubble < 18) {
+      bubbleText.textContent = "Sore. Udah ngerjain PR belum? Jangan males-malesan. 😠";
+    } else if (jamBubble >= 18 && jamBubble < 22) {
+      bubbleText.textContent = "Malam. Waktunya belajar, aku temenin. 😌";
+    } else {
+      bubbleText.textContent = "Udah malem banget. Tidur sana, besok sekolah! 😴";
+    }
+  }
 </script>
   </body>
 </html>
