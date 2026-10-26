@@ -211,8 +211,7 @@
     var cur = back(doneToday ? t : t - 1);
     var endYesterday = back(t - 1);
     var todayPts = 10 + 2 * Math.min((doneToday ? cur : endYesterday + 1) - 1, 10);
-    return { cur: cur, best: best, pts: pts, doneToday: 
-    return { cur: cur, best: best, pts: pts, doneToday: doneToday, todayPts: todayPts, endYesterday: endYesterday };
+        return { cur: cur, best: best, pts: pts, doneToday: doneToday, todayPts: todayPts, endYesterday: endYesterday };
   }
 
   function renderStudy() {
