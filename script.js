@@ -309,5 +309,61 @@
   renderDays();
   renderDay();
   setView("jadwal");
+// ==========================================
+// 8. POMODORO TIMER
+// ==========================================
+var pomoInterval;
+var pomoTimeLeft = 25 * 60; // 25 menit
+var isPomoRunning = false;
 
+var pomoDisplay = document.getElementById("pomoTime");
+var pomoBtn = document.getElementById("pomoBtn");
+var pomoMsg = document.getElementById("pomoMsg");
+
+function updatePomoDisplay() {
+  var minutes = Math.floor(pomoTimeLeft / 60);
+  var seconds = pomoTimeLeft % 60;
+  if (pomoDisplay) {
+    pomoDisplay.textContent = (minutes < 10 ? "0" : "") + minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+  }
+}
+
+if (pomoBtn) {
+  pomoBtn.addEventListener("click", function() {
+    if (isPomoRunning) {
+      // Batal
+      clearInterval(pomoInterval);
+      isPomoRunning = false;
+      pomoTimeLeft = 25 * 60;
+      updatePomoDisplay();
+      pomoBtn.textContent = "Mulai Fokus";
+      pomoBtn.style.background = "var(--navy)";
+      pomoMsg.textContent = "Baru juga mulai udah nyerah? Dasar lemah! 😤";
+      pomoMsg.style.color = "red";
+    } else {
+      // Mulai
+      isPomoRunning = true;
+      pomoBtn.textContent = "Batal Fokus";
+      pomoBtn.style.background = "#b00020"; 
+      pomoMsg.textContent = "Fokus 25 menit! Jangan buka sosmed!";
+      pomoMsg.style.color = "var(--navy)";
+      
+      pomoInterval = setInterval(function() {
+        pomoTimeLeft--;
+        updatePomoDisplay();
+
+        if (pomoTimeLeft <= 0) {
+          clearInterval(pomoInterval);
+          isPomoRunning = false;
+          pomoTimeLeft = 25 * 60;
+          pomoBtn.textContent = "Mulai Fokus Lagi";
+          pomoBtn.style.background = "var(--navy)";
+          pomoMsg.textContent = "Yah, lumayan lah. Istirahat 5 menit! 😌";
+          pomoMsg.style.color = "var(--ok)";
+          alert("Waktu fokus 25 menit selesai! Waktunya istirahat 5 menit.");
+        }
+      }, 1000);
+    }
+  });
+}
 })();
