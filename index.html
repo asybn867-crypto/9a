@@ -57,36 +57,9 @@ button { cursor: pointer; }
   position: relative; z-index: 1;
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
-  padding-block: 20px 56px;
+  padding-block: 30px 56px;
 }
 .col { max-width: 720px; margin-inline: auto; }
-
-/* ---- NAVBAR ---- */
-.top-navbar {
-  position: sticky;
-  top: 20px;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 20px;
-  margin-bottom: 24px;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(20, 33, 61, 0.05);
-}
-.nav-brand {
-  display: flex; align-items: center; gap: 8px;
-  text-decoration: none; font: 900 16px var(--f-disp); color: var(--navy);
-}
-.nav-links { display: flex; gap: 16px; }
-.nav-links a {
-  text-decoration: none; font: 600 13px var(--f-body); color: var(--ink-2); transition: color 0.2s;
-}
-.nav-links a:hover { color: var(--navy); }
 
 /* ---- HEADER ---- */
 .top { display: flex; flex-direction: column; gap: 14px; margin-bottom: 20px; }
@@ -205,10 +178,6 @@ section[hidden] { display: none; }
   .days button .full { display: inline; }
   .days button .abbr { display: none; }
 }
-@media (min-width: 960px) {
-  :root { --panel: #f6f8fd; }
-  .views, .days button, .panel { backdrop-filter: none; -webkit-backdrop-filter: none; }
-}
 
 /* ---- WIDGET MIO AI ---- */
 #mio-toggle {
@@ -241,19 +210,6 @@ section[hidden] { display: none; }
 <div class="wrap">
   <div class="col">
     
-    <!-- NAVBAR -->
-    <nav class="top-navbar">
-      <a href="#" class="nav-brand" onclick="document.getElementById('tabJadwal').click(); return false;">
-        <img src="logo-mata.svg" alt="Logo" style="height: 24px;">
-        <span>IX-A</span>
-      </a>
-      <div class="nav-links">
-        <a href="#" onclick="document.getElementById('tabJadwal').click(); return false;">Jadwal</a>
-        <a href="#" onclick="document.getElementById('tabBelajar').click(); return false;">Belajar</a>
-        <a href="tabungan.html">Tabungan</a>
-      </div>
-    </nav>
-
     <header class="top">
       <div>
         <div class="eyebrow">Kelas IX-A · Semester Ganjil 2026/2027</div>
