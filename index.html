@@ -184,14 +184,14 @@ section[hidden] { display: none; }
 /* ---- SPLIT SCREEN PERSIS KAYAK AWAL ---- */
 @media (min-width: 960px) {
   :root { 
-    --art-w: min(46vw, 780px); 
+    --art-w: min(46vw, 780px, calc(100vh * 0.81)); /* 0.81 = rasio video, biar tidak ada sisa ruang di kiri/kanan */
     --panel: #f6f8fd; 
   }
   .art {
     right: auto;
     width: var(--art-w);
     object-fit: contain;          /* tampilkan seluruh video, tidak di-crop */
-    object-position: center top;  /* menempel di atas, sisa ruang di bawah putih */
+    object-position: left top;    /* mepet kiri-atas */
     background: var(--paper);
   }
   .art::after { display: none; } /* Hilangkan gradien di PC biar video kelihatan jelas */
