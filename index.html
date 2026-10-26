@@ -179,11 +179,11 @@ section[hidden] { display: none; }
 
 /* ---- LAYAR LEBAR (SPLIT SCREEN): Mio kiri, jadwal kanan ---- */
 @media (min-width: 960px) {
-  :root { --art-w: 44vw; --panel: #f6f8fd; }
+  :root { --art-w: clamp(320px, 36vw, 560px); --panel: #f6f8fd; }
   .art-wrap { right: auto; width: var(--art-w); background: var(--paper); }
   .art-wrap::after { display: none; }
   .wrap { margin-left: var(--art-w); padding-block: 40px 72px; padding-inline: clamp(16px, 2.5vw, 40px); }
-  .col { max-width: 820px; margin-inline: 0; } /* rapat ke Mio, tidak melayang di tengah */
+  .col { max-width: 720px; margin-inline: 0; } /* rapat ke Mio, tidak melayang di tengah */
   .gap-hero { display: none; }
   .views, .days button, .panel { backdrop-filter: none; -webkit-backdrop-filter: none; }
   .top { gap: 18px; }
