@@ -9,6 +9,54 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Zen+Maru+Gothic:wght@500;700;900&display=swap">
 <style>
+  /* ---- BUBBLE CHAT MIO DI VIDEO ---- */
+.mio-bubble {
+  position: fixed;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 14px 20px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  z-index: 50;
+  font: 700 14px var(--f-body);
+  color: var(--navy);
+  max-width: 260px;
+  pointer-events: none;
+  animation: floatBubble 3s ease-in-out infinite;
+}
+
+/* Buntut bubble (segitiga) */
+.mio-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -10px; 
+  left: 20px;
+  border-width: 10px 10px 0;
+  border-style: solid;
+  border-color: rgba(255, 255, 255, 0.95) transparent transparent transparent;
+}
+
+@keyframes floatBubble {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Posisi Bubble di Layar PC (Kiri) */
+@media (min-width: 960px) {
+  .mio-bubble { top: 120px; left: 30px; }
+}
+
+/* Posisi Bubble di Layar HP/Tab (Tengah Atas) */
+@media (max-width: 959px) {
+  .mio-bubble { 
+    top: 100px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    border-bottom-left-radius: 20px; 
+    border-bottom-right-radius: 4px;
+  }
+  .mio-bubble::after { left: auto; right: 30px; border-color: rgba(255,255,255,0.95) transparent transparent transparent; }
+}
 :root {
   --paper: #fefefe;
   --ink: #14213d;
@@ -252,6 +300,10 @@ section[hidden] { display: none; }
 
 <video autoplay loop muted playsinline class="art" id="art">
   <source src="bg-video.mp4" type="video/mp4">
+  <!-- BUBBLE MIO -->
+<div id="mio-bubble" class="mio-bubble">
+  <span id="mio-bubble-text">...</span>
+</div>
 </video>
 
 <div class="wrap">
