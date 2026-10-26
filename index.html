@@ -230,6 +230,18 @@ section[hidden] { display: none; }
     <section id="viewBelajar" role="tabpanel" aria-labelledby="tabBelajar" hidden>
       <div class="stack">
         <div class="panel" id="studyPanel"></div>
+      <!-- TAMBAHKAN KODE POMODORO DI SINI -->
+        <div class="panel" id="pomoPanel" style="padding: 20px 16px; text-align: center; border-top: 1px solid var(--line);">
+            <h3 style="margin: 0 0 10px; font: 500 11px var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2);">Pomodoro Timer</h3>
+            <div id="pomoTime" style="font: 900 48px var(--f-disp); margin: 10px 0; color: var(--navy); font-variant-numeric: tabular-nums;">25:00</div>
+            <div id="pomoMsg" style="font-size: 13px; color: var(--ink-2); margin-bottom: 15px; font-style: italic; min-height: 20px;">Siap buat fokus?</div>
+            <button id="pomoBtn" style="padding: 10px 24px; background: var(--navy); color: white; border: none; border-radius: 50px; font-weight: bold; cursor: pointer; width: 100%;">Mulai Fokus</button>
+        </div>
+        <!-- SAMPAI SINI -->
+
+        <div class="panel cal" id="calPanel"></div>
+        <div class="panel miles" id="milesPanel"></div>
+      </div>
         <div class="panel cal" id="calPanel"></div>
         <div class="panel miles" id="milesPanel"></div>
       </div>
