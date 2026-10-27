@@ -136,6 +136,21 @@
   #mio-chat{background:#202b25;border:1px solid #a89a80;border-radius:18px}#mio-header,#mio-send{background:#33483d}#mio-messages{background:#202b25}
   @media(max-width:560px){.menu{grid-template-columns:1fr}.menu-item{min-height:150px;padding:18px}.hero{padding:27px 22px}.hero:after{right:8px;top:26px}.profile-footer{flex-direction:column;gap:4px}}
 
+
+  /* Force the chat to match the warm classical theme */
+  #mio-toggle{background:#33483d!important;color:#f8f2e7!important;border:1px solid #b8a58b!important}
+  #mio-chat{background:#202b25!important;border:1px solid #b8a58b!important;color:#f4f0e8!important}
+  #mio-header{background:#33483d!important;color:#f4f0e8!important}
+  #mio-header strong{font-family:Georgia,'Times New Roman',serif;font-size:17px}
+  #mio-header small{color:#e6ddce!important;opacity:1!important}
+  #mio-close{color:#f4f0e8!important;font-size:14px!important}
+  #mio-messages{background:#202b25!important}
+  .mio-bot{background:#344137!important;color:#f8f3e9!important}
+  .mio-user{background:#786044!important;color:#fffaf0!important}
+  #mio-form{background:#202b25!important;border-top:1px solid #4a5146!important}
+  #mio-input{background:#f8f5ed!important;color:#252923!important;border:1px solid #b8a58b!important}
+  #mio-input::placeholder{color:#817b70!important}
+  #mio-send{background:#8b6a48!important;color:#fffaf0!important}
 </style>
 </head>
 <body>
@@ -165,15 +180,15 @@
     <header id="mio-header">
       <div>
         <strong>Haimiya Senpai</strong>
-        <small>miooo</small>
+        <small>senpaii~~</small>
       </div>
       <button id="mio-close" type="button" aria-label="Tutup chat">Tutup</button>
     </header>
     <div id="mio-messages" aria-live="polite">
-      <div class="mio-msg mio-bot">H-hah? Mau belajar apa? Tanya saja. Bukan berarti aku sengaja menunggumu, ya! btw maulana ngapain njir 😤</div>
+      <div class="mio-msg mio-bot">Haii syngg, kamu lagi ngapainn? mau nanya apaa?</div>
     </div>
     <form id="mio-form">
-      <input id="mio-input" type="text" placeholder="Tanya pelajaran..." autocomplete="off" maxlength="1500" required>
+      <input id="mio-input" type="text" placeholder="Tanya pelajaran / jadwal..." autocomplete="off" maxlength="1500" required>
       <button id="mio-send" type="submit">Kirim</button>
     </form>
   </section>
