@@ -1,487 +1,777 @@
 <!doctype html>
 <html lang="id">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title> -- .- ..- .-.. .- -. .- / -.- .- -.-- .- / -.- --- -. - --- .-...</title>
-<link rel="icon" type="image/png" href="file_0000000030b48211b4c46d9e0ee47457.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Zen+Maru+Gothic:wght@500;700;900&display=swap">
-<style>
-:root {
-  --paper: #fefefe;
-  --ink: #14213d;
-  --ink-2: #4a5878;
-  --navy: #23408f;
-  --steel: #7f9bd6;
-  --mist: #eef2fa;
-  --line: #d6deee;
-  --amber: #e8912d;
-  --ok: #1f9d6b;
-  --panel: rgba(255, 255, 255, .86);
-  --f-disp: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "Nunito", system-ui, sans-serif;
-  --f-body: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --f-mono: "DM Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
-  --art-w: 0px; 
-  color-scheme: light;
-}
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  background: var(--paper);
-  color: var(--ink);
-  font: 400 15px/1.5 var(--f-body);
-  -webkit-font-smoothing: antialiased;
-}
-button, select { font: inherit; color: inherit; }
-button { cursor: pointer; }
-:focus-visible { outline: 3px solid var(--steel); outline-offset: 2px; }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Haimiya Schedule</title>
+  <link rel="icon" type="image/png" href="file_0000000030b48211b4c46d9e0ee47457.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Zen+Maru+Gothic:wght@500;700;900&display=swap">
+  <style>
+    :root {
+      --paper: #f8f9ff;
+      --paper-2: #eef3ff;
+      --ink: #14213d;
+      --ink-2: #536383;
+      --navy: #23408f;
+      --navy-2: #18316d;
+      --steel: #7f9bd6;
+      --mist: #edf3ff;
+      --line: #dbe5f7;
+      --amber: #f3b85d;
+      --amber-2: #ffe3a5;
+      --ok: #1f9d6b;
+      --shadow: 0 18px 42px rgba(20, 33, 61, 0.08);
+      --panel: rgba(255,255,255,.88);
+      --f-disp: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "Nunito", system-ui, sans-serif;
+      --f-body: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+      --f-mono: "DM Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+      color-scheme: light;
+    }
 
-.art {
-  position: fixed; inset: 0; z-index: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  object-position: center top;
-  pointer-events: none;
-}
-.art::after {
-  content: ""; position: absolute; inset: 0;
-  background: linear-gradient(to bottom,
-    rgba(254,254,254,.78) 0, rgba(254,254,254,0) 24%,
-    rgba(254,254,254,0) 34%, rgba(254,254,254,.9) 58%, rgba(254,254,254,.96) 100%);
-}
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%);
+      color: var(--ink);
+      font: 400 15px/1.5 var(--f-body);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    a { color: inherit; }
+    button, input { font: inherit; color: inherit; }
+    button { cursor: pointer; }
+    :focus-visible { outline: 3px solid rgba(127,155,214,.9); outline-offset: 2px; }
 
-.wrap {
-  position: relative; z-index: 1;
-  padding-left: max(16px, env(safe-area-inset-left, 0px));
-  padding-right: max(16px, env(safe-area-inset-right, 0px));
-  padding-block: 30px 56px;
-}
-.col { max-width: 720px; margin-inline: auto; }
+    .art {
+      position: fixed; inset: 0; z-index: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+      pointer-events: none;
+      filter: saturate(1.08) contrast(1.04);
+    }
+    .art::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(to bottom,
+        rgba(248,249,255,.72) 0,
+        rgba(248,249,255,.28) 24%,
+        rgba(248,249,255,.12) 40%,
+        rgba(248,249,255,.92) 76%,
+        rgba(248,249,255,.97) 100%);
+    }
 
-.top { display: flex; flex-direction: column; gap: 14px; margin-bottom: 20px; }
-.eyebrow { font: 500 11px/1.4 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--navy); }
-h1 { margin: 4px 0 0; font: 900 clamp(30px, 8vw, 46px)/1.02 var(--f-disp); letter-spacing: -.01em; text-wrap: balance; color: var(--ink); }
-.now-line { margin: 6px 0 0; font: 500 13px/1.4 var(--f-mono); color: var(--ink-2); font-variant-numeric: tabular-nums; }
-.gap-hero { height: 20px; }
+    .wrap {
+      position: relative; z-index: 1;
+      padding-left: max(16px, env(safe-area-inset-left, 0px));
+      padding-right: max(16px, env(safe-area-inset-right, 0px));
+      padding-block: 28px 60px;
+    }
+    .col { max-width: 760px; margin-inline: auto; }
 
-.views { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 5px; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
-.views button {
-  border: 0; background: transparent; border-radius: 10px; padding: 11px 10px;
-  font: 700 14px var(--f-body); color: var(--ink-2); display: flex; align-items: center; justify-content: center; gap: 8px; min-width: 0;
-}
-.views button[aria-selected="true"] { background: var(--navy); color: #fff; }
-.views .chip { font: 500 12px var(--f-mono); padding: 2px 8px; border-radius: 99px; background: var(--mist); color: var(--navy); display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
-.views button[aria-selected="true"] .chip { background: rgba(255,255,255,.18); color: #fff; }
+    .top {
+      display: flex; flex-direction: column; gap: 18px;
+      margin-bottom: 18px;
+    }
+    .top-actions {
+      display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px;
+    }
+    .nav-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 42px; padding: 10px 16px;
+      border-radius: 999px; border: 1px solid rgba(35,64,143,.18);
+      background: rgba(255,255,255,.75);
+      text-decoration: none; font-weight: 800; color: var(--navy);
+      box-shadow: 0 10px 22px rgba(20,33,61,.05);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .nav-btn:hover { transform: translateY(-1px); }
 
-.btn-row {
-  display: flex; flex-wrap: wrap; gap: 10px; margin: 14px 0 20px;
-}
-.btn-tabungan, .btn-data {
-  display: inline-flex; align-items: center; justify-content: center; padding: 14px 18px;
-  background: var(--mist); color: var(--navy); border: 1.5px solid var(--navy); border-radius: 12px;
-  text-decoration: none; font-weight: 700; transition: background .2s;
-}
-.btn-data { background: rgba(255,255,255,.72); }
-.btn-tabungan:active, .btn-data:active { background: #dce6f9; }
+    .eyebrow {
+      font: 500 11px/1.4 var(--f-mono);
+      letter-spacing: .12em; text-transform: uppercase; color: var(--navy);
+    }
+    h1 {
+      margin: 4px 0 0;
+      font: 900 clamp(30px, 8vw, 48px)/1.02 var(--f-disp);
+      letter-spacing: -.02em; text-wrap: balance;
+      color: var(--ink);
+    }
+    .now-line {
+      margin: 8px 0 0;
+      font: 500 13px/1.4 var(--f-mono);
+      color: var(--ink-2);
+      font-variant-numeric: tabular-nums;
+    }
 
-section[hidden] { display: none; }
-.stack { display: flex; flex-direction: column; gap: 14px; margin-top: 14px; }
+    .views {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 8px; padding: 6px;
+      background: rgba(255,255,255,.82);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    }
+    .views button {
+      border: 0; background: transparent; border-radius: 12px;
+      padding: 12px 10px; font: 700 14px var(--f-body);
+      color: var(--ink-2); display: flex; align-items: center; justify-content: center; gap: 8px;
+      transition: background .2s ease, color .2s ease, transform .15s ease;
+    }
+    .views button:hover { transform: translateY(-1px); }
+    .views button[aria-selected="true"] {
+      background: linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%);
+      color: #fff; box-shadow: 0 10px 18px rgba(35,64,143,.24);
+    }
 
-.days { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; }
-.days button {
-  position: relative; border: 1.5px solid var(--line); background: var(--panel); border-radius: 10px;
-  padding: 9px 2px 10px; font: 700 13px var(--f-body); color: var(--ink-2);
-  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-}
-.days button .full { display: none; }
-.days button[aria-selected="true"] { background: var(--navy); border-color: var(--navy); color: #fff; }
-.days button.today::after { content: ""; position: absolute; left: 50%; bottom: 4px; width: 5px; height: 5px; margin-left: -2.5px; border-radius: 50%; background: var(--amber); }
+    .chip {
+      font: 500 11px var(--f-mono); padding: 3px 8px; border-radius: 999px;
+      background: rgba(255,255,255,.18); color: var(--navy); display: inline-flex; align-items: center; gap: 4px; white-space: nowrap;
+    }
+    .views button[aria-selected="true"] .chip { background: rgba(255,255,255,.18); color: #fff; }
 
-.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
-.dayhead { padding: 16px 16px 14px; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px; }
-.dayhead h2 { margin: 0; font: 900 26px/1.1 var(--f-disp); }
-.dayhead .meta { font: 500 12px var(--f-mono); color: var(--ink-2); letter-spacing: .04em; }
-.note { margin: 0; padding: 10px 16px; background: #fff5e6; color: #7a4a0c; font-size: 13px; border-top: 1px solid #f3dcb8; }
+    .nav-links {
+      display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 18px;
+    }
+    .mini-link {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 12px 14px; border-radius: 12px;
+      background: linear-gradient(180deg, #f4f7ff 0%, #eaf1ff 100%);
+      color: var(--navy); border: 1.5px solid rgba(35,64,143,.16);
+      text-decoration: none; font-weight: 800;
+      box-shadow: 0 10px 18px rgba(20,33,61,.05);
+    }
 
-.les { display: grid; grid-template-columns: 62px minmax(0, 1fr); gap: 14px; padding: 13px 16px 14px; border-top: 1px solid var(--line); position: relative; }
-.les.past { opacity: .5; }
-.tm { display: flex; flex-direction: column; gap: 7px; }
-.tm span { display: flex; flex-direction: column; font: 500 15px/1.1 var(--f-mono); font-variant-numeric: tabular-nums; color: var(--ink); }
-.tm i { font: 500 9px/1.3 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); }
-.mp-line { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
-.mp { font: 700 18px/1.2 var(--f-disp); text-wrap: balance; min-width: 0; }
-.jk { flex: none; font: 500 10.5px/1 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--navy); background: var(--mist); padding: 5px 7px; border-radius: 6px; white-space: nowrap; }
-.gr { margin-top: 4px; color: var(--ink-2); font-size: 14px; overflow-wrap: anywhere; }
-.les.now { background: var(--navy); color: #fff; border-top-color: var(--navy); }
-.les.now .tm span, .les.now .gr { color: #fff; }
-.les.now .tm i { color: #c3d1f3; }
-.les.now .jk { background: rgba(255,255,255,.16); color: #fff; }
-.les .live { display: none; }
-.les.now .live { display: inline-block; font: 500 10px/1 var(--f-mono); letter-spacing: .1em; text-transform: uppercase; padding: 4px 7px; border-radius: 99px; background: var(--amber); color: #2a1700; }
-.bar { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: rgba(255,255,255,.2); }
-.bar b { display: block; height: 100%; background: var(--amber); }
-.brk { display: flex; justify-content: space-between; gap: 12px; padding: 9px 16px; background: var(--mist); border-top: 1px solid var(--line); font: 500 11px/1.4 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; }
-.brk.now { background: var(--amber); color: #2a1700; border-top-color: var(--amber); }
-.brk.past { opacity: .55; }
-.brk span:first-child { min-width: 0; }
+    section[hidden] { display: none; }
+    .stack { display: flex; flex-direction: column; gap: 16px; margin-top: 16px; }
 
-.study { padding: 20px 16px 18px; display: flex; flex-direction: column; gap: 16px; }
-.study .lab { font: 500 11px var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--navy); }
-.study h2 { margin: 2px 0 0; font: 900 clamp(34px, 10vw, 52px)/1 var(--f-disp); font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
-.study .sub { margin: 6px 0 0; color: var(--ink-2); font-size: 14px; }
-.checkrow { display: flex; align-items: center; gap: 16px; }
-.check {
-  flex: none; width: 76px; height: 76px; border-radius: 50%;
-  border: 3px solid var(--navy); background: #fff; color: var(--navy);
-  display: grid; place-items: center; transition: background .2s, color .2s, transform .15s;
-}
-.check svg { width: 38px; height: 38px; stroke-dasharray: 30; stroke-dashoffset: 30; transition: stroke-dashoffset .3s ease .05s; }
-.check[aria-pressed="true"] { background: var(--ok); border-color: var(--ok); color: #fff; }
-.check[aria-pressed="true"] svg { stroke-dashoffset: 0; }
-.check:active:not(:disabled) { transform: scale(.95); }
-.check:disabled { border-color: var(--line); color: var(--line); cursor: not-allowed; background: var(--mist); }
-.checkrow .tx { min-width: 0; }
-.checkrow .tx b { display: block; font: 700 17px/1.25 var(--f-disp); }
-.checkrow .tx span { display: block; margin-top: 3px; color: var(--ink-2); font-size: 14px; }
-.score { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); }
-.score > div { padding: 14px 16px 16px; }
-.score > div + div { border-left: 1px solid var(--line); }
-.score .k { font: 500 11px var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); display: flex; align-items: center; gap: 6px; }
-.score .k svg { width: 14px; height: 14px; color: var(--amber); }
-.score .v { margin-top: 4px; font: 900 34px/1 var(--f-disp); font-variant-numeric: tabular-nums; }
-.score .v small { font: 500 13px var(--f-body); color: var(--ink-2); margin-left: 4px; }
-.score .h { margin-top: 6px; font-size: 12.5px; color: var(--ink-2); line-height: 1.4; }
+    .days {
+      display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 7px;
+    }
+    .days button {
+      position: relative; border: 1.5px solid var(--line); background: rgba(255,255,255,.75);
+      border-radius: 12px; padding: 10px 4px 12px; font: 700 13px var(--f-body);
+      color: var(--ink-2); box-shadow: 0 8px 18px rgba(20,33,61,.04);
+    }
+    .days button .full { display: none; }
+    .days button[aria-selected="true"] {
+      background: linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%);
+      border-color: transparent; color: #fff;
+    }
+    .days button.today::after {
+      content: ""; position: absolute; left: 50%; bottom: 4px; width: 5px; height: 5px; background: var(--amber); border-radius: 50%; transform: translateX(-50%);
+    }
 
-.cal { padding: 16px; }
-.cal h3, .miles h3 { margin: 0 0 12px; font: 500 11px var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); }
-.grid7 { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
-.grid7 .dn { text-align: center; font: 500 10.5px var(--f-mono); letter-spacing: .06em; color: var(--ink-2); text-transform: uppercase; }
-.cell { aspect-ratio: 1; max-width: 100%; border-radius: 9px; display: grid; place-items: center; font: 500 12px var(--f-mono); font-variant-numeric: tabular-nums; background: var(--mist); color: var(--ink-2); }
-.cell.done { background: var(--navy); color: #fff; }
-.cell.fut { background: transparent; border: 1px dashed var(--line); color: #a9b4cc; }
-.cell.today { outline: 2px solid var(--amber); outline-offset: 2px; }
-.legend { margin: 12px 0 0; font-size: 12.5px; color: var(--ink-2); }
+    .panel {
+      background: rgba(255,255,255,.86);
+      border: 1px solid var(--line); border-radius: 18px;
+      overflow: hidden; box-shadow: var(--shadow);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    }
+    .dayhead {
+      padding: 18px 18px 16px; display: flex; justify-content: space-between; align-items: baseline; gap: 10px;
+      border-bottom: 1px solid var(--line);
+    }
+    .dayhead h2 { margin: 0; font: 900 26px/1.1 var(--f-disp); }
+    .dayhead .meta {
+      font: 500 12px var(--f-mono); letter-spacing: .04em; color: var(--ink-2);
+      font-variant-numeric: tabular-nums;
+    }
+    .session-list { display: flex; flex-direction: column; }
+    .session {
+      display: grid; grid-template-columns: 60px minmax(0, 1fr);
+      gap: 14px; padding: 14px 16px; border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .session:last-child { border-bottom: 0; }
+    .time {
+      display: flex; flex-direction: column; gap: 6px; padding-top: 2px;
+      font: 500 14px/1.1 var(--f-mono); font-variant-numeric: tabular-nums; color: var(--ink);
+    }
+    .time i {
+      font: 500 9px/1.3 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2);
+      font-style: normal;
+    }
+    .subject-wrap {
+      display: flex; justify-content: space-between; align-items: flex-start; gap: 10px;
+    }
+    .subject {
+      font: 700 18px/1.2 var(--f-disp); min-width: 0; text-wrap: balance;
+    }
+    .tag {
+      flex: none; padding: 4px 8px; border-radius: 8px; font: 600 10px var(--f-mono); letter-spacing: .08em; text-transform: uppercase;
+      background: var(--mist); color: var(--navy); white-space: nowrap;
+    }
+    .detail { margin-top: 4px; color: var(--ink-2); font-size: 14px; }
+    .session.now {
+      background: linear-gradient(180deg, rgba(35,64,143,.06) 0%, rgba(35,64,143,.02) 100%);
+    }
+    .session.expired {
+      opacity: .5; filter: grayscale(.08);
+    }
 
-.miles { padding: 16px; }
-.mrow { display: flex; flex-wrap: wrap; gap: 8px; }
-.mile { display: inline-flex; align-items: center; gap: 6px; padding: 8px 12px; border-radius: 99px; border: 1.5px dashed var(--line); font: 700 13px var(--f-body); color: #8a96b0; }
-.mile svg { width: 14px; height: 14px; }
-.mile.on { border: 1.5px solid var(--amber); background: #fff5e6; color: #7a4a0c; }
-.mile.on svg { color: var(--amber); }
-.rule { margin: 14px 0 0; font-size: 13px; color: var(--ink-2); }
+    .note {
+      margin: 0; padding: 12px 16px 14px; background: linear-gradient(180deg, #fff8ec 0%, #fff3d8 100%);
+      color: #7a4a0c; font-size: 13px; border-top: 1px solid rgba(243,184,93,.40);
+    }
 
-.pr-panel { padding: 16px; }
-.pr-input-group { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
-.pr-input-group input[type="text"] { flex: 1; min-width: 150px; padding: 10px; border: 1px solid var(--line); border-radius: 8px; font-family: inherit; }
-.pr-input-group input[type="date"] { padding: 10px; border: 1px solid var(--line); border-radius: 8px; font-family: inherit; }
-.pr-input-group button { padding: 10px 16px; background: var(--navy); color: #fff; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
-.pr-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
-.pr-item { display: flex; justify-content: space-between; align-items: center; padding: 12px; background: var(--mist); border-radius: 8px; }
-.pr-item.done { opacity: 0.6; }
-.pr-item.done .pr-title { text-decoration: line-through; }
-.pr-info { display: flex; flex-direction: column; }
-.pr-title { font-weight: 700; font-size: 14px; }
-.pr-date { font-size: 11px; color: var(--ink-2); font-family: var(--f-mono); margin-top: 2px; }
-.pr-badge { background: var(--amber); color: #2a1700; font-size: 10px; padding: 2px 6px; border-radius: 4px; font-weight: bold; margin-left: 6px; }
-.pr-actions { display: flex; gap: 8px; align-items: center; }
-.pr-check { width: 20px; height: 20px; accent-color: var(--navy); cursor: pointer; }
-.pr-del { background: none; border: none; color: red; font-size: 16px; cursor: pointer; }
+    .study-panel { padding: 20px 16px 18px; }
+    .study-panel .label {
+      font: 500 11px var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--navy);
+    }
+    .study-panel h3 {
+      margin: 8px 0 0; font: 900 clamp(32px, 8vw, 50px)/1 var(--f-disp);
+      letter-spacing: -.02em;
+    }
+    .study-panel .sub {
+      margin: 8px 0 0; color: var(--ink-2); font-size: 14px;
+    }
+    .check-row {
+      display: flex; align-items: center; gap: 16px; margin-top: 18px;
+    }
+    .check {
+      width: 76px; height: 76px; border-radius: 50%; border: 3px solid var(--navy);
+      background: #fff; display: grid; place-items: center; color: var(--navy);
+    }
+    .check svg { width: 38px; height: 38px; }
+    .check.done {
+      background: var(--ok);
+      border-color: var(--ok);
+      color: #fff;
+    }
+    .check-row .text b { display: block; font: 700 17px/1.2 var(--f-disp); }
+    .check-row .text span { display: block; margin-top: 4px; color: var(--ink-2); font-size: 14px; }
+    .score {
+      display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); margin-top: 18px;
+    }
+    .score > div { padding: 14px 16px 0; }
+    .score > div + div { border-left: 1px solid var(--line); }
+    .score .k {
+      font: 500 11px var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2);
+    }
+    .score .v {
+      margin-top: 6px; font: 900 34px/1 var(--f-disp); font-variant-numeric: tabular-nums;
+    }
+    .score .v small { font: 500 13px var(--f-body); color: var(--ink-2); margin-left: 4px; }
 
-@media (min-width: 480px) {
-  .days button .full { display: inline; }
-  .days button .abbr { display: none; }
-}
+    .pr-panel {
+      padding: 16px;
+    }
+    .pr-heading {
+      margin: 0 0 12px; font: 500 11px var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2);
+    }
+    .pr-form {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;
+    }
+    .pr-form input[type="text"],
+    .pr-form input[type="date"] {
+      flex: 1; min-width: 150px; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--line); background: #fff; color: var(--ink);
+    }
+    .pr-form button {
+      border: 0; border-radius: 10px; padding: 10px 16px; background: linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%); color: white; font-weight: 800;
+    }
+    .pr-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+    .pr-item {
+      display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px;
+      background: var(--mist); border-radius: 12px; border: 1px solid rgba(35,64,143,.06);
+    }
+    .pr-item.done { opacity: .7; }
+    .pr-item.done .pr-name { text-decoration: line-through; }
+    .pr-main { display: flex; flex-direction: column; }
+    .pr-name { font-weight: 700; font-size: 14px; }
+    .pr-date { font-size: 11px; color: var(--ink-2); font-family: var(--f-mono); margin-top: 2px; }
+    .pr-actions { display: flex; align-items: center; gap: 8px; }
+    .pr-actions input { width: 18px; height: 18px; accent-color: var(--navy); }
+    .pr-remove { border: none; background: transparent; color: #d8313a; font-size: 18px; cursor: pointer; }
 
-@media (min-width: 960px) {
-  :root { --art-w: 50vw; --panel: #f6f8fd; }
-  .art { left: 0; right: auto; width: var(--art-w); height: 100vh; object-fit: cover; object-position: center top; }
-  .art::after { display: none; }
-  .wrap { margin-left: var(--art-w); padding: 40px 40px 72px 40px; max-width: 100%; }
-  .col { margin-left: 0; margin-right: auto; max-width: 720px; }
-  .gap-hero { display: none; }
-  .views, .days button, .panel { backdrop-filter: none; -webkit-backdrop-filter: none; }
-  .top { gap: 18px; }
-}
+    @media (min-width: 480px) {
+      .days button .full { display: inline; }
+      .days button .abbr { display: none; }
+    }
 
-#mio-toggle { position: fixed; right: 20px; bottom: 20px; z-index: 9999; border: 0; border-radius: 50px; padding: 14px 20px; color: white; background: #7957e8; font-size: 15px; font-weight: bold; box-shadow: 0 12px 24px rgba(121, 87, 232, .35); }
-#mio-chat { position: fixed; right: 16px; bottom: 82px; z-index: 9999; width: min(360px, calc(100vw - 32px)); height: min(500px, 70dvh); display: none; flex-direction: column; overflow: hidden; border: 1px solid rgba(255,255,255,.08); background: #1a1b2d; border-radius: 18px; box-shadow: 0 18px 40px rgba(15, 14, 25, .38); }
-#mio-chat.open { display: flex; }
-#mio-header { padding: 16px; background: #7957e8; display: flex; justify-content: space-between; align-items: center; }
-#mio-header small { display: block; opacity: .8; margin-top: 3px; }
-#mio-close { border: 0; background: transparent; color: white; font-size: 24px; cursor: pointer; }
-#mio-messages { flex: 1; overflow-y: auto; padding: 14px; display: flex; flex-direction: column; gap: 12px; }
-.mio-msg { max-width: 85%; padding: 10px 12px; border-radius: 14px; font-size: 14px; line-height: 1.5; white-space: pre-wrap; overflow-wrap: anywhere; }
-.mio-user { align-self: flex-end; background: #7957e8; }
-.mio-bot { align-self: flex-start; background: #292938; }
-#mio-form { display: flex; gap: 8px; padding: 12px; border-top: 1px solid #ffffff18; }
-#mio-input { min-width: 0; flex: 1; padding: 11px; border: 1px solid #414155; border-radius: 12px; outline: none; background: #222230; color: white; font-size: 14px; }
-#mio-send { border: 0; border-radius: 12px; padding: 0 15px; color: white; background: #7957e8; cursor: pointer; }
-#mio-send:disabled { opacity: .5; cursor: wait; }
-</style>
+    @media (min-width: 960px) {
+      .art {
+        left: 0; right: auto; width: 38vw; height: 100vh;
+        object-fit: cover; object-position: center top;
+      }
+      .art::after { display: none; }
+      .wrap {
+        margin-left: 38vw; max-width: 960px; padding-left: 36px; padding-right: 36px;
+      }
+      .col { margin-left: 0; margin-right: auto; max-width: 760px; }
+    }
+
+    #mio-toggle {
+      position: fixed; right: 20px; bottom: 20px; z-index: 9999; border: 0; border-radius: 50px; padding: 14px 20px;
+      color: white; background: linear-gradient(135deg, #8c6fff 0%, #6859e8 100%); font-size: 15px; font-weight: 800;
+      box-shadow: 0 18px 32px rgba(99,76,226,.35);
+    }
+    #mio-chat {
+      position: fixed; right: 16px; bottom: 82px; z-index: 9999; width: min(360px, calc(100vw - 32px)); height: min(500px, 70dvh);
+      display: none; flex-direction: column; overflow: hidden; border: 1px solid rgba(251,252,255,.18);
+      border-radius: 20px; background: rgba(19,21,35,.95); box-shadow: 0 22px 44px rgba(12,10,20,.45);
+    }
+    #mio-chat.open { display: flex; }
+    #mio-header {
+      padding: 16px; background: linear-gradient(135deg, #8c6fff 0%, #6959e8 100%); display: flex; justify-content: space-between; align-items: center; color: white;
+    }
+    #mio-header small { display: block; opacity: .8; margin-top: 3px; }
+    #mio-close { border: 0; background: transparent; color: white; font-size: 24px; cursor: pointer; }
+    #mio-messages { flex: 1; overflow-y: auto; padding: 14px; display: flex; flex-direction: column; gap: 12px; background: #10131d; }
+    .mio-msg {
+      max-width: 85%; padding: 11px 13px; border-radius: 14px; font-size: 14px; line-height: 1.55; white-space: pre-wrap; overflow-wrap: anywhere;
+      box-shadow: 0 10px 18px rgba(15,17,25,.24);
+    }
+    .mio-user { align-self: flex-end; background: linear-gradient(135deg, #7a5cf4 0%, #5a4ce6 100%); color: #fff; }
+    .mio-bot { align-self: flex-start; background: #202739; color: #f2f5ff; }
+    #mio-form {
+      display: flex; gap: 8px; padding: 12px; border-top: 1px solid rgba(255,255,255,.08); background: rgba(16,19,29,.96);
+    }
+    #mio-input {
+      min-width: 0; flex: 1; padding: 11px 12px; border: 1px solid rgba(166,176,207,.3); border-radius: 12px; outline: none;
+      background: #fbfcff; color: #1b2337; font-size: 14px;
+    }
+    #mio-input::placeholder { color: rgba(27,35,55,.55); }
+    #mio-send {
+      border: 0; border-radius: 12px; padding: 0 15px; color: white; background: linear-gradient(135deg, #8c6fff 0%, #6859e8 100%);
+      cursor: pointer; font-weight: 700;
+    }
+    #mio-send:disabled { opacity: .55; cursor: wait; }
+  </style>
 </head>
 <body>
+  <video autoplay loop muted playsinline class="art" aria-hidden="true">
+    <source src="bg-video.mp4" type="video/mp4">
+  </video>
 
-<video autoplay loop muted playsinline class="art" id="art">
-  <source src="bg-video.mp4" type="video/mp4">
-</video>
+  <div class="wrap">
+    <div class="col">
+      <header class="top">
+        <div class="top-actions">
+          <a class="nav-btn" href="data-diri.html">Data Diri</a>
+          <a class="nav-btn" href="tabungan.html">Tabungan</a>
+        </div>
+        <div>
+          <div class="eyebrow">Kelas IX-A • Jadwal & Fokus</div>
+          <h1>Haimiya Senpai</h1>
+          <p class="now-line" id="nowLine"></p>
+        </div>
+      </header>
 
-<div class="wrap">
-  <div class="col">
-    
-    <header class="top">
-      <div>
-        <div class="eyebrow"> -- .- ..- .-.. .- -. .- / -.- .- -.-- .- / -.- --- -. - --- .-... part 2</div>
-        <h1> -- .- ..- .-.. .- -. .- / -.- .- -.-- .- / -.- --- -. - --- .-...part 3</h1>
-        <p class="now-line" id="nowLine"></p>
+      <nav class="views" role="tablist" aria-label="Tampilan utama">
+        <button type="button" role="tab" aria-selected="true" id="tabJadwal" aria-controls="viewJadwal">Jadwal Sekolah</button>
+        <button type="button" role="tab" aria-selected="false" id="tabBelajar" aria-controls="viewBelajar">Belajar Malam <span class="chip">+7</span></button>
+      </nav>
+
+      <div class="nav-links" style="margin-top: 18px;">
+        <a href="tabungan.html" class="mini-link">Tabungan</a>
+        <a href="data-diri.html" class="mini-link">Data Diri</a>
       </div>
-    </header>
 
-    <div class="gap-hero" aria-hidden="true"></div>
+      <section id="viewJadwal" role="tabpanel" aria-labelledby="tabJadwal">
+        <div class="stack">
+          <div class="days" id="days" role="tablist" aria-label="Pilih hari"></div>
+          <div class="panel" id="dayPanel"></div>
 
-    <nav class="views" role="tablist" aria-label="Tampilan">
-      <button type="button" role="tab" id="tabJadwal" aria-selected="true" aria-controls="viewJadwal">Jadwal Sekolah</button>
-      <button type="button" role="tab" id="tabBelajar" aria-selected="false" aria-controls="viewBelajar">Belajar Malam <span class="chip" id="navChip"></span></button>
-    </nav>
-
-    <div class="btn-row">
-      <a href="tabungan.html" class="btn-tabungan">Tabungan</a>
-      <a href="data-diri.html" class="btn-data">Data Diri</a>
-    </div>
-    
-    <section id="viewJadwal" role="tabpanel" aria-labelledby="tabJadwal">
-      <div class="stack">
-        <div class="days" id="days" role="tablist" aria-label="Hari"></div>
-        <div class="panel" id="dayPanel"></div>
-        
-        <div class="panel pr-panel" id="prPanel">
-            <h3 style="margin: 0 0 12px; font: 500 11px var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2);">Daftar PR & Deadline</h3>
-            <div class="pr-input-group">
-                <input type="text" id="prInput" placeholder="Tambah PR...">
-                <input type="date" id="prDate">
-                <button id="prAddBtn">+</button>
+          <div class="panel pr-panel" id="prPanel">
+            <h3 class="pr-heading">Deadline & PR</h3>
+            <div class="pr-form">
+              <input type="text" id="prInput" placeholder="Tambah PR / deadline..." aria-label="Tambah PR">
+              <input type="date" id="prDate" aria-label="Tanggal deadline">
+              <button type="button" id="prAddBtn">Tambah</button>
             </div>
             <ul class="pr-list" id="prList"></ul>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="viewBelajar" role="tabpanel" aria-labelledby="tabBelajar" hidden>
-      <div class="stack">
-        <div class="panel" id="studyPanel"></div>
-        
-        <div class="panel" id="pomoPanel" style="padding: 20px 16px; text-align: center; border-top: 1px solid var(--line);">
-            <h3 style="margin: 0 0 10px; font: 500 11px var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2);">Pomodoro Timer</h3>
-            <div id="pomoTime" style="font: 900 48px var(--f-disp); margin: 10px 0; color: var(--navy); font-variant-numeric: tabular-nums;">25:00</div>
-            <div id="pomoMsg" style="font-size: 13px; color: var(--ink-2); margin-bottom: 15px; font-style: italic; min-height: 20px;">Siap buat fokus?</div>
-            <button id="pomoBtn" style="padding: 10px 24px; background: var(--navy); color: white; border: none; border-radius: 50px; font-weight: bold; cursor: pointer; width: 100%;">Mulai Fokus</button>
+      <section id="viewBelajar" role="tabpanel" aria-labelledby="tabBelajar" hidden>
+        <div class="stack">
+          <div class="panel study-panel">
+            <div class="label">Belajar malam</div>
+            <h3 id="studyTitle">2.4h</h3>
+            <p class="sub" id="studySub">Kamu sudah konsisten dalam belajar. Lanjutkan ya.</p>
+
+            <div class="check-row">
+              <div class="check" id="checkStudy" aria-label="Tandai belajar hari ini">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M5 12.5 9.2 16.7 19 6.9"></path>
+                </svg>
+              </div>
+              <div class="text">
+                <b>Target hari ini</b>
+                <span id="studyText">Belajar 2 jam lagi untuk menutup target.</span>
+              </div>
+            </div>
+
+            <div class="score">
+              <div>
+                <div class="k">Streak</div>
+                <div class="v" id="streakValue">4 <small>hari</small></div>
+              </div>
+              <div>
+                <div class="k">Skor</div>
+                <div class="v" id="scoreValue">82 <small>poin</small></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel pr-panel">
+            <h3 class="pr-heading">Pomodoro</h3>
+            <div id="timerValue" style="font: 900 48px/1 var(--f-disp); text-align: center; margin: 6px 0 12px; color: var(--navy); font-variant-numeric: tabular-nums;">25:00</div>
+            <div id="timerText" style="font-size: 13px; color: var(--ink-2); text-align: center; margin-bottom: 14px; min-height: 20px;">Siap fokus?</div>
+            <button id="timerBtn" type="button" style="width:100%; padding: 12px 16px; border: 0; border-radius: 12px; font-weight: 800; background: linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%); color: white;">Mulai Fokus</button>
+          </div>
         </div>
-
-        <div class="panel cal" id="calPanel"></div>
-        <div class="panel miles" id="milesPanel"></div>
-      </div>
-    </section>
-  </div>
-</div>
-
-<script>
-window.onerror = function (msg, src, line) {
-  var b = document.createElement("pre");
-  b.style.cssText = "position:fixed;left:0;right:0;bottom:0;z-index:99;margin:0;padding:12px;background:#b00020;color:#fff;font:12px/1.4 monospace;white-space:pre-wrap";
-  b.textContent = "Error: " + msg + " (baris " + line + ")";
-  document.body.appendChild(b);
-};
-</script>
-<script src="script.js"></script>
-
-<button id="mio-toggle" type="button">✦ haimiya senpaii~</button>
-<section id="mio-chat" aria-label="Chat dengan Mio">
-  <header id="mio-header">
-    <div>
-      <strong>Haimiya senpaii~</strong>
-      <small>miooo</small>
+      </section>
     </div>
-    <button id="mio-close" type="button" aria-label="Tutup chat">×</button>
-  </header>
-  <div id="mio-messages" aria-live="polite">
-    <div class="mio-msg mio-bot">H-hah? Mau belajar apa? Tanya saja. Bukan berarti aku sengaja menunggumu, ya! btw maulana ngapain njir 😤</div>
   </div>
-  <form id="mio-form">
-    <input id="mio-input" type="text" placeholder="Tanya pelajaran..." autocomplete="off" maxlength="1500" required>
-    <button id="mio-send" type="submit">Kirim ke haimiyaa </button>
-  </form>
-</section>
-<script>
-(() => {
-  const API = "https://synn.asybn867.workers.dev/chat";
-  const toggle = document.getElementById("mio-toggle");
-  const chat = document.getElementById("mio-chat");
-  const close = document.getElementById("mio-close");
-  const messagesBox = document.getElementById("mio-messages");
-  const form = document.getElementById("mio-form");
-  const input = document.getElementById("mio-input");
-  const send = document.getElementById("mio-send");
-  const history = [];
 
-  toggle.addEventListener("click", () => {
-    chat.classList.toggle("open");
-    if (chat.classList.contains("open")) input.focus();
-  });
-  close.addEventListener("click", () => chat.classList.remove("open"));
+  <button id="mio-toggle" type="button">✦ haimiya senpai~</button>
+  <section id="mio-chat" aria-label="Chat dengan Haimiya">
+    <header id="mio-header">
+      <div>
+        <strong>Haimiya senpai~</strong>
+        <small>AI helper</small>
+      </div>
+      <button id="mio-close" type="button" aria-label="Tutup chat">×</button>
+    </header>
+    <div id="mio-messages" aria-live="polite">
+      <div class="mio-msg mio-bot">H-hai! Aku Haimiya senpai~. Mau belajar atau cek jadwal? Aku siap bantu.</div>
+    </div>
+    <form id="mio-form">
+      <input id="mio-input" type="text" placeholder="Tanya pelajaran / jadwal..." autocomplete="off" maxlength="1500" required>
+      <button id="mio-send" type="submit">Kirim</button>
+    </form>
+  </section>
 
-  function addMessage(text, role) {
-    const bubble = document.createElement("div");
-    bubble.className = "mio-msg " + (role === "user" ? "mio-user" : "mio-bot");
-    bubble.textContent = text;
-    messagesBox.appendChild(bubble);
-    messagesBox.scrollTop = messagesBox.scrollHeight;
-    return bubble;
-  }
+  <script>
+    const days = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+    const scheduleData = {
+      Senin: [
+        { time: "06:45", end: "07:15", title: "Upacara", detail: "Lapangan sekolah • wajib hadir", deadline: "2026-11-02T07:15:00" },
+        { time: "07:15", end: "08:00", title: "Matematika", detail: "Persamaan linear • catatan", deadline: "2026-11-02T08:00:00" },
+        { time: "09:00", end: "10:30", title: "IPA", detail: "Sistem organ manusia", deadline: "2026-11-02T10:30:00" }
+      ],
+      Selasa: [
+        { time: "07:15", end: "08:00", title: "Bahasa Indonesia", detail: "Membaca puisi dan tugas analisis", deadline: "2026-11-03T08:00:00" },
+        { time: "08:00", end: "09:00", title: "Sejarah", detail: "Pergerakan nasional", deadline: "2026-11-03T09:00:00" }
+      ],
+      Rabu: [
+        { time: "07:00", end: "08:00", title: "Olahraga", detail: "Lapangan basket • warm-up", deadline: "2026-11-04T08:00:00" },
+        { time: "09:00", end: "10:30", title: "TIK", detail: "Membuat presentasi digital", deadline: "2026-11-04T10:30:00" }
+      ],
+      Kamis: [
+        { time: "07:15", end: "08:00", title: "Bahasa Inggris", detail: "Reading comprehension", deadline: "2026-11-05T08:00:00" },
+        { time: "09:00", end: "10:00", title: "Seni Budaya", detail: "Karya lukis sederhana", deadline: "2026-11-05T10:00:00" }
+      ],
+      Jumat: [
+        { time: "07:15", end: "08:00", title: "Pkn", detail: "Diskusi demokrasi", deadline: "2026-11-06T08:00:00" },
+        { time: "09:00", end: "10:15", title: "Praktek", detail: "Lab komputer / projek", deadline: "2026-11-06T10:15:00" }
+      ],
+      Sabtu: [
+        { time: "08:00", end: "09:00", title: "Belajar Mandiri", detail: "Review materi minggu ini", deadline: "2026-11-07T09:00:00" }
+      ]
+    };
 
-  form.addEventListener("submit", async (event) => {
-    event.preventDefault();
-    const text = input.value.trim();
-    if (!text || send.disabled) return;
-    addMessage(text, "user");
-    history.push({ role: "user", content: text });
-    input.value = ""; input.disabled = true; send.disabled = true;
-    const loading = addMessage("Mio sedang berpikir...", "assistant");
+    const prKey = "mio-pr-list";
+    const nowLine = document.getElementById("nowLine");
+    const daysWrap = document.getElementById("days");
+    const dayPanel = document.getElementById("dayPanel");
+    const tabJadwal = document.getElementById("tabJadwal");
+    const tabBelajar = document.getElementById("tabBelajar");
+    const viewJadwal = document.getElementById("viewJadwal");
+    const viewBelajar = document.getElementById("viewBelajar");
 
-    try {
-      const response = await fetch(API, {
-        method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: history.slice(-10) })
+    function formatClock(date) {
+      return new Intl.DateTimeFormat("id-ID", {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+      }).format(date);
+    }
+
+    function updateClock() {
+      const now = new Date();
+      nowLine.textContent = formatClock(now);
+    }
+
+    function isPast(deadline) {
+      if (!deadline) return false;
+      const d = new Date(deadline);
+      if (Number.isNaN(d.getTime())) return false;
+      return d.getTime() <= Date.now();
+    }
+
+    function renderDayButtons() {
+      const now = new Date();
+      const todayName = days[now.getDay() === 0 ? 6 : now.getDay() - 1] || "Senin";
+      daysWrap.innerHTML = "";
+      days.forEach((day) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.setAttribute("role", "tab");
+        button.setAttribute("aria-selected", day === todayName ? "true" : "false");
+        button.className = day === todayName ? "today" : "";
+        const label = document.createElement("span");
+        label.className = "abbr";
+        label.textContent = day.slice(0, 2);
+        const labelFull = document.createElement("span");
+        labelFull.className = "full";
+        labelFull.textContent = day;
+        button.appendChild(label);
+        button.appendChild(labelFull);
+        button.addEventListener("click", () => {
+          renderDay(day);
+          document.querySelectorAll("#days button").forEach((el) => el.setAttribute("aria-selected", (el === button) ? "true" : "false"));
+        });
+        daysWrap.appendChild(button);
       });
-      const data = await response.json();
-      if (!response.ok || !data.response) throw new Error(data.error || "Permintaan gagal.");
-      loading.textContent = data.response;
-      history.push({ role: "assistant", content: data.response });
-    } catch (error) {
-      loading.textContent = "Error: " + error.message;
-      console.error("Mio AI error:", error);
-      history.pop();
-    } finally {
-      input.disabled = false; send.disabled = false; input.focus();
-      messagesBox.scrollTop = messagesBox.scrollHeight;
+      renderDay(todayName);
     }
-  });
-})();
 
-let prData = JSON.parse(localStorage.getItem('mio_pr') || '[]');
-const prList = document.getElementById('prList');
-const prInput = document.getElementById('prInput');
-const prDate = document.getElementById('prDate');
-const prAddBtn = document.getElementById('prAddBtn');
+    function renderDay(day) {
+      const items = (scheduleData[day] || []).filter((item) => !isPast(item.deadline));
+      const today = new Date();
+      const now = today.getHours() * 60 + today.getMinutes();
+      const dateLabel = new Intl.DateTimeFormat("id-ID", { weekday: "long", day: "numeric", month: "short" }).format(today);
 
-function parseDeadlineValue(value) {
-  if (!value) return null;
-  const raw = String(value).trim();
-  if (!raw) return null;
-  const normalized = /^\d{4}-\d{2}-\d{2}$/.test(raw) ? raw + 'T23:59:59' : raw;
-  const parsed = new Date(normalized);
-  return Number.isNaN(parsed.getTime()) ? null : parsed;
-}
+      dayPanel.innerHTML = "";
+      const wrapper = document.createElement("div");
+      const head = document.createElement("div");
+      head.className = "dayhead";
+      head.innerHTML = `<h2>${day}</h2><div class="meta">${dateLabel}</div>`;
+      wrapper.appendChild(head);
 
-function purgeExpiredPRs() {
-  const now = Date.now();
-  const filtered = [];
-  prData.forEach((item) => {
-    if (item.done) {
-      filtered.push(item); return;
-    }
-    const due = parseDeadlineValue(item.date);
-    if (!due || now < due.getTime()) filtered.push(item);
-  });
-  if (filtered.length !== prData.length) {
-    prData = filtered;
-    localStorage.setItem('mio_pr', JSON.stringify(prData));
-  }
-}
+      const list = document.createElement("div");
+      list.className = "session-list";
 
-function renderPR() {
-  if (!prList) return;
-  purgeExpiredPRs();
-  prList.innerHTML = '';
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const tomorrow = new Date(today); tomorrow.setDate(tomorrow.getDate() + 1);
-
-  prData.forEach((item, index) => {
-    const li = document.createElement('li');
-    li.className = 'pr-item' + (item.done ? ' done' : '');
-
-    let badge = '';
-    if (item.date && !item.done) {
-      const dueDate = new Date(item.date);
-      dueDate.setHours(0,0,0,0);
-      if (dueDate.getTime() === tomorrow.getTime()) {
-        badge = '<span class="pr-badge">Besok!</span>';
-      } else if (dueDate < today) {
-        badge = '<span class="pr-badge" style="background:red;color:white;">Telat!</span>';
+      if (!items.length) {
+        const empty = document.createElement("div");
+        empty.style.padding = "18px 16px";
+        empty.style.color = "var(--ink-2)";
+        empty.textContent = "Tidak ada jadwal yang aktif hari ini. Waktu deadline sudah lewat.";
+        list.appendChild(empty);
+      } else {
+        items.forEach((item) => {
+          const entry = document.createElement("div");
+          entry.className = "session";
+          const itemTime = Number.parseInt(item.time.split(":")[0], 10) * 60 + Number.parseInt(item.time.split(":")[1], 10);
+          if (itemTime <= now && now < Number.parseInt(item.end.split(":")[0], 10) * 60 + Number.parseInt(item.end.split(":")[1], 10)) {
+            entry.classList.add("now");
+          }
+          entry.innerHTML = `
+            <div class="time"><i>Jam</i><span>${item.time}</span></div>
+            <div>
+              <div class="subject-wrap">
+                <div class="subject">${item.title}</div>
+                <span class="tag">${item.end}</span>
+              </div>
+              <div class="detail">${item.detail}</div>
+            </div>
+          `;
+          list.appendChild(entry);
+        });
       }
+
+      wrapper.appendChild(list);
+      const note = document.createElement("div");
+      note.className = "note";
+      note.textContent = "Jadwal otomatis hilang saat waktu deadline sudah lewat. Ini supaya lebih rapi dan tidak menumpuk.";
+      wrapper.appendChild(note);
+      dayPanel.appendChild(wrapper);
     }
 
-    const dateText = item.date ? new Date(item.date).toLocaleDateString('id-ID', { day: 'numeric', month: 'short' }) : 'Tanpa deadline';
-    li.innerHTML = `
-      <div class="pr-info">
-        <span class="pr-title">${item.text} ${badge}</span>
-        <span class="pr-date">📅 ${dateText}</span>
-      </div>
-      <div class="pr-actions">
-        <input type="checkbox" class="pr-check" ${item.done ? 'checked' : ''} onchange="togglePR(${index})">
-        <button class="pr-del" onclick="hapusPR(${index})">✖</button>
-      </div>
-    `;
-    prList.appendChild(li);
-  });
-}
+    function renderPR() {
+      const prList = document.getElementById("prList");
+      let items = [];
+      try { items = JSON.parse(localStorage.getItem(prKey) || "[]"); } catch (e) { items = []; }
+      prList.innerHTML = "";
+      if (!items.length) {
+        prList.innerHTML = '<li style="padding: 10px 6px; color: var(--ink-2);">Belum ada PR / deadline yang ditambah.</li>';
+        return;
+      }
+      items.forEach((item, index) => {
+        const li = document.createElement("li");
+        li.className = "pr-item" + (item.done ? " done" : "");
+        const due = item.date ? new Date(item.date + "T00:00:00") : null;
+        const dueText = item.date ? due.toLocaleDateString("id-ID", { day: "numeric", month: "short" }) : "Tanpa tanggal";
+        li.innerHTML = `
+          <div class="pr-main">
+            <span class="pr-name">${escapeHtml(item.text)}</span>
+            <span class="pr-date">${dueText}</span>
+          </div>
+          <div class="pr-actions">
+            <input type="checkbox" ${item.done ? "checked" : ""} aria-label="Tandai selesai" data-index="${index}">
+            <button type="button" class="pr-remove" data-index="${index}" aria-label="Hapus item">×</button>
+          </div>
+        `;
+        prList.appendChild(li);
+      });
 
-window.togglePR = function(index) {
-  prData[index].done = !prData[index].done;
-  localStorage.setItem('mio_pr', JSON.stringify(prData));
-  renderPR();
-};
+      prList.querySelectorAll("input[type='checkbox']").forEach((chk) => {
+        chk.addEventListener("change", (e) => {
+          const idx = Number(e.target.dataset.index);
+          const current = JSON.parse(localStorage.getItem(prKey) || "[]");
+          current[idx].done = e.target.checked;
+          localStorage.setItem(prKey, JSON.stringify(current));
+          renderPR();
+        });
+      });
 
-window.hapusPR = function(index) {
-  prData.splice(index, 1);
-  localStorage.setItem('mio_pr', JSON.stringify(prData));
-  renderPR();
-};
+      prList.querySelectorAll(".pr-remove").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const idx = Number(btn.dataset.index);
+          const current = JSON.parse(localStorage.getItem(prKey) || "[]");
+          current.splice(idx, 1);
+          localStorage.setItem(prKey, JSON.stringify(current));
+          renderPR();
+        });
+      });
+    }
 
-if (prAddBtn) {
-  prAddBtn.addEventListener('click', () => {
-    const text = prInput.value.trim();
-    if (!text) return;
-    prData.push({ text: text, date: prDate.value, done: false });
-    localStorage.setItem('mio_pr', JSON.stringify(prData));
-    prInput.value = '';
-    prDate.value = '';
+    function escapeHtml(str) {
+      return String(str).replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      }[char]));
+    }
+
+    document.getElementById("prAddBtn").addEventListener("click", () => {
+      const value = document.getElementById("prInput").value.trim();
+      const date = document.getElementById("prDate").value;
+      if (!value) return;
+      let items = [];
+      try { items = JSON.parse(localStorage.getItem(prKey) || "[]"); } catch (e) { items = []; }
+      items.push({ text: value, date, done: false });
+      localStorage.setItem(prKey, JSON.stringify(items));
+      document.getElementById("prInput").value = "";
+      document.getElementById("prDate").value = "";
+      renderPR();
+    });
+
+    document.getElementById("tabJadwal").addEventListener("click", () => {
+      tabJadwal.setAttribute("aria-selected", "true");
+      tabBelajar.setAttribute("aria-selected", "false");
+      viewJadwal.hidden = false;
+      viewBelajar.hidden = true;
+    });
+
+    document.getElementById("tabBelajar").addEventListener("click", () => {
+      tabBelajar.setAttribute("aria-selected", "true");
+      tabJadwal.setAttribute("aria-selected", "false");
+      viewBelajar.hidden = false;
+      viewJadwal.hidden = true;
+    });
+
+    const checkStudy = document.getElementById("checkStudy");
+    checkStudy.addEventListener("click", () => {
+      checkStudy.classList.toggle("done");
+    });
+
+    const timerBtn = document.getElementById("timerBtn");
+    const timerValue = document.getElementById("timerValue");
+    const timerText = document.getElementById("timerText");
+    let timerSeconds = 25 * 60;
+    let timerRunning = false;
+    let timerInterval = null;
+
+    function showTimer() {
+      const mins = Math.floor(timerSeconds / 60).toString().padStart(2, "0");
+      const secs = (timerSeconds % 60).toString().padStart(2, "0");
+      timerValue.textContent = `${mins}:${secs}`;
+    }
+
+    timerBtn.addEventListener("click", () => {
+      if (timerRunning) {
+        clearInterval(timerInterval);
+        timerRunning = false;
+        timerBtn.textContent = "Lanjutkan";
+        timerText.textContent = "Fokus berhenti sementara.";
+        return;
+      }
+      timerRunning = true;
+      timerBtn.textContent = "Jeda";
+      timerText.textContent = "Misi: fokus tanpa gangguan.";
+      timerInterval = setInterval(() => {
+        timerSeconds--;
+        showTimer();
+        if (timerSeconds <= 0) {
+          clearInterval(timerInterval);
+          timerRunning = false;
+          timerBtn.textContent = "Mulai Lagi";
+          timerText.textContent = "Waktu fokus selesai — istirahat sebentar ya.";
+          timerSeconds = 25 * 60;
+          showTimer();
+        }
+      }, 1000);
+    });
+
+    showTimer();
     renderPR();
-  });
-  prInput.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter') {
-      event.preventDefault();
-      prAddBtn.click();
+    renderDayButtons();
+    updateClock();
+    setInterval(updateClock, 1000 * 30);
+
+    const AI_URL = "https://synn.asybn867.workers.dev/chat";
+    const toggle = document.getElementById("mio-toggle");
+    const chat = document.getElementById("mio-chat");
+    const close = document.getElementById("mio-close");
+    const messagesBox = document.getElementById("mio-messages");
+    const form = document.getElementById("mio-form");
+    const input = document.getElementById("mio-input");
+    const send = document.getElementById("mio-send");
+    const history = [];
+
+    toggle.addEventListener("click", () => {
+      chat.classList.toggle("open");
+      if (chat.classList.contains("open")) input.focus();
+    });
+    close.addEventListener("click", () => chat.classList.remove("open"));
+
+    function addMessage(text, role) {
+      const bubble = document.createElement("div");
+      bubble.className = "mio-msg " + (role === "user" ? "mio-user" : "mio-bot");
+      bubble.textContent = text;
+      messagesBox.appendChild(bubble);
+      messagesBox.scrollTop = messagesBox.scrollHeight;
+      return bubble;
     }
-  });
-}
-renderPR();
 
-const jam = new Date().getHours();
-const mioGreeting = document.querySelector('.mio-msg.mio-bot');
-if (mioGreeting) {
-  if (jam >= 6 && jam < 12) {
-    mioGreeting.textContent = "Selamat pagi... Jangan lupa sarapan sebelum ke sekolah, dasar beban. 😤";
-  } else if (jam >= 12 && jam < 15) {
-    mioGreeting.textContent = "Istirahat siang. Makan yang bener, jangan cuma jajan terus. 😒";
-  } else if (jam >= 15 && jam < 18) {
-    mioGreeting.textContent = "Sore. Udah ngerjain PR belum? Jangan males-malesan, awas aja kalau nggak dikerjain! 😠";
-  } else {
-    mioGreeting.textContent = "Malam... Kamu belum tidur? Ayo belajar, aku temenin. Jangan begadang terus. 😌";
-  }
-}
-</script>
-
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const text = input.value.trim();
+      if (!text || send.disabled) return;
+      addMessage(text, "user");
+      history.push({ role: "user", content: text });
+      input.value = ""; input.disabled = true; send.disabled = true;
+      const loading = addMessage("Mio lagi mikir...", "assistant");
+      try {
+        const response = await fetch(AI_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ messages: history.slice(-10) })
+        });
+        const data = await response.json();
+        const message = data?.response || "Aku nggak dapet jawaban dari server. Coba lagi ya.";
+        loading.textContent = message;
+        history.push({ role: "assistant", content: message });
+      } catch (error) {
+        loading.textContent = "Maaf, AI lagi error. Coba lagi nanti ya.";
+      } finally {
+        input.disabled = false;
+        send.disabled = false;
+        input.focus();
+        messagesBox.scrollTop = messagesBox.scrollHeight;
+      }
+    });
+  </script>
 </body>
 </html>
