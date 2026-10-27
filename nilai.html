@@ -31,6 +31,7 @@ h2{font:600 20px/1.2 Georgia,serif;margin:0 0 15px}.form-grid{display:grid;grid-
 <div class="field full"><label for="note">Catatan (opsional)</label><input id="note" type="text" maxlength="100" placeholder="Contoh: Bab statistika"></div>
 </div><button class="save" type="submit">Simpan nilai</button><p class="notice" id="notice" aria-live="polite"></p></form></section>
 <section class="records"><div class="records-head"><h2>Riwayat nilai</h2><span id="recordLabel">0 catatan</span></div><div id="list"><div class="empty">Belum ada nilai. Tambahkan catatan pertamamu di atas.</div></div></section>
+<section class="records"><div class="records-head"><h2>Rata-rata per mapel</h2><span>berdasarkan catatanmu</span></div><div id="subjectAverages"><div class="empty">Rata-rata mapel muncul setelah ada nilai.</div></div></section>
 <p class="foot">Catatan disimpan di browser perangkat ini. Data tidak otomatis tersinkron ke perangkat lain.</p>
 </main>
 <script>
@@ -45,6 +46,9 @@ function render(){
  if(!grades.length){avg.textContent="—";note.textContent="Belum ada nilai";list.innerHTML='<div class="empty">Belum ada nilai. Tambahkan catatan pertamamu di atas.</div>';return;}
  const mean=grades.reduce((sum,g)=>sum+Number(g.score),0)/grades.length;avg.textContent=mean.toLocaleString("id-ID",{maximumFractionDigits:2});note.textContent="Dari "+grades.length+" nilai yang dicatat";
  list.replaceChildren();
+ const groups={};grades.forEach(g=>{if(!groups[g.subject])groups[g.subject]=[];groups[g.subject].push(Number(g.score));});
+ const subjectRoot=document.getElementById("subjectAverages");subjectRoot.replaceChildren();
+ Object.keys(groups).sort((a,b)=>a.localeCompare(b,"id")).forEach(subject=>{const scores=groups[subject],mean=scores.reduce((sum,n)=>sum+n,0)/scores.length;const row=document.createElement("article");row.className="record";const name=document.createElement("div");name.className="record-title";name.textContent=subject;const meta=document.createElement("div");meta.className="record-meta";meta.textContent=scores.length+" nilai";name.append(meta);const value=document.createElement("div");value.className="grade";value.textContent=mean.toLocaleString("id-ID",{maximumFractionDigits:2});row.append(name,value);subjectRoot.append(row);});
  [...grades].reverse().forEach(g=>{
   const row=document.createElement("article");row.className="record";
   const info=document.createElement("div"),title=document.createElement("div"),meta=document.createElement("div");
