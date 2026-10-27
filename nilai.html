@@ -43,7 +43,7 @@ const fmtDate=value=>{if(!value)return "";const d=new Date(value+"T12:00:00");re
 function render(){
  const avg=document.getElementById("average"),count=document.getElementById("count"),note=document.getElementById("averageNote");
  count.textContent=grades.length;document.getElementById("recordLabel").textContent=grades.length+" catatan";
- if(!grades.length){avg.textContent="—";note.textContent="Belum ada nilai";list.innerHTML='<div class="empty">Belum ada nilai. Tambahkan catatan pertamamu di atas.</div>';return;}
+ if(!grades.length){avg.textContent="—";note.textContent="Belum ada nilai";list.innerHTML='<div class="empty">Belum ada nilai. Tambahkan catatan pertamamu di atas.</div>';document.getElementById("subjectAverages").innerHTML='<div class="empty">Rata-rata mapel muncul setelah ada nilai.</div>';return;}
  const mean=grades.reduce((sum,g)=>sum+Number(g.score),0)/grades.length;avg.textContent=mean.toLocaleString("id-ID",{maximumFractionDigits:2});note.textContent="Dari "+grades.length+" nilai yang dicatat";
  list.replaceChildren();
  const groups={};grades.forEach(g=>{if(!groups[g.subject])groups[g.subject]=[];groups[g.subject].push(Number(g.score));});
