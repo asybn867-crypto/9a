@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Data Diri | Haimiya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Zen+Maru+Gothic:wght@500;700;900&display=swap">
+<style>
+  :root {
+    --paper: #fefefe;
+    --ink: #14213d;
+    --ink-2: #4a5878;
+    --navy: #23408f;
+    --steel: #7f9bd6;
+    --mist: #eef2fa;
+    --line: #d6deee;
+    --amber: #e8912d;
+    --ok: #1f9d6b;
+    --panel: rgba(255,255,255,.88);
+    --f-disp: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "Nunito", system-ui, sans-serif;
+    --f-body: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --f-mono: "DM Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: linear-gradient(180deg, #f8f9ff 0%, #eef3ff 100%);
+    color: var(--ink);
+    font: 400 15px/1.5 var(--f-body);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 28px 16px 70px;
+  }
+  .topbar {
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+    margin-bottom: 18px;
+  }
+  .nav-link {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 10px 14px; border: 1px solid var(--line); border-radius: 999px;
+    background: rgba(255,255,255,.7); text-decoration: none; font-weight: 700; color: var(--navy);
+  }
+  .hero {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 22px;
+    padding: 24px 20px; box-shadow: 0 18px 40px rgba(20,33,61,.06);
+    margin-bottom: 18px;
+  }
+  .eyebrow {
+    font: 500 11px/1.4 var(--f-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--navy);
+  }
+  h1 {
+    margin: 10px 0 0; font: 900 clamp(32px, 8vw, 48px)/1.05 var(--f-disp); letter-spacing: -.03em;
+  }
+  .sub {
+    margin: 10px 0 0; color: var(--ink-2); font-size: 14px;
+  }
+  .menu {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;
+    margin-top: 18px;
+  }
+  .menu-item {
+    background: var(--mist); border: 1px solid var(--line); border-radius: 18px;
+    padding: 16px 14px; min-height: 120px; display: flex; flex-direction: column; gap: 10px;
+  }
+  .menu-item .icon {
+    width: 42px; height: 42px; border-radius: 12px; background: #dfe9ff; color: var(--navy);
+    display: grid; place-items: center; font-size: 20px;
+  }
+  .menu-item h2 {
+    margin: 0; font: 700 20px/1.2 var(--f-disp);
+  }
+  .menu-item p {
+    margin: 0; color: var(--ink-2); font-size: 13px;
+  }
+  .menu-item.empty {
+    border-style: dashed; background: rgba(238,242,250,.7);
+  }
+  .menu-item.empty .icon {
+    background: rgba(35,64,143,.08); color: var(--ink-2);
+  }
+  .footer-note {
+    margin-top: 18px; padding: 14px 18px; background: #fff8eb; color: #7a4a0c;
+    border: 1px solid #f4d7a5; border-radius: 14px; font-size: 13px;
+  }
+
+  #mio-toggle {
+    position: fixed; right: 20px; bottom: 20px; z-index: 9999; border: 0; border-radius: 50px; padding: 14px 20px; color: white; background: #7957e8; font-size: 15px; font-weight: bold; box-shadow: 0 8px 20px rgba(121, 87, 232, .35);
+  }
+  #mio-chat {
+    position: fixed; right: 16px; bottom: 82px; z-index: 9999; width: min(360px, calc(100vw - 32px)); height: min(500px, 70dvh); display: none; flex-direction: column; overflow: hidden; border: 1px solid rgba(255,255,255,.16); border-radius: 20px; background: #171722; color: #fff; box-shadow: 0 18px 40px rgba(18,18,25,.35);
+  }
+  #mio-chat.open { display: flex; }
+  #mio-header { padding: 16px; background: #7957e8; display: flex; justify-content: space-between; align-items: center; }
+  #mio-header small { display: block; opacity: .8; margin-top: 3px; }
+  #mio-close { border: 0; background: transparent; color: white; font-size: 24px; cursor: pointer; }
+  #mio-messages { flex: 1; overflow-y: auto; padding: 14px; display: flex; flex-direction: column; gap: 12px; }
+  .mio-msg { max-width: 85%; padding: 10px 12px; border-radius: 14px; font-size: 14px; line-height: 1.5; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .mio-user { align-self: flex-end; background: #7957e8; }
+  .mio-bot { align-self: flex-start; background: #292938; }
+  #mio-form { display: flex; gap: 8px; padding: 12px; border-top: 1px solid #ffffff18; }
+  #mio-input { min-width: 0; flex: 1; padding: 11px; border: 1px solid #414155; border-radius: 12px; outline: none; background: #222230; color: white; font-size: 14px; }
+  #mio-send { border: 0; border-radius: 12px; padding: 0 15px; color: white; background: #7957e8; cursor: pointer; }
+  #mio-send:disabled { opacity: .5; cursor: wait; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <a class="nav-link" href="index.html">← Kembali</a>
+      <a class="nav-link" href="tabungan.html">Tabungan</a>
+    </div>
+
+    <header class="hero">
+      <div class="eyebrow">Data Diri</div>
+      <h1>Profilku</h1>
+      <p class="sub">Nanti diisi detail tentang aku — sementara ini baru menunya aja, ya. 🤍</p>
+    </header>
+
+    <main class="menu" aria-label="Menu data diri">
+      <article class="menu-item empty">
+        <div class="icon">👤</div>
+        <h2>Biodata</h2>
+        <p>Nama, kelas, tanggal lahir, dll.</p>
+      </article>
+      <article class="menu-item empty">
+        <div class="icon">🎵</div>
+        <h2>Lagu Favorit</h2>
+        <p>Judul lagu yang sering diputer.</p>
+      </article>
+      <article class="menu-item empty">
+        <div class="icon">🎨</div>
+        <h2>Hobi</h2>
+        <p>Aktivitas favorit sehari-hari.</p>
+      </article>
+      <article class="menu-item empty">
+        <div class="icon">🍜</div>
+        <h2>Makanan Favorit</h2>
+        <p>Menu yang paling disukai.</p>
+      </article>
+      <article class="menu-item empty">
+        <div class="icon">⚽</div>
+        <h2>Olahraga</h2>
+        <p>Jenis kegiatan fisik yang suka.</p>
+      </article>
+      <article class="menu-item empty">
+        <div class="icon">🌙</div>
+        <h2>Cita-cita</h2>
+        <p>Harapan atau impian kedepan.</p>
+      </article>
+    </main>
+
+    <div class="footer-note">Kalau mau, nanti kita isi datanya satu per satu. Untuk sekarang, menunya dulu biar rapi dan gampang dilihat. ✨</div>
+  </div>
+
+  <button id="mio-toggle" type="button">✦ haimiya senpaii~</button>
+  <section id="mio-chat" aria-label="Chat dengan Mio">
+    <header id="mio-header">
+      <div>
+        <strong>Haimiya senpaii~</strong>
+        <small>miooo</small>
+      </div>
+      <button id="mio-close" type="button" aria-label="Tutup chat">×</button>
+    </header>
+    <div id="mio-messages" aria-live="polite">
+      <div class="mio-msg mio-bot">H-hah? Mau belajar apa? Tanya saja. Bukan berarti aku sengaja menunggumu, ya! btw maulana ngapain njir 😤</div>
+    </div>
+    <form id="mio-form">
+      <input id="mio-input" type="text" placeholder="Tanya pelajaran..." autocomplete="off" maxlength="1500" required>
+      <button id="mio-send" type="submit">Kirim</button>
+    </form>
+  </section>
+
+  <script>
+    (() => {
+      const API = "https://synn.asybn867.workers.dev/chat";
+      const toggle = document.getElementById("mio-toggle");
+      const chat = document.getElementById("mio-chat");
+      const close = document.getElementById("mio-close");
+      const messagesBox = document.getElementById("mio-messages");
+      const form = document.getElementById("mio-form");
+      const input = document.getElementById("mio-input");
+      const send = document.getElementById("mio-send");
+      const history = [];
+
+      toggle.addEventListener("click", () => {
+        chat.classList.toggle("open");
+        if (chat.classList.contains("open")) input.focus();
+      });
+      close.addEventListener("click", () => chat.classList.remove("open"));
+
+      function addMessage(text, role) {
+        const bubble = document.createElement("div");
+        bubble.className = "mio-msg " + (role === "user" ? "mio-user" : "mio-bot");
+        bubble.textContent = text;
+        messagesBox.appendChild(bubble);
+        messagesBox.scrollTop = messagesBox.scrollHeight;
+        return bubble;
+      }
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const text = input.value.trim();
+        if (!text || send.disabled) return;
+        addMessage(text, "user");
+        history.push({ role: "user", content: text });
+        input.value = ""; input.disabled = true; send.disabled = true;
+        const loading = addMessage("Mio sedang berpikir...", "assistant");
+
+        try {
+          const response = await fetch(API, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ messages: history.slice(-10) })
+          });
+          const data = await response.json();
+          if (!response.ok || !data.response) throw new Error(data.error || "Permintaan gagal.");
+          loading.textContent = data.response;
+          history.push({ role: "assistant", content: data.response });
+        } catch (error) {
+          loading.textContent = "Error: " + error.message;
+          console.error("Mio AI error:", error);
+          history.pop();
+        } finally {
+          input.disabled = false; send.disabled = false; input.focus();
+          messagesBox.scrollTop = messagesBox.scrollHeight;
+        }
+      });
+
+      const jam = new Date().getHours();
+      const greeting = document.querySelector('.mio-msg.mio-bot');
+      if (greeting) {
+        if (jam >= 6 && jam < 12) {
+          greeting.textContent = "Selamat pagi... Jangan lupa sarapan sebelum ke sekolah, dasar beban. 😤";
+        } else if (jam >= 12 && jam < 15) {
+          greeting.textContent = "Istirahat siang. Makan yang bener, jangan cuma jajan terus. 😒";
+        } else if (jam >= 15 && jam < 18) {
+          greeting.textContent = "Sore. Udah ngerjain PR belum? Jangan males-malesan, awas aja kalau nggak dikerjain! 😠";
+        } else {
+          greeting.textContent = "Malam... Kamu belum tidur? Ayo belajar, aku temenin. Jangan begadang terus. 😌";
+        }
+      }
+    })();
+  </script>
+</body>
+</html>
