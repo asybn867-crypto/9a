@@ -339,7 +339,23 @@
       cursor: pointer; font-weight: 700;
     }
     #mio-send:disabled { opacity: .55; cursor: wait; }
-  </style>
+  /* Classical-modern editorial palette */
+:root{--paper:#f4f0e8;--paper-2:#e9e1d4;--ink:#252923;--ink-2:#6b6c61;--navy:#33483d;--navy-2:#26382f;--steel:#a9ad91;--mist:#eee9df;--line:#d8d0c2;--amber:#b57c4a;--amber-2:#ead8bf;--ok:#426d55;--shadow:0 18px 48px rgba(48,43,34,.08);--panel:rgba(250,248,242,.92);--f-disp:Georgia,"Times New Roman",serif;--f-body:"Plus Jakarta Sans",system-ui,sans-serif}
+body{background:radial-gradient(ellipse at 12% 8%,rgba(185,159,120,.16),transparent 34%),linear-gradient(145deg,#f6f2e9,#e8e0d3);color:var(--ink)}
+.art{opacity:.25;filter:grayscale(.3) saturate(.5)}.wrap{padding-top:clamp(22px,5vw,52px)}.top{gap:14px}.top-actions{justify-content:flex-start}
+.eyebrow{color:#7a6045;letter-spacing:.17em}h1{font-weight:700;letter-spacing:-.045em;font-size:clamp(38px,9vw,66px);line-height:.98}
+.nav-btn{background:rgba(250,248,242,.78);border-color:#d5c9b7;color:#34483b;box-shadow:none}.nav-btn:hover{background:#fffaf0;transform:translateY(-2px)}
+.views{background:rgba(250,248,242,.75);border-color:#d8d0c2;box-shadow:0 8px 28px rgba(48,43,34,.04);backdrop-filter:blur(16px)}.views button[aria-selected=true]{background:#33483d;color:#f8f4eb;box-shadow:0 8px 20px rgba(38,56,47,.18)}
+.panel,.study-panel{background:rgba(250,248,242,.9);border:1px solid #d8d0c2;border-radius:20px;box-shadow:0 12px 36px rgba(48,43,34,.055);backdrop-filter:blur(14px)}
+.days button{border-color:#d8d0c2;background:rgba(250,248,242,.82);color:#586256}.days button[aria-selected=true]{background:#33483d;color:#f8f4eb;border-color:#33483d}
+.session{border-color:#e1d8ca;background:rgba(255,253,247,.75);border-radius:15px}.session.now{border-color:#b18a60;background:#f3e9d8}.subject{font-family:Georgia,serif;font-size:19px;font-weight:700;letter-spacing:-.02em}.tag{background:#e7dfd1;color:#5b604f}
+.pr-form input{background:#fffdf8;border-color:#d8d0c2;border-radius:12px}.pr-form button,.check.done{background:#33483d}.pr-item{background:#f2ede3;border-color:#e1d8ca;border-radius:14px}
+.study-panel h3,.pr-heading{font-family:Georgia,serif;letter-spacing:-.03em}.score .v{font-family:Georgia,serif}
+#mio-toggle{background:#33483d;border:1px solid rgba(245,236,218,.5);box-shadow:0 12px 30px rgba(38,56,47,.22);font-family:Georgia,serif}#mio-chat{background:#202b25;border:1px solid #a89a80;border-radius:18px}#mio-header{background:#33483d;font-family:Georgia,serif}#mio-messages{background:#202b25}.mio-user{background:#667b67}.mio-bot{background:#303b33;color:#f4f0e8}#mio-send{background:#8a6b48}
+.calendar-panel{padding:20px;margin-top:16px;background:rgba(250,248,242,.9);border:1px solid #d8d0c2;border-radius:20px;box-shadow:0 12px 36px rgba(48,43,34,.055)}.calendar-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}.calendar-head h3{font:700 clamp(24px,5vw,32px)/1.1 Georgia,serif;margin:7px 0 4px}.calendar-head .sub{margin:0;font-size:13px}.calendar-nav{display:flex;gap:6px}.calendar-nav button{width:38px;height:38px;border:1px solid var(--line);border-radius:50%;background:#f8f4eb;color:var(--navy);font-size:22px}
+.cal-title{font:600 14px var(--f-body);margin:18px 0 10px;color:var(--ink-2)}.cal-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}.cal-weekday{text-align:center;color:#858276;font:600 10px var(--f-body);padding:5px 0;text-transform:uppercase}.cal-day{aspect-ratio:1;border:1px solid transparent;border-radius:11px;background:#f0eadf;display:flex;align-items:center;justify-content:center;position:relative;font-size:13px;color:#474b42;cursor:pointer;min-width:0}.cal-day.outside{opacity:.3;background:transparent}.cal-day.today{border-color:#b57c4a;font-weight:800}.cal-day.done{background:#dce6d8;border-color:#b4c7af;color:#294b35;font-weight:800}.cal-day.done:after{content:"✓";position:absolute;right:3px;top:1px;font-size:9px}.cal-day:hover{border-color:#9aab91}.calendar-legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:13px;color:var(--ink-2);font-size:11px}.calendar-legend span{display:flex;align-items:center;gap:6px}.legend-dot{width:8px;height:8px;border-radius:50%;display:inline-block;background:#dce6d8}.today-dot{background:#b57c4a}
+@media(max-width:480px){.calendar-panel{padding:15px}.cal-grid{gap:4px}.cal-day{border-radius:8px;font-size:12px}.calendar-head{gap:8px}.calendar-nav button{width:34px;height:34px}}
+</style>
 </head>
 <body>
   <video autoplay loop muted playsinline class="art" aria-hidden="true">
@@ -379,7 +395,7 @@
             <h3 class="pr-heading">Deadline & PR</h3>
             <div class="pr-form">
               <input type="text" id="prInput" placeholder="Tambah PR / deadline..." aria-label="Tambah PR">
-              <input type="date" id="prDate" aria-label="Tanggal deadline">
+              <input type="datetime-local" id="prDate" aria-label="Tanggal dan jam deadline">
               <button type="button" id="prAddBtn">Tambah</button>
             </div>
             <ul class="pr-list" id="prList"></ul>
@@ -391,8 +407,8 @@
         <div class="stack">
           <div class="panel study-panel">
             <div class="label">Belajar malam</div>
-            <h3 id="studyTitle">2.4h</h3>
-            <p class="sub" id="studySub">Kamu sudah konsisten dalam belajar. Lanjutkan ya.</p>
+            <h3 id="studyTitle">45 menit</h3>
+            <p class="sub" id="studySub">Target harian: satu sesi fokus pukul 19.45–20.30.</p>
 
             <div class="check-row">
               <div class="check" id="checkStudy" aria-label="Tandai belajar hari ini">
@@ -402,7 +418,7 @@
               </div>
               <div class="text">
                 <b>Target hari ini</b>
-                <span id="studyText">Belajar 2 jam lagi untuk menutup target.</span>
+                <span id="studyText">Tandai target selesai di sini atau langsung dari kalender.</span>
               </div>
             </div>
 
@@ -449,32 +465,7 @@
 
   <script>
     const days = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
-    const scheduleData = {
-      Senin: [
-        { time: "06:45", end: "07:15", title: "Upacara", detail: "Lapangan sekolah • wajib hadir", deadline: "2026-11-02T07:15:00" },
-        { time: "07:15", end: "08:00", title: "Matematika", detail: "Persamaan linear • catatan", deadline: "2026-11-02T08:00:00" },
-        { time: "09:00", end: "10:30", title: "IPA", detail: "Sistem organ manusia", deadline: "2026-11-02T10:30:00" }
-      ],
-      Selasa: [
-        { time: "07:15", end: "08:00", title: "Bahasa Indonesia", detail: "Membaca puisi dan tugas analisis", deadline: "2026-11-03T08:00:00" },
-        { time: "08:00", end: "09:00", title: "Sejarah", detail: "Pergerakan nasional", deadline: "2026-11-03T09:00:00" }
-      ],
-      Rabu: [
-        { time: "07:00", end: "08:00", title: "Olahraga", detail: "Lapangan basket • warm-up", deadline: "2026-11-04T08:00:00" },
-        { time: "09:00", end: "10:30", title: "TIK", detail: "Membuat presentasi digital", deadline: "2026-11-04T10:30:00" }
-      ],
-      Kamis: [
-        { time: "07:15", end: "08:00", title: "Bahasa Inggris", detail: "Reading comprehension", deadline: "2026-11-05T08:00:00" },
-        { time: "09:00", end: "10:00", title: "Seni Budaya", detail: "Karya lukis sederhana", deadline: "2026-11-05T10:00:00" }
-      ],
-      Jumat: [
-        { time: "07:15", end: "08:00", title: "Pkn", detail: "Diskusi demokrasi", deadline: "2026-11-06T08:00:00" },
-        { time: "09:00", end: "10:15", title: "Praktek", detail: "Lab komputer / projek", deadline: "2026-11-06T10:15:00" }
-      ],
-      Sabtu: [
-        { time: "08:00", end: "09:00", title: "Belajar Mandiri", detail: "Review materi minggu ini", deadline: "2026-11-07T09:00:00" }
-      ]
-    };
+    const scheduleData = {"Senin":[["07:00","07:40","Upacara Bendera","","other"],["07:40","09:25","BAHASA ARAB","Amaliyah Sriyanti, S.Pd","lesson"],["09:25","10:00","Istirahat","","other"],["10:00","11:15","MATEMATIKA","Maulana, S.Pd","lesson"],["11:15","11:50","INFORMATIKA","Samsul Akbar, S.Pd","lesson"],["11:50","12:25","Istirahat","","other"],["12:25","13:00","INFORMATIKA","Samsul Akbar, S.Pd","lesson"],["13:00","13:40","KORKULIKULER","Samsul Akbar, S.Pd","lesson"],["13:40","13:55","Apel siang","","other"]],"Selasa":[["07:00","07:15","Apel pagi","","other"],["07:15","09:15","BAHASA INGGRIS","Nurdiana, S.Pd","lesson"],["09:15","09:50","Istirahat","","other"],["09:50","10:30","KORKULIKULER","Nurdiana, S.Pd","lesson"],["10:30","11:50","MATEMATIKA","Maulana, S.Pd","lesson"],["11:50","12:20","Istirahat","","other"],["12:20","13:40","FIQIH","Agusriansyah, S.Pd.I","lesson"],["13:40","13:55","Apel siang","","other"]],"Rabu":[["07:00","07:15","Apel pagi","","other"],["07:15","08:35","IPA","Sitti Rahmatia I.J., S.Pd., M.M","lesson"],["08:35","09:15","PENJAS ORKES","Bayu, S. Or","lesson"],["09:15","09:50","Istirahat","","other"],["09:50","10:30","PENJAS ORKES","Bayu, S. Or","lesson"],["10:30","11:50","CODING/AI","Samsul Akbar, S.Pd","lesson"],["11:50","12:20","Istirahat","","other"],["12:20","13:40","PENDIDIKAN PANCASILA","Rino, S.Pd.","lesson"],["13:40","13:55","Apel siang","","other"]],"Kamis":[["07:00","07:15","Apel pagi","","other"],["07:15","09:15","IPS","Wa Ode Rustiani, S.Pd","lesson"],["09:15","09:50","Istirahat","","other"],["09:50","10:30","KORKULIKULER","Wa Ode Rustiani, S.Pd","lesson"],["10:30","11:50","SENI TEATER","Wa Ode Irda Rahmah Diangsari, S.Pd","lesson"],["11:50","12:20","Istirahat","","other"],["12:20","13:40","AL-QUR'AN HADITS","Wa Ode Muhsanah, S.Pd.","lesson"],["13:40","13:55","Apel siang","","other"]],"Jumat":[["07:00","07:50","Kegiatan pagi","","other"],["07:50","09:15","BAHASA INDONESIA","Ernawati Angi, S.Pd","lesson"],["09:15","09:30","Istirahat","","other"],["09:30","10:50","AQIDAH AKHLAK","Nusiasti, S.Pd","lesson"],["10:50","11:20","KORKULIKULER","Nusiasti, S.Pd","lesson"],["11:20","11:30","Selesai","","other"]],"Sabtu":[["07:00","07:30","Kegiatan pagi","","other"],["07:30","08:45","BAHASA INDONESIA","Ernawati Angi, S.Pd","lesson"],["08:45","09:25","MULOK (RISET)","Nurdiana, S.Pd","lesson"],["09:25","09:55","Istirahat","","other"],["09:55","10:30","MULOK (RISET)","Nurdiana, S.Pd","lesson"],["10:30","11:50","IPA","Sitti Rahmatia I.J., S.Pd., M.M","lesson"],["11:50","12:20","Istirahat","","other"],["12:20","13:40","SKI","Halimah, S.Pd.I","lesson"],["13:40","13:55","Apel siang","","other"]]};
 
     const prKey = "mio-pr-list";
     const nowLine = document.getElementById("nowLine");
