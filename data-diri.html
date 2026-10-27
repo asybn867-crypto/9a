@@ -6,7 +6,7 @@
 <title>Data Diri | Haimiya</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Zen+Maru+Gothic:wght@500;700;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap">
 <style>
   :root {
     --paper: #fefefe;
@@ -19,9 +19,8 @@
     --amber: #e8912d;
     --ok: #1f9d6b;
     --panel: rgba(255,255,255,.88);
-    --f-disp: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "Nunito", system-ui, sans-serif;
-    --f-body: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
-    --f-mono: "DM Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+    --f-display: "Josefin Sans", "Segoe UI", sans-serif;
+    --f-body: "Merriweather", Georgia, serif;
   }
   * { box-sizing: border-box; }
   body {
@@ -45,6 +44,7 @@
     display: inline-flex; align-items: center; justify-content: center;
     padding: 10px 14px; border: 1px solid var(--line); border-radius: 999px;
     background: rgba(255,255,255,.7); text-decoration: none; font-weight: 700; color: var(--navy);
+    font-family: var(--f-display);
   }
   .hero {
     background: var(--panel); border: 1px solid var(--line); border-radius: 22px;
@@ -52,14 +52,15 @@
     margin-bottom: 18px;
   }
   .eyebrow {
-    font: 500 11px/1.4 var(--f-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--navy);
+    font: 600 11px/1.4 var(--f-display); letter-spacing: .14em; text-transform: uppercase; color: var(--navy);
   }
   h1 {
-    margin: 10px 0 0; font: 900 clamp(32px, 8vw, 48px)/1.05 var(--f-disp); letter-spacing: -.03em;
+    margin: 10px 0 0; font: 700 clamp(32px, 8vw, 48px)/1.05 var(--f-display); letter-spacing: -.03em;
   }
   .sub {
     margin: 10px 0 0; color: var(--ink-2); font-size: 14px;
-    line-height: 1.6;
+    line-height: 1.8;
+    font-family: var(--f-body);
   }
   .menu {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;
@@ -74,7 +75,7 @@
     display: grid; place-items: center; font-size: 20px;
   }
   .menu-item h2 {
-    margin: 0; font: 700 20px/1.2 var(--f-disp);
+    margin: 0; font: 700 20px/1.2 var(--f-display);
   }
   .menu-item p {
     margin: 0; color: var(--ink-2); font-size: 13px;
@@ -92,8 +93,9 @@
     margin-top: auto;
     color: var(--ink);
     font-size: 12.5px;
-    line-height: 1.6;
+    line-height: 1.7;
     font-weight: 600;
+    font-family: var(--f-body);
   }
   .meta-list span {
     display: block;
@@ -101,6 +103,7 @@
 
   #mio-toggle {
     position: fixed; right: 20px; bottom: 20px; z-index: 9999; border: 0; border-radius: 50px; padding: 14px 20px; color: white; background: #7957e8; font-size: 15px; font-weight: bold; box-shadow: 0 12px 24px rgba(121, 87, 232, .35);
+    font-family: var(--f-display);
   }
   #mio-chat {
     position: fixed; right: 16px; bottom: 82px; z-index: 9999; width: min(360px, calc(100vw - 32px)); height: min(500px, 70dvh); display: none; flex-direction: column; overflow: hidden; border: 1px solid rgba(255,255,255,.08); background: #1a1b2d; border-radius: 18px; box-shadow: 0 18px 40px rgba(15, 14, 25, .38);
