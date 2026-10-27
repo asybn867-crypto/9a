@@ -387,6 +387,9 @@ body{background:radial-gradient(ellipse at 12% 8%,rgba(185,159,120,.16),transpar
     .session-list .session .detail{color:#7b8498!important}
     .session-list .session .tag{background:#eef1fb!important;color:#3d527f!important;border-radius:7px!important}
     .session-list .session.now{background:#ffefd9!important;border:0!important;border-left:5px solid #e58a2d!important;box-shadow:inset 0 0 0 1px #f0c58e!important}
+    .schedule-status{padding:13px 15px;margin:0 0 12px;border:1px solid #ead4b5;border-radius:12px;background:#fff8ed;color:#77491e;font-size:13px;line-height:1.5}
+    .schedule-status strong{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px;color:#a85e1b}
+    .schedule-status.is-live{background:#ffefd9;border-color:#e58a2d;box-shadow:inset 4px 0 #e58a2d}
     .session-list .session.now .time span,.session-list .session.now .subject{color:#7b461b!important}
     .session-list .session.now .tag{background:#f4ce98!important;color:#75431a!important}
     .session-list .session.now .live{display:inline-flex!important;width:max-content;margin-top:7px;background:#dc8126!important;color:#fff!important;border:0!important;border-radius:6px!important;padding:4px 8px!important;font-size:10px!important;font-weight:800!important;letter-spacing:.05em!important}
@@ -569,10 +572,19 @@ body{background:radial-gradient(ellipse at 12% 8%,rgba(185,159,120,.16),transpar
       const dateLabel=new Intl.DateTimeFormat("id-ID",{weekday:"long",day:"numeric",month:"long"}).format(now);
       dayPanel.innerHTML="";const wrapper=document.createElement("div"),head=document.createElement("div");
       head.className="dayhead";head.innerHTML='<h2>'+day+'</h2><div class="meta">IX-A · '+dateLabel+'</div>';wrapper.appendChild(head);
+      const isToday=day===days[now.getDay()===0?6:now.getDay()-1];
+      const status=document.createElement("div");status.className="schedule-status";
+      const active=items.find(item=>{const a=Number(item.time.slice(0,2))*60+Number(item.time.slice(3)),b=Number(item.end.slice(0,2))*60+Number(item.end.slice(3));return isToday&&a<=mins&&mins<b;});
+      const next=items.find(item=>Number(item.time.slice(0,2))*60+Number(item.time.slice(3))>mins);
+      if(active){status.classList.add("is-live");status.innerHTML='<strong>● Sedang berlangsung</strong>'+escapeHtml(active.title)+' · '+active.time+'–'+active.end;}
+      else if(isToday&&next){status.innerHTML='<strong>Pelajaran berikutnya</strong>'+escapeHtml(next.title)+' mulai pukul '+next.time;}
+      else if(isToday){status.innerHTML='<strong>Jadwal hari ini</strong>Semua jam pelajaran di jadwal hari ini sudah lewat.';}
+      else{status.innerHTML='<strong>Pratinjau jadwal</strong>Warna oranye akan aktif otomatis saat jam pelajaran pada hari tersebut.';}
+      wrapper.appendChild(status);
       const list=document.createElement("div");list.className="session-list";
       items.forEach(item=>{const entry=document.createElement("div");entry.className="session";
         const a=Number(item.time.slice(0,2))*60+Number(item.time.slice(3)),b=Number(item.end.slice(0,2))*60+Number(item.end.slice(3));
-        if(day===days[now.getDay()===0?6:now.getDay()-1]&&a<=mins&&mins<b)entry.classList.add("now");
+        if(isToday&&a<=mins&&mins<b)entry.classList.add("now");
         entry.innerHTML='<div class="time"><i>Jam</i><span>'+item.time+'</span></div><div><div class="subject-wrap"><div class="subject">'+escapeHtml(item.title)+'</div><span class="tag">'+item.end+'</span></div>'+(entry.classList.contains("now")?'<span class="live">SEDANG BERLANGSUNG</span>':'')+'<div class="detail">'+escapeHtml(item.detail||"Agenda sekolah")+'</div></div>';
         list.appendChild(entry);
       });
