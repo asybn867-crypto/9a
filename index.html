@@ -575,8 +575,7 @@ body{background:radial-gradient(ellipse at 12% 8%,rgba(185,159,120,.16),transpar
         entry.innerHTML='<div class="time"><i>Jam</i><span>'+item.time+'</span></div><div><div class="subject-wrap"><div class="subject">'+escapeHtml(item.title)+'</div><span class="tag">'+item.end+'</span></div>'+(entry.classList.contains("now")?'<span class="live">SEDANG BERLANGSUNG</span>':'')+'<div class="detail">'+escapeHtml(item.detail||"Agenda sekolah")+'</div></div>';
         list.appendChild(entry);
       });
-      wrapper.appendChild(list);const note=document.createElement("div");note.className="note";
-      note.textContent="Jadwal IX-A sesuai lembar resmi semester ganjil 2026/2027. Deadline hanya berlaku untuk tugas di bawah.";wrapper.appendChild(note);dayPanel.appendChild(wrapper);
+      wrapper.appendChild(list);dayPanel.appendChild(wrapper);
     }
 
     function renderPR() {
