@@ -355,6 +355,24 @@ body{background:radial-gradient(ellipse at 12% 8%,rgba(185,159,120,.16),transpar
 .calendar-panel{padding:20px;margin-top:16px;background:rgba(250,248,242,.9);border:1px solid #d8d0c2;border-radius:20px;box-shadow:0 12px 36px rgba(48,43,34,.055)}.calendar-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}.calendar-head h3{font:700 clamp(24px,5vw,32px)/1.1 Georgia,serif;margin:7px 0 4px}.calendar-head .sub{margin:0;font-size:13px}.calendar-nav{display:flex;gap:6px}.calendar-nav button{width:38px;height:38px;border:1px solid var(--line);border-radius:50%;background:#f8f4eb;color:var(--navy);font-size:22px}
 .cal-title{font:600 14px var(--f-body);margin:18px 0 10px;color:var(--ink-2)}.cal-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}.cal-weekday{text-align:center;color:#858276;font:600 10px var(--f-body);padding:5px 0;text-transform:uppercase}.cal-day{aspect-ratio:1;border:1px solid transparent;border-radius:11px;background:#f0eadf;display:flex;align-items:center;justify-content:center;position:relative;font-size:13px;color:#474b42;cursor:pointer;min-width:0}.cal-day.outside{opacity:.3;background:transparent}.cal-day.today{border-color:#b57c4a;font-weight:800}.cal-day.done{background:#dce6d8;border-color:#b4c7af;color:#294b35;font-weight:800}.cal-day.done:after{content:"✓";position:absolute;right:3px;top:1px;font-size:9px}.cal-day:hover{border-color:#9aab91}.calendar-legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:13px;color:var(--ink-2);font-size:11px}.calendar-legend span{display:flex;align-items:center;gap:6px}.legend-dot{width:8px;height:8px;border-radius:50%;display:inline-block;background:#dce6d8}.today-dot{background:#b57c4a}
 @media(max-width:480px){.calendar-panel{padding:15px}.cal-grid{gap:4px}.cal-day{border-radius:8px;font-size:12px}.calendar-head{gap:8px}.calendar-nav button{width:34px;height:34px}}
+
+    /* Bright porcelain palette */
+    :root{--paper:#fffefd;--paper-2:#f5f7fc;--ink:#20283a;--ink-2:#68738a;--navy:#314b86;--navy-2:#243965;--steel:#aab8d8;--mist:#f3f6fc;--line:#e1e6f0;--amber:#e5b86d;--amber-2:#fff0cd;--ok:#398467;--shadow:0 16px 38px rgba(38,55,91,.07);--panel:rgba(255,255,255,.93)}
+    body{background:linear-gradient(180deg,#fff 0%,#f4f7fd 100%)}
+    .art{opacity:1;filter:saturate(1.08) contrast(1.03)}
+    .art::after{background:linear-gradient(to bottom,rgba(255,255,255,.18) 0,rgba(255,255,255,.04) 25%,rgba(255,255,255,.08) 48%,rgba(255,255,255,.76) 78%,rgba(255,255,255,.94) 100%)}
+    .panel,.study-panel,.calendar-panel{background:rgba(255,255,255,.94);border-color:#e1e6f0;box-shadow:0 14px 34px rgba(38,55,91,.055)}
+    .nav-btn,.views{background:rgba(255,255,255,.88);border-color:#e0e6f1}
+    .views button[aria-selected=true],.days button[aria-selected=true]{background:#314b86;color:#fff}
+    .session,.pr-item{background:#fbfcff;border-color:#e4e9f2}
+    .session.now,.les.now{background:#edf5ff;border-color:#7897d0;box-shadow:inset 4px 0 #5276bb}
+    .session.now .subject,.les.now .mp{color:#243f79}
+    .session.now .live,.les.now .live{display:inline-flex}
+    .live{background:#dce9ff;color:#284a8a;border:1px solid #c5d7fa;border-radius:20px;padding:3px 8px;font-size:10px;font-weight:800;letter-spacing:.04em}
+    .calendar-panel{background:rgba(255,255,255,.96)}
+    #mio-toggle{background:#526bc5;border-color:rgba(255,255,255,.85);box-shadow:0 12px 28px rgba(73,99,182,.3)}
+    #mio-chat{background:#20283a;border-color:#d6deef}#mio-header,#mio-send{background:#526bc5}#mio-messages{background:#20283a}
+
 </style>
 </head>
 <body>
@@ -382,8 +400,7 @@ body{background:radial-gradient(ellipse at 12% 8%,rgba(185,159,120,.16),transpar
       </nav>
 
       <div class="nav-links" style="margin-top: 18px;">
-        <a href="tabungan.html" class="mini-link">Tabungan</a>
-        <a href="data-diri.html" class="mini-link">Data Diri</a>
+
       </div>
 
       <section id="viewJadwal" role="tabpanel" aria-labelledby="tabJadwal">
