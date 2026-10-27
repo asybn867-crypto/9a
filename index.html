@@ -633,7 +633,7 @@ body{background:radial-gradient(ellipse at 12% 8%,rgba(185,159,120,.16),transpar
       viewJadwal.hidden = true;
     });
 
-    const checkStudy=document.getElementById("checkStudy"),studyKey="haimiya-study-days-v2";
+    const checkStudy=document.getElementById("checkStudy"),studyKey="haimiya-study-days-v3";
     let studyDone={};try{studyDone=JSON.parse(localStorage.getItem(studyKey)||"{}")||{};}catch(e){studyDone={};}
     let calYear=new Date().getFullYear(),calMonth=new Date().getMonth();
     const pad=n=>String(n).padStart(2,"0"),isoDay=d=>d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
