@@ -526,103 +526,36 @@ body{background:radial-gradient(ellipse at 12% 8%,rgba(185,159,120,.16),transpar
     }
 
     function renderDay(day) {
-      const items = (scheduleData[day] || []).filter((item) => !isPast(item.deadline));
-      const today = new Date();
-      const now = today.getHours() * 60 + today.getMinutes();
-      const dateLabel = new Intl.DateTimeFormat("id-ID", { weekday: "long", day: "numeric", month: "short" }).format(today);
-
-      dayPanel.innerHTML = "";
-      const wrapper = document.createElement("div");
-      const head = document.createElement("div");
-      head.className = "dayhead";
-      head.innerHTML = `<h2>${day}</h2><div class="meta">${dateLabel}</div>`;
-      wrapper.appendChild(head);
-
-      const list = document.createElement("div");
-      list.className = "session-list";
-
-      if (!items.length) {
-        const empty = document.createElement("div");
-        empty.style.padding = "18px 16px";
-        empty.style.color = "var(--ink-2)";
-        empty.textContent = "Tidak ada jadwal yang aktif hari ini. Waktu deadline sudah lewat.";
-        list.appendChild(empty);
-      } else {
-        items.forEach((item) => {
-          const entry = document.createElement("div");
-          entry.className = "session";
-          const itemTime = Number.parseInt(item.time.split(":")[0], 10) * 60 + Number.parseInt(item.time.split(":")[1], 10);
-          if (itemTime <= now && now < Number.parseInt(item.end.split(":")[0], 10) * 60 + Number.parseInt(item.end.split(":")[1], 10)) {
-            entry.classList.add("now");
-          }
-          entry.innerHTML = `
-            <div class="time"><i>Jam</i><span>${item.time}</span></div>
-            <div>
-              <div class="subject-wrap">
-                <div class="subject">${item.title}</div>
-                <span class="tag">${item.end}</span>
-              </div>
-              <div class="detail">${item.detail}</div>
-            </div>
-          `;
-          list.appendChild(entry);
-        });
-      }
-
-      wrapper.appendChild(list);
-      const note = document.createElement("div");
-      note.className = "note";
-      note.textContent = "Jadwal otomatis hilang saat waktu deadline sudah lewat. Ini supaya lebih rapi dan tidak menumpuk.";
-      wrapper.appendChild(note);
-      dayPanel.appendChild(wrapper);
+      const items=scheduleData[day]||[],now=new Date(),mins=now.getHours()*60+now.getMinutes();
+      const dateLabel=new Intl.DateTimeFormat("id-ID",{weekday:"long",day:"numeric",month:"long"}).format(now);
+      dayPanel.innerHTML="";const wrapper=document.createElement("div"),head=document.createElement("div");
+      head.className="dayhead";head.innerHTML='<h2>'+day+'</h2><div class="meta">IX-A · '+dateLabel+'</div>';wrapper.appendChild(head);
+      const list=document.createElement("div");list.className="session-list";
+      items.forEach(item=>{const entry=document.createElement("div");entry.className="session";
+        const a=Number(item.time.slice(0,2))*60+Number(item.time.slice(3)),b=Number(item.end.slice(0,2))*60+Number(item.end.slice(3));
+        if(day===days[now.getDay()===0?6:now.getDay()-1]&&a<=mins&&mins<b)entry.classList.add("now");
+        entry.innerHTML='<div class="time"><i>Jam</i><span>'+item.time+'</span></div><div><div class="subject-wrap"><div class="subject">'+escapeHtml(item.title)+'</div><span class="tag">'+item.end+'</span></div><div class="detail">'+escapeHtml(item.detail||"Agenda sekolah")+'</div></div>';
+        list.appendChild(entry);
+      });
+      wrapper.appendChild(list);const note=document.createElement("div");note.className="note";
+      note.textContent="Jadwal IX-A sesuai lembar resmi semester ganjil 2026/2027. Deadline hanya berlaku untuk tugas di bawah.";wrapper.appendChild(note);dayPanel.appendChild(wrapper);
     }
 
     function renderPR() {
-      const prList = document.getElementById("prList");
-      let items = [];
-      try { items = JSON.parse(localStorage.getItem(prKey) || "[]"); } catch (e) { items = []; }
-      prList.innerHTML = "";
-      if (!items.length) {
-        prList.innerHTML = '<li style="padding: 10px 6px; color: var(--ink-2);">Belum ada PR / deadline yang ditambah.</li>';
-        return;
-      }
-      items.forEach((item, index) => {
-        const li = document.createElement("li");
-        li.className = "pr-item" + (item.done ? " done" : "");
-        const due = item.date ? new Date(item.date + "T00:00:00") : null;
-        const dueText = item.date ? due.toLocaleDateString("id-ID", { day: "numeric", month: "short" }) : "Tanpa tanggal";
-        li.innerHTML = `
-          <div class="pr-main">
-            <span class="pr-name">${escapeHtml(item.text)}</span>
-            <span class="pr-date">${dueText}</span>
-          </div>
-          <div class="pr-actions">
-            <input type="checkbox" ${item.done ? "checked" : ""} aria-label="Tandai selesai" data-index="${index}">
-            <button type="button" class="pr-remove" data-index="${index}" aria-label="Hapus item">×</button>
-          </div>
-        `;
+      const prList=document.getElementById("prList");let items=[];
+      try{items=JSON.parse(localStorage.getItem(prKey)||"[]");}catch(e){items=[];}
+      const before=items.length;items=items.filter(item=>!item.date||new Date(item.date).getTime()>Date.now());
+      if(items.length!==before)localStorage.setItem(prKey,JSON.stringify(items));
+      prList.innerHTML="";
+      if(!items.length){prList.innerHTML='<li style="padding:14px 6px;color:var(--ink-2)">Belum ada tugas aktif. Tambahkan tugas beserta deadline-nya.</li>';return;}
+      items.forEach((item,index)=>{const li=document.createElement("li");li.className="pr-item"+(item.done?" done":"");
+        const due=item.date?new Date(item.date):null;
+        const dueText=due?due.toLocaleString("id-ID",{day:"numeric",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"}):"Tanpa deadline";
+        li.innerHTML='<div class="pr-main"><span class="pr-name">'+escapeHtml(item.text)+'</span><span class="pr-date">'+escapeHtml(dueText)+'</span></div><div class="pr-actions"><input type="checkbox" '+(item.done?"checked":"")+' aria-label="Tandai selesai" data-index="'+index+'"><button type="button" class="pr-remove" data-index="'+index+'" aria-label="Hapus tugas">×</button></div>';
         prList.appendChild(li);
       });
-
-      prList.querySelectorAll("input[type='checkbox']").forEach((chk) => {
-        chk.addEventListener("change", (e) => {
-          const idx = Number(e.target.dataset.index);
-          const current = JSON.parse(localStorage.getItem(prKey) || "[]");
-          current[idx].done = e.target.checked;
-          localStorage.setItem(prKey, JSON.stringify(current));
-          renderPR();
-        });
-      });
-
-      prList.querySelectorAll(".pr-remove").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const idx = Number(btn.dataset.index);
-          const current = JSON.parse(localStorage.getItem(prKey) || "[]");
-          current.splice(idx, 1);
-          localStorage.setItem(prKey, JSON.stringify(current));
-          renderPR();
-        });
-      });
+      prList.querySelectorAll("input[type=checkbox]").forEach(chk=>chk.addEventListener("change",e=>{const current=JSON.parse(localStorage.getItem(prKey)||"[]"),idx=Number(e.target.dataset.index);if(current[idx])current[idx].done=e.target.checked;localStorage.setItem(prKey,JSON.stringify(current));renderPR();}));
+      prList.querySelectorAll(".pr-remove").forEach(btn=>btn.addEventListener("click",()=>{const current=JSON.parse(localStorage.getItem(prKey)||"[]");current.splice(Number(btn.dataset.index),1);localStorage.setItem(prKey,JSON.stringify(current));renderPR();}));
     }
 
     function escapeHtml(str) {
@@ -641,7 +574,7 @@ body{background:radial-gradient(ellipse at 12% 8%,rgba(185,159,120,.16),transpar
       if (!value) return;
       let items = [];
       try { items = JSON.parse(localStorage.getItem(prKey) || "[]"); } catch (e) { items = []; }
-      items.push({ text: value, date, done: false });
+      items.push({ text: value, date: date || "", done: false });
       localStorage.setItem(prKey, JSON.stringify(items));
       document.getElementById("prInput").value = "";
       document.getElementById("prDate").value = "";
@@ -662,10 +595,20 @@ body{background:radial-gradient(ellipse at 12% 8%,rgba(185,159,120,.16),transpar
       viewJadwal.hidden = true;
     });
 
-    const checkStudy = document.getElementById("checkStudy");
-    checkStudy.addEventListener("click", () => {
-      checkStudy.classList.toggle("done");
-    });
+    const checkStudy=document.getElementById("checkStudy"),studyKey="haimiya-study-days-v2";
+    let studyDone={};try{studyDone=JSON.parse(localStorage.getItem(studyKey)||"{}")||{};}catch(e){studyDone={};}
+    let calYear=new Date().getFullYear(),calMonth=new Date().getMonth();
+    const pad=n=>String(n).padStart(2,"0"),isoDay=d=>d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
+    function saveStudy(){localStorage.setItem(studyKey,JSON.stringify(studyDone));}
+    function toggleStudyDay(key){if(studyDone[key])delete studyDone[key];else studyDone[key]=true;saveStudy();renderCalendar();syncStudyButton();}
+    function calculateStreak(){let d=new Date(),n=0;while(studyDone[isoDay(d)]){n++;d.setDate(d.getDate()-1);}return n;}
+    function syncStudyButton(){const done=!!studyDone[isoDay(new Date())];checkStudy.classList.toggle("done",done);checkStudy.setAttribute("role","checkbox");checkStudy.setAttribute("aria-checked",String(done));checkStudy.setAttribute("tabindex","0");document.getElementById("studyText").textContent=done?"Target hari ini selesai. Tercatat di kalender.":"Belum dicentang. Selesaikan target lalu tandai di sini atau kalender.";document.getElementById("streakValue").innerHTML=calculateStreak()+' <small>hari</small>';document.getElementById("scoreValue").innerHTML=Object.keys(studyDone).length*10+' <small>poin</small>';}
+    function renderCalendar(){const root=document.getElementById("studyCalendar");if(!root)return;const first=new Date(calYear,calMonth,1),offset=(first.getDay()+6)%7,total=new Date(calYear,calMonth+1,0).getDate();let html='<div class="cal-title">'+first.toLocaleDateString("id-ID",{month:"long",year:"numeric"})+'</div><div class="cal-grid">';["Sen","Sel","Rab","Kam","Jum","Sab","Min"].forEach(d=>html+='<div class="cal-weekday">'+d+'</div>');for(let i=0;i<offset;i++)html+='<div class="cal-day outside" aria-hidden="true"></div>';for(let d=1;d<=total;d++){const date=new Date(calYear,calMonth,d),key=isoDay(date),classes=["cal-day"];if(key===isoDay(new Date()))classes.push("today");if(studyDone[key])classes.push("done");html+='<button type="button" class="'+classes.join(" ")+'" data-day="'+key+'" aria-label="'+d+(studyDone[key]?", target selesai":", target belum selesai")+'" aria-pressed="'+!!studyDone[key]+'">'+d+'</button>';}html+='</div>';root.innerHTML=html;root.querySelectorAll("[data-day]").forEach(btn=>btn.addEventListener("click",()=>toggleStudyDay(btn.dataset.day)));}
+    checkStudy.addEventListener("click",()=>toggleStudyDay(isoDay(new Date())));
+    checkStudy.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();toggleStudyDay(isoDay(new Date()));}});
+    document.getElementById("calPrev").addEventListener("click",()=>{calMonth--;if(calMonth<0){calMonth=11;calYear--;}renderCalendar();});
+    document.getElementById("calNext").addEventListener("click",()=>{calMonth++;if(calMonth>11){calMonth=0;calYear++;}renderCalendar();});
+    renderCalendar();syncStudyButton();
 
     const timerBtn = document.getElementById("timerBtn");
     const timerValue = document.getElementById("timerValue");
@@ -709,7 +652,7 @@ body{background:radial-gradient(ellipse at 12% 8%,rgba(185,159,120,.16),transpar
     renderPR();
     renderDayButtons();
     updateClock();
-    setInterval(updateClock, 1000 * 30);
+    setInterval(() => { updateClock(); renderPR(); }, 1000 * 30);
 
     const AI_URL = "https://synn.asybn867.workers.dev/chat";
     const toggle = document.getElementById("mio-toggle");
