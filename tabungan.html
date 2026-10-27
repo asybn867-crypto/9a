@@ -86,6 +86,13 @@
   /* Tabungan shares the same soft classical palette as the main page */
   h1{letter-spacing:-.035em;font-weight:700}
   .total-box .amount{font-weight:700}
+  .goal-box{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0;margin:0 0 22px}
+  .goal-inputs{display:grid;grid-template-columns:1fr auto;gap:8px}
+  .goal-inputs button{border:0;border-radius:6px;background:#33483d;color:#fff;padding:0 14px;font:600 13px var(--f-body)}
+  .goal-track{height:7px;background:#e3ddcf;border-radius:99px;overflow:hidden;margin-top:14px}
+  #goalFill{height:100%;width:0;background:#66836a;transition:width .25s}
+  .goal-meta{display:flex;justify-content:space-between;gap:8px;margin-top:7px;color:var(--ink-2);font-size:11px}
+  @media(max-width:380px){.goal-inputs{grid-template-columns:1fr}.goal-inputs button{padding:11px}}
   .btn-in{background:#426d55}.btn-out{background:#a65d4e}
   .btn-back{color:#33483d}
   input{background:#fffdf8;color:#252923}
@@ -98,7 +105,7 @@
 <body>
 
 <div class="wrap">
-  <a href="index.html" class="btn-back">← Kembali ke Jadwal</a>
+  <a href="index.html" class="btn-back">← Kembali ke Jadwal</a> <a href="nilai.html" class="btn-back">Catatan Nilai</a>
   
   <h1>💰 Tabungan Kamu</h1>
 
@@ -106,6 +113,13 @@
     <div class="total-box">
       <div class="label">Total Saldo</div>
       <div class="amount" id="totalAmount">Rp 0</div>
+    </div>
+
+    <div class="goal-box">
+      <h3>Target tabungan</h3>
+      <div class="goal-inputs"><input type="number" id="goalAmount" min="1" step="1" placeholder="Target, contoh: 170000" aria-label="Target tabungan"><button type="button" id="saveGoal">Simpan target</button></div>
+      <div class="goal-track"><div id="goalFill"></div></div>
+      <div class="goal-meta"><span id="goalProgress">Belum ada target</span><span id="goalPercent"></span></div>
     </div>
 
     <div class="form-group">
@@ -131,6 +145,18 @@
   try {
     dataUang = JSON.parse(localStorage.getItem("jp26:money") || "[]") || [];
   } catch (e) { dataUang = []; }
+
+  let targetTabungan = 0;
+  try { targetTabungan = Number(localStorage.getItem("jp26:savings-goal") || 0); } catch (e) { targetTabungan = 0; }
+  const goalInput = document.getElementById("goalAmount");
+  goalInput.value = targetTabungan || "";
+  document.getElementById("saveGoal").addEventListener("click", () => {
+    const value = Number(goalInput.value);
+    if (!Number.isFinite(value) || value <= 0) { alert("Masukkan target yang lebih besar dari nol."); return; }
+    targetTabungan = Math.round(value);
+    try { localStorage.setItem("jp26:savings-goal", String(targetTabungan)); } catch (e) {}
+    renderUang();
+  });
 
   function simpanData() {
     localStorage.setItem("jp26:money", JSON.stringify(dataUang));
@@ -184,6 +210,15 @@
     // Update Total Saldo
     totalEl.textContent = (total < 0 ? "- " : "") + "Rp " + Math.abs(total).toLocaleString('id-ID');
     totalEl.style.color = total < 0 ? "var(--danger)" : "var(--ok)";
+    const fill = document.getElementById("goalFill"), progress = document.getElementById("goalProgress"), percent = document.getElementById("goalPercent");
+    if (targetTabungan > 0) {
+      const pct = Math.max(0, Math.min(100, total / targetTabungan * 100));
+      fill.style.width = pct + "%";
+      progress.textContent = "Rp " + Math.max(0, total).toLocaleString("id-ID") + " dari Rp " + targetTabungan.toLocaleString("id-ID");
+      percent.textContent = Math.floor(pct) + "%";
+    } else {
+      fill.style.width = "0%"; progress.textContent = "Belum ada target"; percent.textContent = "";
+    }
   }
 
   function tambahUang(type) {
