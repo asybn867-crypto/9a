@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f2ede3">
+<title>Catatan Nilai · IX-A</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f2ede3;--sheet:#faf7f0;--ink:#292b25;--muted:#77766b;--line:#d9d0c1;--green:#496650;--rust:#a45f45;--mono:"DM Mono",monospace;--sans:"Plus Jakarta Sans",system-ui,sans-serif}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:14px/1.6 var(--sans);padding:22px 15px 50px}
+main{max-width:720px;margin:auto}.back{display:inline-block;color:var(--green);text-decoration:none;border-bottom:1px solid var(--line);padding:4px 0;margin-bottom:24px;font-weight:700}
+.kicker{font:11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}h1{font:600 clamp(34px,8vw,54px)/1.05 Georgia,serif;letter-spacing:-.045em;margin:9px 0 10px}header p{max-width:480px;color:var(--muted);margin:0 0 25px}
+.summary{display:grid;grid-template-columns:1.2fr 1fr;gap:10px;margin-bottom:16px}.metric,.form-panel,.records{background:var(--sheet);border:1px solid var(--line);padding:18px}
+.metric:first-child{background:#e7e9dc}.metric-label{color:var(--muted);font-size:12px}.metric-value{font:500 clamp(28px,7vw,40px)/1.2 Georgia,serif;margin-top:7px}.metric small{font:11px var(--mono);color:var(--muted)}
+h2{font:600 20px/1.2 Georgia,serif;margin:0 0 15px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}label{font-size:12px;color:var(--muted)}input,select{width:100%;min-width:0;border:1px solid var(--line);border-radius:4px;padding:12px;background:#fffdf8;color:var(--ink);font:14px var(--sans);outline:none}input:focus,select:focus{border-color:var(--green);box-shadow:0 0 0 2px #49665018}.save{margin-top:14px;border:0;border-radius:4px;padding:12px 16px;background:var(--green);color:white;font:600 14px var(--sans);cursor:pointer}.notice{min-height:20px;margin:8px 0 0;font-size:12px;color:var(--rust)}.records{margin-top:14px}.records-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px}.records-head span{font:11px var(--mono);color:var(--muted)}.empty{padding:24px 4px;color:var(--muted);border-top:1px solid var(--line)}.record{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:13px 0;border-top:1px solid var(--line)}.record-title{font-weight:700}.record-meta{font-size:12px;color:var(--muted);margin-top:3px}.record-right{display:flex;align-items:center;gap:10px}.grade{font:500 20px var(--mono);color:var(--green)}.delete{border:1px solid var(--line);background:transparent;color:var(--rust);border-radius:3px;padding:6px 8px;cursor:pointer}.foot{margin-top:18px;font-size:11px;color:var(--muted)}
+@media(max-width:480px){.summary{grid-template-columns:1fr 1fr}.metric,.form-panel,.records{padding:14px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.record{grid-template-columns:1fr}.record-right{justify-content:space-between}.records-head{align-items:flex-start;flex-direction:column;gap:3px}}
+</style>
+</head>
+<body><main>
+<a class="back" href="index.html">← Kembali ke jadwal</a>
+<header><div class="kicker">Catatan pribadi · IX-A</div><h1>Nilai yang<br>terkumpul.</h1><p>Masukkan nilai tugas atau ulanganmu sendiri. Rata-rata dihitung dari catatan yang tersimpan di perangkat ini.</p></header>
+<section class="summary" aria-label="Ringkasan nilai"><div class="metric"><div class="metric-label">Rata-rata</div><div class="metric-value" id="average">—</div><small id="averageNote">Belum ada nilai</small></div><div class="metric"><div class="metric-label">Catatan masuk</div><div class="metric-value" id="count">0</div><small>nilai tersimpan</small></div></section>
+<section class="form-panel"><h2>Tambah nilai</h2><form id="gradeForm"><div class="form-grid">
+<div class="field"><label for="subject">Mata pelajaran</label><select id="subject" required><option value="">Pilih mapel</option><option>Bahasa Indonesia</option><option>Bahasa Inggris</option><option>Matematika</option><option>IPA</option><option>IPS</option><option>PPKn</option><option>PAI</option><option>Informatika</option><option>Seni Budaya</option><option>PJOK</option><option>Prakarya</option><option>Bahasa Daerah</option><option>Mapel lain</option></select></div>
+<div class="field"><label for="kind">Jenis penilaian</label><select id="kind" required><option value="Tugas">Tugas</option><option value="Ulangan">Ulangan</option><option value="Proyek">Proyek</option><option value="Praktik">Praktik</option><option value="Ujian">Ujian</option></select></div>
+<div class="field"><label for="score">Nilai (0–100)</label><input id="score" type="number" min="0" max="100" step="any" inputmode="decimal" placeholder="Contoh: 87" required></div>
+<div class="field"><label for="date">Tanggal</label><input id="date" type="date" required></div>
+<div class="field full"><label for="note">Catatan (opsional)</label><input id="note" type="text" maxlength="100" placeholder="Contoh: Bab statistika"></div>
+</div><button class="save" type="submit">Simpan nilai</button><p class="notice" id="notice" aria-live="polite"></p></form></section>
+<section class="records"><div class="records-head"><h2>Riwayat nilai</h2><span id="recordLabel">0 catatan</span></div><div id="list"><div class="empty">Belum ada nilai. Tambahkan catatan pertamamu di atas.</div></div></section>
+<p class="foot">Catatan disimpan di browser perangkat ini. Data tidak otomatis tersinkron ke perangkat lain.</p>
+</main>
+<script>
+(function(){
+const key="jp26:grades:v1",form=document.getElementById("gradeForm"),list=document.getElementById("list");
+let grades=[];try{grades=JSON.parse(localStorage.getItem(key)||"[]");if(!Array.isArray(grades))grades=[];}catch(e){grades=[];}
+const today=new Date();document.getElementById("date").value=[today.getFullYear(),String(today.getMonth()+1).padStart(2,"0"),String(today.getDate()).padStart(2,"0")].join("-");
+const fmtDate=value=>{if(!value)return "";const d=new Date(value+"T12:00:00");return d.toLocaleDateString("id-ID",{day:"numeric",month:"short",year:"numeric"});};
+function render(){
+ const avg=document.getElementById("average"),count=document.getElementById("count"),note=document.getElementById("averageNote");
+ count.textContent=grades.length;document.getElementById("recordLabel").textContent=grades.length+" catatan";
+ if(!grades.length){avg.textContent="—";note.textContent="Belum ada nilai";list.innerHTML='<div class="empty">Belum ada nilai. Tambahkan catatan pertamamu di atas.</div>';return;}
+ const mean=grades.reduce((sum,g)=>sum+Number(g.score),0)/grades.length;avg.textContent=mean.toLocaleString("id-ID",{maximumFractionDigits:2});note.textContent="Dari "+grades.length+" nilai yang dicatat";
+ list.replaceChildren();
+ [...grades].reverse().forEach(g=>{
+  const row=document.createElement("article");row.className="record";
+  const info=document.createElement("div"),title=document.createElement("div"),meta=document.createElement("div");
+  title.className="record-title";title.textContent=g.subject+" · "+g.kind;
+  meta.className="record-meta";meta.textContent=fmtDate(g.date)+(g.note?" · "+g.note:"");
+  info.append(title,meta);
+  const right=document.createElement("div");right.className="record-right";
+  const score=document.createElement("div");score.className="grade";score.textContent=Number(g.score).toLocaleString("id-ID",{maximumFractionDigits:2});
+  const del=document.createElement("button");del.type="button";del.className="delete";del.textContent="Hapus";del.setAttribute("aria-label","Hapus nilai "+g.subject);
+  del.addEventListener("click",()=>{if(confirm("Hapus catatan nilai ini?")){grades=grades.filter(x=>x.id!==g.id);save();render();}});
+  right.append(score,del);row.append(info,right);list.append(row);
+ });
+}
+function save(){try{localStorage.setItem(key,JSON.stringify(grades));document.getElementById("notice").textContent="";}catch(e){document.getElementById("notice").textContent="Tidak bisa menyimpan. Periksa ruang penyimpanan browser.";}}
+form.addEventListener("submit",e=>{e.preventDefault();const score=Number(document.getElementById("score").value);if(!Number.isFinite(score)||score<0||score>100){document.getElementById("notice").textContent="Nilai harus antara 0 dan 100.";return;}const subject=document.getElementById("subject").value;if(!subject)return;grades.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,7),subject,kind:document.getElementById("kind").value,score,date:document.getElementById("date").value,note:document.getElementById("note").value.trim()});save();form.reset();document.getElementById("date").value=[today.getFullYear(),String(today.getMonth()+1).padStart(2,"0"),String(today.getDate()).padStart(2,"0")].join("-");render();document.getElementById("notice").textContent="Nilai tersimpan.";});
+render();
+})();
+</script></body></html>
