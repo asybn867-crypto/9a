@@ -114,69 +114,57 @@
   #mio-input { min-width: 0; flex: 1; padding: 11px; border: 1px solid #414155; border-radius: 12px; outline: none; background: #222230; color: white; font-size: 14px; }
   #mio-send { border: 0; border-radius: 12px; padding: 0 15px; color: white; background: #7957e8; cursor: pointer; }
   #mio-send:disabled { opacity: .5; cursor: wait; }
+
+  :root{--paper:#f4f0e8;--ink:#252923;--ink-2:#6b6c61;--navy:#33483d;--steel:#a9ad91;--mist:#eee9df;--line:#d8d0c2;--amber:#b57c4a;--panel:rgba(250,248,242,.9);--f-display:Georgia,"Times New Roman",serif;--f-body:"Plus Jakarta Sans",system-ui,sans-serif}
+  body{background:radial-gradient(ellipse at 85% 0%,rgba(180,147,102,.16),transparent 35%),linear-gradient(145deg,#f6f2e9,#e8e0d3);color:var(--ink);font:400 14px/1.65 var(--f-body)}
+  .wrap{max-width:960px;padding:clamp(22px,5vw,54px) 18px 42px}
+  .topbar{margin-bottom:26px}.nav-link{border-color:var(--line);background:rgba(250,248,242,.75);color:var(--navy);font-family:var(--f-body);font-size:12px;letter-spacing:.03em}
+  .hero{position:relative;overflow:hidden;background:rgba(250,248,242,.68);border:1px solid var(--line);border-radius:4px;padding:clamp(25px,6vw,58px);box-shadow:none;margin-bottom:18px}
+  .hero:after{content:"✳";position:absolute;right:clamp(18px,5vw,54px);top:12px;font:clamp(90px,18vw,190px)/1 Georgia,serif;color:rgba(181,124,74,.13);pointer-events:none}
+  .eyebrow,.index,.status,.profile-footer,.hero-rule{font:600 10px/1.5 var(--f-body);letter-spacing:.17em;color:#7a6045}
+  h1{font:700 clamp(44px,9vw,88px)/.98 var(--f-display);letter-spacing:-.055em;margin:18px 0 16px;position:relative;z-index:1}
+  h1 em{font-weight:400;color:#8b6a48}
+  .sub{max-width:510px;font:14px/1.9 var(--f-body);color:var(--ink-2);margin:0}
+  .hero-rule{display:flex;align-items:center;gap:14px;margin-top:28px;padding-top:14px;border-top:1px solid var(--line);max-width:210px}
+  .menu{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:10px}
+  .menu-item{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:9px;min-height:195px;padding:20px;background:rgba(250,248,242,.64);border:1px solid var(--line);border-radius:4px;text-decoration:none;color:inherit;transition:background .2s,border-color .2s,transform .2s}
+  .menu-item:hover{background:#fbf8f0;border-color:#b8a58b;transform:translateY(-2px)}
+  .menu-item .symbol{position:absolute;right:18px;top:14px;color:#9a7c58;font:24px Georgia,serif}
+  .menu-item h2{font:700 clamp(21px,4vw,29px)/1.1 var(--f-display);letter-spacing:-.03em;margin:10px 0 0}
+  .menu-item p{font:12px/1.8 var(--f-body);color:var(--ink-2);margin:0;max-width:270px}
+  .status{margin-top:auto;color:#8c8a7d;font-size:9px;letter-spacing:.13em}
+  .profile-footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:24px;padding:14px 2px;border-top:1px solid var(--line);font-size:9px;color:#807c70}
+  #mio-toggle{background:#33483d;border:1px solid rgba(245,236,218,.5);box-shadow:0 12px 30px rgba(38,56,47,.22);font-family:Georgia,serif;letter-spacing:.01em}
+  #mio-chat{background:#202b25;border:1px solid #a89a80;border-radius:18px}
+  #mio-header{background:#33483d;font-family:Georgia,serif}
+  #mio-messages{background:#202b25}.mio-user{background:#667b67}.mio-bot{background:#303b33;color:#f4f0e8}
+  #mio-input{background:#f8f4eb;border-color:#c7bda9}#mio-send{background:#8a6b48}
+  @media(max-width:560px){.menu{grid-template-columns:1fr}.menu-item{min-height:165px;padding:18px}.hero{padding:27px 22px}.hero:after{right:8px;top:26px}.profile-footer{flex-direction:column;gap:4px}}
+
 </style>
 </head>
 <body>
   <div class="wrap">
     <div class="topbar">
-      <a class="nav-link" href="index.html">Kembali</a>
-      <a class="nav-link" href="tabungan.html">Tabungan</a>
+      <a class="nav-link" href="index.html">← Jadwal</a>
+      <a class="nav-link" href="tabungan.html">Tabungan ↗</a>
     </div>
-
     <header class="hero">
-      <div class="eyebrow">Data Diri</div>
-      <h1>Profilku</h1>
-      <p class="sub">Haii, aku Dexter bisa dipanggil Dex. Alasan aku buat web ini hanya untuk mempermudah hidupku aja, sih. Oke, segitu aja aku gatau mau nulis apa lagi.</p>
+      <div class="eyebrow">PERSONAL ARCHIVE · IX-A</div>
+      <h1>Halaman<br><em>tentangku.</em></h1>
+      <p class="sub">Ruang kecil buat hal-hal yang aku suka, hal yang lagi kupelajari, dan rencana yang belum selesai. Isinya sengaja kubiarkan kosong dulu.</p>
+      <div class="hero-rule"><span>EST.</span><span>2026</span><span>✳</span></div>
     </header>
-
-    <main class="menu" aria-label="Menu data diri">
-      <article class="menu-item filled">
-        <h2>Biodata</h2>
-        <div class="meta-list">
-          <span>Nama: Dexter</span>
-          <span>Kelas: S2 Teknik Sipil</span>
-          <span>Tanggal lahir: 19 August 1945</span>
-        </div>
-      </article>
-
-      <article class="menu-item filled">
-        <h2>Lagu Favorit</h2>
-        <div class="meta-list">
-          <span>Stranger Again (Magnolia Celebration)</span>
-          <span>Baon Cikadap</span>
-        </div>
-      </article>
-
-      <article class="menu-item filled">
-        <h2>Hobi</h2>
-        <div class="meta-list">
-          <span>Bakar baygon</span>
-        </div>
-      </article>
-
-      <article class="menu-item filled">
-        <h2>Makanan Favorit</h2>
-        <div class="meta-list">
-          <span>Meteor</span>
-        </div>
-      </article>
-
-      <article class="menu-item filled">
-        <h2>Olahraga</h2>
-        <div class="meta-list">
-          <span>Diem</span>
-        </div>
-      </article>
-
-      <article class="menu-item filled">
-        <h2>Cita-cita</h2>
-        <div class="meta-list">
-          <span>Jadi orkay</span>
-        </div>
-      </article>
+    <main class="menu" aria-label="Menu profil pribadi">
+      <a class="menu-item" href="#biodata"><span class="index">01 / IDENTITY</span><span class="symbol">↗</span><h2>Biodata</h2><p>Nama panggilan, kelas, dan hal dasar tentangku.</p><span class="status">BELUM DIISI</span></a>
+      <a class="menu-item" href="#musik"><span class="index">02 / SOUNDTRACK</span><span class="symbol">♫</span><h2>Lagu favorit</h2><p>Lagu yang lagi diputar berulang-ulang.</p><span class="status">BELUM DIISI</span></a>
+      <a class="menu-item" href="#hobi"><span class="index">03 / OFF HOURS</span><span class="symbol">✳</span><h2>Hobi</h2><p>Hal yang kulakukan saat nggak sedang belajar.</p><span class="status">BELUM DIISI</span></a>
+      <a class="menu-item" href="#favorit"><span class="index">04 / LITTLE THINGS</span><span class="symbol">◇</span><h2>Hal favorit</h2><p>Makanan, warna, film, atau hal kecil lainnya.</p><span class="status">BELUM DIISI</span></a>
+      <a class="menu-item" href="#goals"><span class="index">05 / NEXT CHAPTER</span><span class="symbol">↗</span><h2>Target & cita-cita</h2><p>Hal yang ingin kucapai, pelan-pelan.</p><span class="status">BELUM DIISI</span></a>
+      <a class="menu-item" href="#notes"><span class="index">06 / MARGIN NOTES</span><span class="symbol">✎</span><h2>Catatan pribadi</h2><p>Ide random yang mungkin penting nanti.</p><span class="status">BELUM DIISI</span></a>
     </main>
+    <footer class="profile-footer"><span>PERSONAL ARCHIVE</span><span>made at my own pace · with Haimiya senpai</span></footer>
   </div>
-
   <button id="mio-toggle" type="button">Haimiya Senpai</button>
   <section id="mio-chat" aria-label="Chat dengan Mio">
     <header id="mio-header">
