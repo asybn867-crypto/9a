@@ -7,15 +7,15 @@
   var DATA = {
     "mapel": {"A":"AL-QUR'AN HADITS","B":"AQIDAH AKHLAK","C":"FIQIH","D":"SKI","E":"PENDIDIKAN PANCASILA","F":"BAHASA INDONESIA","G":"BAHASA ARAB","H":"BAHASA INGGRIS","I":"MATEMATIKA","J":"IPA","K":"IPS","L":"SENI TEATER","M":"PENJAS ORKES","N":"INFORMATIKA","O":"MULOK (RISET)","P":"CODING/AI","Q":"KORKULIKULER","R":"BIMBINGAN KONSELING"},
     "guru": {
-      "1": "Arsyad, S.Pd., M.Pd", "2": "Wa Ode Raslimin, S.Pd", "3": "Ernawati Angi, S.Pd", "4": "Drs. Samsul",
-      "5": "Sitti Rahmatia I.J., S.Pd., M.M", "6": "Halimah, S.Pd.I", "7": "Bayu, S. Or", "8": "La Ode Boy Susanto, S.Pd.",
-      "9": "Saswal Daud, S. Pd", "10": "Wa Ode Rustiani, S.Pd", "11": "Nurdiana, S.Pd", "12": "Samsul Akbar, S.Pd",
-      "13": "Wa Ode Muhsanah, S.Pd.", "14": "La Ode Arwan, S.Pd", "15": "Mariani, S.Pd.", "16": "Agusriansyah, S.Pd.I",
-      "17": "Wa Suriadi, S.Pd", "18": "Istiqomah NuryanI, S.Pd", "19": "Sumila, S.Pd", "20": "Maulana, S.Pd",
-      "21": "Muhsiri. A, S.H", "22": "Andi Sriwanti, S.Pd.I", "23": "Nur Syuaiba, S.Mat", "24": "Wa Ode Uka, S.Pd",
-      "25": "Rino, S.Pd.", "26": "Nusiasti, S.Pd", "27": "Nur Asti, S.Pd", "28": "Sitti Asriejah S.Si",
-      "29": "Amaliyah Sriyanti, S.Pd", "30": "Wa Ode Rika Santika, S.Pd", "31": "Wulandari Rahmatwati, S.Pd",
-      "32": "Neneng Apriliyanti, S.Pd", "33": "Tiansi, S.Si", "34": "Wa ode irda Rahmah diangsari, S.Pd", "35": "M.Ikbal Ode, S.S"
+      "1": "Arsyad", "2": "Wa Ode Raslimin", "3": "Ernawati Angi", "4": "Samsul",
+      "5": "Sitti Rahmatia I.J.", "6": "Halimah", "7": "Bayu", "8": "La Ode Boy Susanto",
+      "9": "Saswal Daud, S. Pd", "10": "Wa Ode Rustiani", "11": "Nurdiana", "12": "Samsul Akbar",
+      "13": "Wa Ode Muhsanah", "14": "La Ode Arwan", "15": "Mariani", "16": "Agusriansyah",
+      "17": "Wa Suriadi", "18": "Istiqomah NuryanI", "19": "Sumila", "20": "Maulana",
+      "21": "Muhsiri. A", "22": "Andi Sriwanti", "23": "Nur Syuaiba", "24": "Wa Ode Uka",
+      "25": "Rino", "26": "Nusiasti", "27": "Nur Asti", "28": "Sitti Asriejah S.Si",
+      "29": "Amaliyah Sriyanti", "30": "Wa Ode Rika Santika", "31": "Wulandari Rahmatwati",
+      "32": "Neneng Apriliyanti", "33": "Tiansi", "34": "Wa ode irda Rahmah diangsari", "35": "M.Ikbal Ode, S.S"
     },
     "kelas": ["VII-A","VII-B","VII-C","VII-D","VII-E","VII-F","VII-G","VIII-A","VIII-B","VIII-C","VIII-D","VIII-E","IX-A","IX-B","IX-C","IX-D","IX-E","IX-F"],
     "hari": {
