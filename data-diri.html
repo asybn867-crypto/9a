@@ -117,23 +117,23 @@
 
 
   /* Porcelain paper, ink and a quiet classical type pairing */
-  :root{--paper:#fff;--ink:#20283a;--ink-2:#68738a;--navy:#314b86;--steel:#aab8d8;--mist:#f7f9fd;--line:#e1e6f0;--amber:#d7ad68;--panel:rgba(255,255,255,.93);--f-display:Georgia,'Times New Roman',serif;--f-body:'Plus Jakarta Sans',system-ui,sans-serif}
-  body{background:linear-gradient(180deg,#fff 0%,#f5f7fc 100%);color:var(--ink);font:400 14px/1.65 var(--f-body)}
+  :root{--paper:#f4f0e8;--ink:#252923;--ink-2:#6b6c61;--navy:#33483d;--steel:#a9ad91;--mist:#eee9df;--line:#d8d0c2;--amber:#b57c4a;--panel:rgba(250,248,242,.9);--f-display:Georgia,'Times New Roman',serif;--f-body:'Plus Jakarta Sans',system-ui,sans-serif}
+  body{background:linear-gradient(145deg,#f8f5ed 0%,#eee7da 100%);color:var(--ink);font:400 14px/1.65 var(--f-body)}
   .wrap{max-width:960px;padding:clamp(22px,5vw,54px) 18px 42px}
   .topbar{display:flex;gap:9px;margin-bottom:20px}.nav-link{border:1px solid var(--line);border-radius:999px;padding:9px 14px;background:#fff;color:var(--navy);text-decoration:none;font-size:12px}
-  .hero{position:relative;overflow:hidden;background:rgba(255,255,255,.84);border:1px solid var(--line);border-radius:3px;padding:clamp(25px,6vw,58px);margin-bottom:18px;box-shadow:0 16px 42px rgba(38,55,91,.05)}
-  .hero:after{content:'✳';position:absolute;right:clamp(18px,5vw,54px);top:12px;font:clamp(90px,18vw,190px)/1 Georgia,serif;color:rgba(75,103,163,.10);pointer-events:none}
-  .eyebrow,.index,.status,.profile-footer,.hero-rule{font:600 10px/1.5 var(--f-body);letter-spacing:.15em;color:#63769e}
-  h1{font:700 clamp(44px,9vw,88px)/.98 var(--f-display);letter-spacing:-.055em;margin:18px 0 16px;position:relative;z-index:1;color:#20283a}h1 em{font-weight:400;color:#526bc5}
+  .hero{position:relative;overflow:hidden;background:rgba(255,255,255,.84);border:1px solid var(--line);border-radius:3px;padding:clamp(25px,6vw,58px);margin-bottom:18px;box-shadow:0 16px 42px rgba(48,43,34,.05)}
+  .hero:after{content:'✳';position:absolute;right:clamp(18px,5vw,54px);top:12px;font:clamp(90px,18vw,190px)/1 Georgia,serif;color:rgba(181,124,74,.13);pointer-events:none}
+  .eyebrow,.index,.status,.profile-footer,.hero-rule{font:600 10px/1.5 var(--f-body);letter-spacing:.15em;color:#7a6045}
+  h1{font:700 clamp(44px,9vw,88px)/.98 var(--f-display);letter-spacing:-.055em;margin:18px 0 16px;position:relative;z-index:1;color:#252923}h1 em{font-weight:400;color:#8b6a48}
   .sub{max-width:510px;font:14px/1.9 var(--f-body);color:var(--ink-2);margin:0}
   .hero-rule{display:flex;gap:14px;margin-top:28px;padding-top:14px;border-top:1px solid var(--line);max-width:210px}
   .menu{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:10px}
-  .menu-item{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:9px;min-height:175px;padding:20px;background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:3px;color:inherit;transition:background .2s,border-color .2s,transform .2s}
-  .menu-item:hover{background:#f9fbff;border-color:#aab9d7;transform:translateY(-2px)}.menu-item .symbol{position:absolute;right:18px;top:14px;color:#7185b0;font:24px Georgia,serif}
-  .menu-item h2{font:700 clamp(21px,4vw,29px)/1.1 var(--f-display);letter-spacing:-.03em;margin:10px 0 0}.menu-item p{font:12px/1.8 var(--f-body);color:var(--ink-2);margin:0;max-width:270px}.status{margin-top:auto;color:#8a94a8;font-size:9px}
-  .profile-footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:24px;padding:14px 2px;border-top:1px solid var(--line);font-size:9px;color:#8790a2}
-  #mio-toggle{background:#526bc5;border:1px solid rgba(255,255,255,.85);box-shadow:0 12px 28px rgba(73,99,182,.3);font-family:Georgia,serif}
-  #mio-chat{background:#20283a;border:1px solid #d6deef;border-radius:18px}#mio-header,#mio-send{background:#526bc5}#mio-messages{background:#20283a}
+  .menu-item{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:9px;min-height:175px;padding:20px;background:rgba(250,248,242,.78);border:1px solid var(--line);border-radius:3px;color:inherit;transition:background .2s,border-color .2s,transform .2s}
+  .menu-item:hover{background:#fffdf8;border-color:#b8a58b;transform:translateY(-2px)}
+  .menu-item h2{font:700 clamp(21px,4vw,29px)/1.1 var(--f-display);letter-spacing:-.03em;margin:10px 0 0}.menu-item p{font:12px/1.8 var(--f-body);color:var(--ink-2);margin:0;max-width:270px}.status{margin-top:auto;color:#8c8a7d;font-size:9px}
+  .profile-footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:24px;padding:14px 2px;border-top:1px solid var(--line);font-size:9px;color:#807c70}
+  #mio-toggle{background:#33483d;border:1px solid rgba(245,236,218,.5);box-shadow:0 12px 30px rgba(38,56,47,.22);font-family:Georgia,serif}
+  #mio-chat{background:#202b25;border:1px solid #a89a80;border-radius:18px}#mio-header,#mio-send{background:#33483d}#mio-messages{background:#202b25}
   @media(max-width:560px){.menu{grid-template-columns:1fr}.menu-item{min-height:150px;padding:18px}.hero{padding:27px 22px}.hero:after{right:8px;top:26px}.profile-footer{flex-direction:column;gap:4px}}
 
 </style>
@@ -151,12 +151,12 @@
       <div class="hero-rule"><span>EST.</span><span>2026</span><span>✳</span></div>
     </header>
     <main class="menu" aria-label="Menu profil pribadi">
-      <article class="menu-item"><span class="index">01 / IDENTITY</span><span class="symbol">↗</span><h2>Biodata</h2><p>Nama panggilan, kelas, dan hal dasar tentangku.</p><span class="status">BELUM DIISI</span></article>
-      <article class="menu-item"><span class="index">02 / SOUNDTRACK</span><span class="symbol">♫</span><h2>Lagu favorit</h2><p>Lagu yang lagi diputar berulang-ulang.</p><span class="status">BELUM DIISI</span></article>
-      <article class="menu-item"><span class="index">03 / OFF HOURS</span><span class="symbol">✳</span><h2>Hobi</h2><p>Hal yang kulakukan saat nggak sedang belajar.</p><span class="status">BELUM DIISI</span></article>
-      <article class="menu-item"><span class="index">04 / LITTLE THINGS</span><span class="symbol">◇</span><h2>Hal favorit</h2><p>Makanan, warna, film, atau hal kecil lainnya.</p><span class="status">BELUM DIISI</span></article>
-      <article class="menu-item"><span class="index">05 / NEXT CHAPTER</span><span class="symbol">↗</span><h2>Target & cita-cita</h2><p>Hal yang ingin kucapai, pelan-pelan.</p><span class="status">BELUM DIISI</span></article>
-      <article class="menu-item"><span class="index">06 / MARGIN NOTES</span><span class="symbol">✎</span><h2>Catatan pribadi</h2><p>Ide random yang mungkin penting nanti.</p><span class="status">BELUM DIISI</span></article>
+      <article class="menu-item"><h2>Biodata</h2><p>Nama panggilan, kelas, dan hal dasar tentangku.</p><span class="status">BELUM DIISI</span></article>
+      <article class="menu-item"><h2>Lagu favorit</h2><p>Lagu yang lagi diputar berulang-ulang.</p><span class="status">BELUM DIISI</span></article>
+      <article class="menu-item"><h2>Hobi</h2><p>Hal yang kulakukan saat nggak sedang belajar.</p><span class="status">BELUM DIISI</span></article>
+      <article class="menu-item"><h2>Hal favorit</h2><p>Makanan, warna, film, atau hal kecil lainnya.</p><span class="status">BELUM DIISI</span></article>
+      <article class="menu-item"><h2>Target & cita-cita</h2><p>Hal yang ingin kucapai, pelan-pelan.</p><span class="status">BELUM DIISI</span></article>
+      <article class="menu-item"><h2>Catatan pribadi</h2><p>Ide random yang mungkin penting nanti.</p><span class="status">BELUM DIISI</span></article>
     </main>
     <footer class="profile-footer"><span>PERSONAL ARCHIVE</span><span>made at my own pace · with Haimiya senpai</span></footer>
   </div>
