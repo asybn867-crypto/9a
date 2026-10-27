@@ -374,44 +374,24 @@ body{background:radial-gradient(ellipse at 12% 8%,rgba(185,159,120,.16),transpar
     #mio-chat{background:#20283a;border-color:#d6deef}#mio-header,#mio-send{background:#526bc5}#mio-messages{background:#20283a}
 
 
-    /* Final visual overrides: warm timetable + polished violet AI panel */
-    .session.now,.les.now{
-      background:#f5dfbd!important;
-      border-color:#d99548!important;
-      box-shadow:inset 5px 0 #d8872e,0 5px 18px rgba(169,105,37,.12)!important;
-    }
-    .session.now .subject,.les.now .mp{color:#75451d!important}
-    .session.now .tag,.les.now .tag{background:#e9bf83!important;color:#6d421d!important}
-    .session.now .live,.les.now .live{
-      display:inline-flex;background:#d8872e!important;color:#fffaf2!important;
-      border:1px solid #c67a25!important;border-radius:7px;padding:4px 9px;
-      font-size:10px;font-weight:800;letter-spacing:.045em
-    }
-    #mio-toggle{
-      background:linear-gradient(135deg,#8c6fff 0%,#6859e8 100%)!important;
-      border:1px solid rgba(255,255,255,.85)!important;
-      box-shadow:0 12px 28px rgba(73,99,182,.3)!important;
-      color:#fff!important;font-family:Georgia,"Times New Roman",serif
-    }
-    #mio-chat{
-      background:#171724!important;border:1px solid rgba(210,202,255,.25)!important;
-      border-radius:20px!important;box-shadow:0 22px 44px rgba(12,10,20,.4)!important
-    }
-    #mio-header{
-      background:linear-gradient(135deg,#8c6fff 0%,#6959e8 100%)!important;
-      color:#fff!important;font-family:Georgia,"Times New Roman",serif
-    }
-    #mio-header small{color:#f1edff!important;opacity:.9!important}
-    #mio-close{color:#fff!important}
-    #mio-messages{background:#171724!important}
-    .mio-bot{background:#29283a!important;color:#f5f3ff!important}
-    .mio-user{background:linear-gradient(135deg,#7a5cf4 0%,#5a4ce6 100%)!important;color:#fff!important}
-    #mio-form{background:#171724!important;border-top:1px solid rgba(255,255,255,.1)!important}
-    #mio-input{background:#fbfcff!important;color:#20283a!important;border:1px solid #d6deef!important}
-    #mio-input::placeholder{color:#777f94!important}
-    #mio-send{background:linear-gradient(135deg,#8c6fff 0%,#6859e8 100%)!important;color:#fff!important}
-
-  </style>
+    /* Final styles: Haimiya violet chat + orange live lesson */
+    #mio-toggle{background:linear-gradient(135deg,#8c6fff,#6859e8)!important;color:#fff!important;border:1px solid rgba(255,255,255,.85)!important;box-shadow:0 12px 28px rgba(73,99,182,.3)!important;font-family:Georgia,"Times New Roman",serif!important}
+    #mio-chat{background:#171724!important;border:1px solid rgba(210,202,255,.25)!important;border-radius:20px!important;box-shadow:0 22px 44px rgba(12,10,20,.4)!important;overflow:hidden}
+    #mio-chat #mio-header{background:linear-gradient(135deg,#8c6fff,#6959e8)!important;color:#fff!important;font-family:Georgia,"Times New Roman",serif!important}
+    #mio-chat #mio-header small{color:#f1edff!important;opacity:1!important}
+    #mio-chat #mio-close{color:#fff!important}
+    #mio-chat #mio-messages{background:#171724!important}
+    #mio-chat .mio-msg.mio-bot{background:#29283a!important;color:#f5f3ff!important}
+    #mio-chat .mio-msg.mio-user{background:linear-gradient(135deg,#7a5cf4,#5a4ce6)!important;color:#fff!important}
+    #mio-chat #mio-form{background:#171724!important;border-top:1px solid rgba(255,255,255,.1)!important}
+    #mio-chat #mio-input{background:#fbfcff!important;color:#20283a!important;border:1px solid #d6deef!important}
+    #mio-chat #mio-input::placeholder{color:#777f94!important}
+    #mio-chat #mio-send{background:linear-gradient(135deg,#8c6fff,#6859e8)!important;color:#fff!important}
+    .session-list .session.now{background:#f5dfbd!important;border:1px solid #d99548!important;box-shadow:inset 5px 0 #d8872e,0 5px 18px rgba(169,105,37,.12)!important}
+    .session-list .session.now .subject{color:#75451d!important}
+    .session-list .session.now .tag{background:#e9bf83!important;color:#6d421d!important}
+    .session-list .session.now .live{display:inline-flex!important;background:#d8872e!important;color:#fffaf2!important;border:1px solid #c67a25!important;border-radius:7px;padding:4px 9px;font-size:10px;font-weight:800;letter-spacing:.045em}
+</style>
 </head>
 <body>
   <video autoplay loop muted playsinline class="art" aria-hidden="true">
