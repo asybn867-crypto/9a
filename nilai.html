@@ -17,7 +17,25 @@ main{max-width:720px;margin:auto}.back{display:inline-block;color:var(--green);t
 .metric:first-child{background:#e7e9dc}.metric-label{color:var(--muted);font-size:12px}.metric-value{font:500 clamp(28px,7vw,40px)/1.2 Georgia,serif;margin-top:7px}.metric small{font:11px var(--mono);color:var(--muted)}
 h2{font:600 20px/1.2 Georgia,serif;margin:0 0 15px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}label{font-size:12px;color:var(--muted)}input,select{width:100%;min-width:0;border:1px solid var(--line);border-radius:4px;padding:12px;background:#fffdf8;color:var(--ink);font:14px var(--sans);outline:none}input:focus,select:focus{border-color:var(--green);box-shadow:0 0 0 2px #49665018}.save{margin-top:14px;border:0;border-radius:4px;padding:12px 16px;background:var(--green);color:white;font:600 14px var(--sans);cursor:pointer}.notice{min-height:20px;margin:8px 0 0;font-size:12px;color:var(--rust)}.records{margin-top:14px}.records-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px}.records-head span{font:11px var(--mono);color:var(--muted)}.empty{padding:24px 4px;color:var(--muted);border-top:1px solid var(--line)}.record{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:13px 0;border-top:1px solid var(--line)}.record-title{font-weight:700}.record-meta{font-size:12px;color:var(--muted);margin-top:3px}.record-right{display:flex;align-items:center;gap:10px}.grade{font:500 20px var(--mono);color:var(--green)}.delete{border:1px solid var(--line);background:transparent;color:var(--rust);border-radius:3px;padding:6px 8px;cursor:pointer}.foot{margin-top:18px;font-size:11px;color:var(--muted)}
 @media(max-width:480px){.summary{grid-template-columns:1fr 1fr}.metric,.form-panel,.records{padding:14px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.record{grid-template-columns:1fr}.record-right{justify-content:space-between}.records-head{align-items:flex-start;flex-direction:column;gap:3px}}
-</style>
+
+/* Visual polish v2 */
+:root{--paper:#f3f1eb;--sheet:rgba(255,255,255,.82);--ink:#252b3b;--muted:#737b8c;--line:#e0e4ed;--green:#526b61;--rust:#a56d55}
+body{background:radial-gradient(ellipse at 90% 0%,#e4e9f6 0,transparent 38%),linear-gradient(145deg,#f6f4ef,#eceff5)!important;padding:clamp(16px,3vw,30px) 15px 50px!important}
+main{max-width:850px!important}
+.back{border:1px solid #dfe4ee!important;border-radius:999px!important;padding:9px 15px!important;background:rgba(255,255,255,.75)!important;margin-bottom:28px!important}
+header{padding:clamp(20px,4vw,34px)!important;background:rgba(255,255,255,.7)!important;border:1px solid rgba(255,255,255,.9)!important;border-radius:26px!important;margin-bottom:18px!important;backdrop-filter:blur(12px)}
+h1{letter-spacing:-.06em!important}
+.summary{gap:12px!important}
+.metric,.form-panel,.records{border:1px solid var(--line)!important;border-radius:20px!important;background:rgba(255,255,255,.86)!important;box-shadow:0 12px 30px rgba(30,40,65,.055)!important;padding:clamp(16px,3vw,24px)!important}
+.metric:first-child{background:#e7ebdf!important}
+.form-grid{gap:14px!important}
+input,select,textarea{border-radius:12px!important;border:1px solid #d9dfeb!important;background:#fff!important}
+button,.save{border-radius:999px!important;transition:transform .18s,box-shadow .18s}
+button:hover,.save:hover{transform:translateY(-1px)}
+.records-head{gap:12px}
+@media(max-width:520px){.summary{grid-template-columns:1fr!important}.form-grid{grid-template-columns:1fr!important}.field.full{grid-column:auto!important}header{border-radius:22px!important}}
+
+  </style>
 </head>
 <body><main>
 <a class="back" href="index.html">← Kembali ke jadwal</a>
