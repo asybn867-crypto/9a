@@ -100,7 +100,23 @@
   input:focus{border-color:#718b76;box-shadow:0 0 0 3px rgba(66,109,85,.1)}
   .btn-group button{box-shadow:0 4px 12px rgba(48,43,34,.07)}
   li{background:#f1ece2}
-</style>
+
+/* Visual polish v2 */
+:root{--paper:#f3f1eb;--ink:#252b3b;--ink-2:#697287;--navy:#526b61;--mist:#e9eee8;--line:#dfe4dc;--ok:#4d775e;--danger:#a65d55}
+body{background:radial-gradient(ellipse at 10% 0%,#e4ebf7 0,transparent 40%),linear-gradient(145deg,#f7f5ef,#e9eee9)!important;padding:clamp(16px,3vw,30px) 15px 50px!important}
+.wrap{max-width:760px!important}
+.btn-back{border-radius:999px!important;background:rgba(255,255,255,.78)!important;border-color:#dfe4dc!important;padding:10px 16px!important;transition:transform .2s}
+.btn-back:hover{transform:translateY(-2px)}
+h1{font-size:clamp(32px,6vw,46px)!important;letter-spacing:-.055em!important}
+.panel{background:rgba(255,255,255,.84)!important;border:1px solid rgba(255,255,255,.95)!important;border-radius:24px!important;padding:clamp(18px,4vw,28px)!important;box-shadow:0 20px 48px rgba(33,43,39,.08)!important;backdrop-filter:blur(12px)}
+.total-box,.goal-box{border-radius:18px!important}
+input,select,textarea{border-radius:12px!important;border:1px solid #d9dfd6!important;background:#fff!important}
+button{border-radius:999px!important;transition:transform .18s,box-shadow .18s}
+button:hover{transform:translateY(-1px)}
+.goal-track{overflow:hidden;border-radius:999px!important}
+@media(max-width:520px){.panel{border-radius:20px!important}.btn-group{flex-wrap:wrap}}
+
+  </style>
 </head>
 <body>
 
